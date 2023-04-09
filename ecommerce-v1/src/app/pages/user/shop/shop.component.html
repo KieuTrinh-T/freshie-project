@@ -1,0 +1,35 @@
+<!-- filter session -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="filter-container col-3">
+      <h3>Categories</h3>
+        <mat-selection-list #category (selectionChange)="onSelection($event, category.selectedOptions)">
+          <mat-list-option color="primary" *ngFor="let category of typeOfCategories" [value]="category">
+            {{category}}
+        </mat-list-option>
+      </mat-selection-list>
+      </div>
+
+      <!-- list product session -->
+      <div class="product-container col-9">
+        <!-- sort session -->
+        <div class="sort-container d-flex justify-content-end">
+          <form [formGroup]="filterForm">
+            <div class="form-group">
+              <select formControlName="price" class="form-control" id="price">
+                <option>Low to High</option>
+                <option>High to Low</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <!-- list product session -->
+        <div class="list-product-container">
+          <p>list product</p>
+        </div>
+      </div>
+  </div>
+</div>
+
+
+

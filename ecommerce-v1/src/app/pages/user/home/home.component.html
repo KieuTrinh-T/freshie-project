@@ -1,0 +1,48 @@
+<!-- banner hero start -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner" style="height: 650px;">
+    <div class="carousel-item active">
+      <img src="../../../../assets/img/banner_1.webp" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="../../../../assets/img/banner_2.webp" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="../../../../assets/img/banner_3.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+    <mat-icon class="text-dark" fontIcon="navigate_before"></mat-icon>
+  </a>
+  <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+    <mat-icon class="text-dark" fontIcon="navigate_next"></mat-icon>
+  </a>
+</div>
+<!-- banner hero end -->
+
+<!-- best seller section start -->
+<section class="container py-5">
+  <div class="row text-center pt-3">
+      <div class="col-lg-6 m-auto">
+          <h1 class="h1">Best seller</h1>
+      </div>
+  </div>
+  <div class="row">
+    <ec-carousel-product></ec-carousel-product>
+  </div>
+</section>
+<!-- best seller section end -->
+<!-- categories session start-->
+<section class="container py-5">
+  <div class="row text-center pt-3 mb-2">
+      <div class="col-lg-6 m-auto">
+          <h1 class="title-categories mb-2">What are you shopping today?</h1>
+      </div>
+  </div>
+  <div class="row">
+    <div class="categories-container col-2 align-items-center" *ngFor="let c of categories">
+      <img class="category-image" src="{{c.image}}" alt="">
+      <p class="category-name text-center">{{c.name}}</p>
+    </div>
+  </div>
+<!-- categories session end-->

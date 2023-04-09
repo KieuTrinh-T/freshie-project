@@ -1,0 +1,13 @@
+[{
+        "maAdmin": 1,
+        "tenAdmin": "Trần Thị Kiều Trinh",
+        "email": "kieutrinh@gmail.com",
+        "password": "KieuTrinh2002#"
+    },
+    {
+        "maAdmin": 2,
+        "tenAdmin": "Trần Nguyễn Ngọc Hiếu",
+        "email": "ngochieu@gmail.com",
+        "password": "NgocHieu2002#"
+    }
+]

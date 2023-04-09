@@ -1,0 +1,7 @@
+<lib-header
+  *ngIf="!(_router.url === '/pages-register' || _router.url === '/pages-login' || _router.url === '/pages-error404')"></lib-header>
+<lib-sidebar
+  *ngIf="!(_router.url === '/pages-register' || _router.url === '/pages-login' || _router.url === '/pages-error404')"></lib-sidebar>
+<router-outlet></router-outlet>
+<lib-footer
+  *ngIf="!(_router.url === '/pages-register' || _router.url === '/pages-login' || _router.url === '/pages-error404')"></lib-footer>

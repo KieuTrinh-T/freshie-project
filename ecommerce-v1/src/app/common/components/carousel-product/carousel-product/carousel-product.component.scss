@@ -1,0 +1,242 @@
+ul, p {
+  margin: 0;
+  padding: 0;
+}
+.bt-card-ui-3 {
+  box-shadow: 2px 2px 7px rgb(0 0 0 / 15%);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  color: #33302d;
+  &:hover {
+    .card-image {
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+  .card-image {
+    width: 100%;
+    overflow: hidden;
+    & {
+      height: 0;
+      position: relative;
+      padding-bottom: 85%;
+    }
+    & > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+      transition: linear 0.25s;
+    }
+  }
+  .card-body {
+    padding: 14px;
+    padding-bottom: 10px;
+    position: relative;
+    background-color: #fff;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    top: -10px;
+  }
+  .card-price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    align-items: flex-end;
+    margin-bottom: 8px;
+  }
+  .card-price-old {
+    font-size: 18px;
+    color: #8b8d8e;
+    line-height: 1;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #8b8d8e;
+      transform: rotate(5deg) translate(0, -50%);
+    }
+  }
+  .card-price-current {
+    font-size: 24px;
+    color: var(--primary-color);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .card-title-link {
+    color: #19508f;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+
+  .card-sub-title {
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  .product-name{
+    font-size: 18px;
+    font-weight: 700;
+    color: #850026;
+  }
+
+  .card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 16px;
+  }
+
+  .card-utilities-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-utilities-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    span {
+      font-size: 14px;
+    }
+  }
+
+  .card-utilities-icon {
+    color: #19508f;
+  }
+
+  .card-photo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+  }
+
+  .card-photo-heading {
+    font-size: 12px;
+    font-weight: 700;
+    color: #19508f;
+  }
+
+  .card-photo-more {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e95152;
+    font-weight: 600;
+    font-size: 14px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .card-photo-list {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .card-photo-item {
+    border-radius: 12px;
+  }
+  .card-photo-img {
+    border-radius: 16px;
+    display: block;
+    height: 100%;
+    img {
+      border-radius: inherit;
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+  .card-btn-wrap {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .card-btn {
+    padding: 8px 16px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 12px;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    &--buy-now {
+      background-color: var(--primary-color);
+      flex: 1;
+      font-size: 14px;
+    }
+    &--add-cart {
+      background-color: var(--secondary-color);
+      font-size: 14px;
+    }
+    &:hover::before {
+      left: auto;
+      right: 0;
+      width: 100%;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: auto;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background-color: #fff;
+      opacity: 0.1;
+      z-index: -1;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+  }
+  .card-vote {
+    display: flex;
+    align-items: center;
+  }
+  .vote-list {
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+  .vote-item {
+    color: #ffc22b;
+    &:last-child {
+      color: #ebeced;
+    }
+  }
+  .card-vote-tag {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    align-items: center;
+    display: flex;
+  }
+  .card-vote-tag p{
+    margin-left: 1rem;
+  }
+}
+
