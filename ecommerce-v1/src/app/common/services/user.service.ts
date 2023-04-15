@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HttpService } from './../http/http.service';
 import { HttpHeaders } from "@angular/common/http";
 import { OdataResponse } from "../http/http.model";
+import { ThisReceiver } from "@angular/compiler";
 
 @Injectable({ providedIn: "root" })
 export class UserService extends HttpService {
@@ -12,6 +13,8 @@ export class UserService extends HttpService {
   login(user: IUser) {
     if (user.name && user.password) {
       this.userStates$.next(user)
+      this.getItems<IUser>('http://localhost:3000/users', null, { name: user.name, password: user.password })
+
     }
   }
 }

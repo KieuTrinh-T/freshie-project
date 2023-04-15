@@ -1,4 +1,7 @@
+const { convertArrayResult } = require('../../utils/function');
+
 const { MongoClient, ServerApiVersion } = require('mongodb');
+
 
 const getAllProducts = async(req) => {
     try {
@@ -76,7 +79,7 @@ const filterProduct = async(req) => {
         const collection = await client.db("cosmetic").collection("product_list");
         let filter = req.query;
         const page = parseInt(req.query.page) - 1 || 0;
-        const limit = parseInt(req.query.limit) || 5;
+        const limit = parseInt(req.query.limit) || 10;
         const search = req.query.search || "";
         let sort = req.query.sort || "rating_average";
         if (req.query.min_price && req.query.max_price) {
@@ -150,7 +153,7 @@ const filterProduct = async(req) => {
             .skip(page * limit)
             .limit(limit).toArray()
         client.close()
-        return result
+        return convertArrayResult(result)
     } catch (err) {
         return err
     }

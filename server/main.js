@@ -10,7 +10,10 @@ const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mong
 const express = require('express');
 const app = express()
 const port = 3004
+var cors = require('cors');
 
+// use it before all route definitions
+app.use(cors({ origin: 'http://localhost:4200' }));
 const productRouter = require('./api/controllers/product.controller')
 app.use('/api/products', productRouter)
 app.listen(port, () => {

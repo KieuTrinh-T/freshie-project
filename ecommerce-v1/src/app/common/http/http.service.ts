@@ -5,8 +5,12 @@ import { OdataParams, OdataResponse, HttpOptions } from './http.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttpService {
+  public baseUrl = 'http://localhost:3004';
+
   constructor(protected _http: HttpClient) { }
+
 
   protected getItems<T>(url: string, headers?: HttpHeaders | null, params?: OdataParams | null) {
     const reqOptions: HttpOptions = {}
