@@ -8,6 +8,7 @@ import { provideStateConfigs } from './common/state/state.provider';
 import { INITIAL_STATE } from './app.state';
 import { LoadingModule } from '@common/components/loading';
 import { MatButtonModule } from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table'
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
     BrowserAnimationsModule,
     LoadingModule,
     MatButtonModule,
+    MatTableModule
   ],
   providers: [
     provideStateConfigs({

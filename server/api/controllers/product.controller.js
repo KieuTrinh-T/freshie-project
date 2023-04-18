@@ -22,12 +22,6 @@ router
         const result = await getProductByBrand(req)
         res.status(200).json(result)
     })
-    .get('/filter/', async(req, res, ) => {
-        console.log(req.query)
-        const result = await filterProduct(req)
-
-        res.status(200).json(result)
-    })
 
 
 

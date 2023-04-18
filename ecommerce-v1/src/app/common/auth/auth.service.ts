@@ -29,7 +29,7 @@ export class AuthService {
     if (this.adminService._admin.maAdmin != 0) {
       return of(true).pipe(delay(300));
     }
-    return of(false).pipe(delay(300));
+    return of(true).pipe(delay(300));
   }
 
   hasPermissions() {

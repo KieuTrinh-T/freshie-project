@@ -8,10 +8,10 @@ const getAllProducts = async(req) => {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
-        const collection = await client.db("cosmetic").collection("product_list");
+        const collection = await client.db("cosmetic").collection("products");
         const result = await collection.find({}).toArray();
         await client.close()
-        return result
+        return convertArrayResult(result)
     } catch (err) {
         return err
     }
@@ -22,11 +22,11 @@ const getProduct = async(req) => {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
-        const collection = await client.db("cosmetic").collection("product_list");
+        const collection = await client.db("cosmetic").collection("products");
         const result = await collection.findOne({ product_id: req.params.id })
         console.log(result)
         client.close()
-        return result
+        return convertArrayResult(result)
     } catch (err) {
         return err
     }
@@ -36,10 +36,10 @@ const getProductByCategory = async(req) => {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
-        const collection = await client.db("cosmetic").collection("product_list");
+        const collection = await client.db("cosmetic").collection("products");
         const result = await collection.find({ category_id: req.params.category_id }).toArray()
         client.close()
-        return result
+        return convertArrayResult(result)
     } catch (err) {
         return err
     }
@@ -49,39 +49,71 @@ const getProductByBrand = async(req) => {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
-        const collection = await client.db("cosmetic").collection("product_list");
+        const collection = await client.db("cosmetic").collection("products");
         const result = await collection.find({
             brand_id: req.params.brand_id
         }).toArray()
         console.log(result)
         client.close()
-        return result
+        return convertArrayResult(result)
     } catch (err) {
         return err
     }
 }
 
-function search(query) {
-    return function(element) {
-        for (var i in query) {
-            if (query[i] != element[i]) {
-                return false;
+const search = async(req) => {
+    try {
+        const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
+        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+        await client.connect();
+        const collection = await client.db("cosmetic").collection("products");
+        const result = await collection.find({
+            $text: {
+                $search: req.query.search
             }
-        }
-        return true;
+        }).toArray()
+        client.close()
+        return convertArrayResult(result)
+    } catch (err) {
+        return err
     }
+
 }
 const filterProduct = async(req) => {
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
-        const collection = await client.db("cosmetic").collection("product_list");
+        const collection = await client.db("cosmetic").collection("products");
         let filter = req.query;
         const page = parseInt(req.query.page) - 1 || 0;
-        const limit = parseInt(req.query.limit) || 10;
-        const search = req.query.search || "";
-        let sort = req.query.sort || "rating_average";
+        const limit = parseInt(req.query.limit);
+        const search = req.query.search;
+        let sort = req.query.sort;
+        if (search) {
+            filter = {
+                ...filter,
+                product_name: {
+                    $regex: search,
+                }
+            }
+        }
+        filter = {
+            ...filter,
+            is_deleted: 0,
+
+        }
+        if (req.query.brand_id) {
+            delete filter.brand_id
+            let brands = req.query.brand_id.split(',');
+            filter = {
+                ...filter,
+                brand_id: {
+                    $in: brands
+                }
+            }
+        }
+
         if (req.query.min_price && req.query.max_price) {
             filter = {
                 ...filter,
@@ -148,7 +180,29 @@ const filterProduct = async(req) => {
         console.log(filter);
         ["sort", "page", "limit", "search", "min_price", "max_price", "min_rating"].forEach((e) => delete filter[e]);
         console.log(filter)
-        const result = await collection.find(filter)
+        const projection = {
+            _id: 0,
+            product_id: 1,
+            product_name: 1,
+            brand_id: 0,
+            brand_name: 0,
+            slug: 0,
+            imgage_1: 0,
+            image_2: 0,
+            thumb: 1,
+            description: 1,
+            product_name: 1,
+            category_id: 0,
+            brand: 0,
+            original_price: 1,
+            price: 1,
+            sold: 1,
+            rating_average: 1,
+            rating_count: 1,
+            category_name: 0,
+            inventory_num: 1
+        };
+        const result = await collection.find(filter, projection)
             .sort(sortBy)
             .skip(page * limit)
             .limit(limit).toArray()
@@ -166,5 +220,6 @@ module.exports = {
     getProduct,
     getProductByCategory,
     getProductByBrand,
-    filterProduct
+    filterProduct,
+    search
 }
