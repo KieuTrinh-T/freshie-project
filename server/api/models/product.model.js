@@ -1,6 +1,7 @@
 const { convertArrayResult } = require('../../utils/function');
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const { ObjectId } = require('mongodb');
 
 
 const getAllProducts = async(req) => {
@@ -23,7 +24,7 @@ const getProduct = async(req) => {
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
         const collection = await client.db("cosmetic").collection("products");
-        const result = await collection.findOne({ product_id: req.params.id })
+        const result = await collection.findOne({ _id: new ObjectId(req.params.id) })
         console.log(result)
         client.close()
         return convertArrayResult(result)

@@ -2,7 +2,8 @@
 
 const express = require('express')
 const router = express.Router()
-const { signUp, signIn, getUserById, filterUser } = require('../models/user.model')
+const { signUp, signIn, getUserById, filterUser, updateUser } = require('../models/user.model')
+
 
 
 router
@@ -11,8 +12,10 @@ router
         res.status(200).json(result)
     })
     .post('/signin', async(req, res) => {
-        const result = await signIn(req)
+        const result = await signIn(req);
         res.status(200).json(result)
+        console.log(result)
+
 
     })
     .get('/', async(req, res) => {
@@ -21,6 +24,10 @@ router
     })
     .get('/:id', async(req, res) => {
         const result = await getUserById(req)
+        res.send(result)
+    })
+    .put('/:id', async(req, res) => {
+        const result = await updateUser(req)
         res.send(result)
     })
 
