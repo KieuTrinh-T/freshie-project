@@ -2,6 +2,7 @@ const { convertArrayResult } = require('../../utils/function');
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
+const mongoose = require('mongoose');
 
 const getAllOrder = async(req) => {
     try {
@@ -46,7 +47,18 @@ const viewOrderItems = async(req) => {
         return err
     }
 }
+const postOrder = async(req) => {
+    // Mongodb connection url
+    const MONGODB_URI = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
 
+    // Connect to MongoDB
+    mongoose.connect(MONGODB_URI, { dbName: 'cosmetic' });
+    mongoose.connection.on('connected', () => {
+        console.log('Mess from function signIn: Connected to MongoDB');
+    });
+
+
+}
 module.exports = {
     getAllOrder,
     getOrderByUser,

@@ -1,25 +1,66 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
+require('dotenv').config()
+const jwt = require('jsonwebtoken')
 
 var UserSchema = mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true
     },
+    hash: String,
+    salt: String,
     email: {
         type: String,
         required: true,
-        unique: true
+    },
+    avatar: {
+        type: String,
+        default: ''
     },
     phone: {
         type: String,
         required: true,
-        unique: true
     },
-    hash: String,
-    salt: String
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
+    street: {
+        type: String,
+        default: ''
+    },
+    apartment: {
+        type: String,
+        default: ''
+    },
+    zip: {
+        type: String,
+        default: ''
+    },
+    city: {
+        type: String,
+        default: ''
+    },
+    country: {
+        type: String,
+        default: ''
+    },
+    is_active: {
+        type: Boolean,
+        default: true,
+    }
+
 });
+
+UserSchema.virtual('id').get(function() {
+    return this._id.toHexString();
+});
+
+UserSchema.set('toJSON', {
+    virtuals: true,
+});
+
 
 // Method to set salt and hash the password for a user
 // setPassword method first creates a salt unique for every user
