@@ -10,9 +10,11 @@ import { LoadingModule } from '@common/components/loading';
 import { MatButtonModule } from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table'
 
+
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,
