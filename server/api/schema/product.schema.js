@@ -55,4 +55,12 @@ const productSchema = mongoose.Schema({
         type: String,
     }
 })
-exports.Product = mongoose.model('Product', productSchema);
+productSchema.virtual('id').get(function() {
+    return this._id.toHexString();
+});
+
+productSchema.set('toJSON', {
+    virtuals: true,
+});
+var Product = mongoose.model('Product', productSchema, 'products');
+module.exports = Product;

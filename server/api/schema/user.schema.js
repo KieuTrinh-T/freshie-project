@@ -93,5 +93,5 @@ UserSchema.methods.validPassword = function(password) {
 };
 
 // Exporting module to allow it to be imported in other files
-var User = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema, 'users');
 module.exports = User;

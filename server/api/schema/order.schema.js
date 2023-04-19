@@ -36,7 +36,7 @@ const orderSchema = mongoose.Schema({
         type: Number,
 
     },
-    totalPrice: {
+    total: {
         type: Number,
     },
     user: {
@@ -57,4 +57,5 @@ orderSchema.set('toJSON', {
     virtuals: true,
 });
 
-exports.Order = mongoose.model('Order', orderSchema);
+var Order = mongoose.model('Order', orderSchema, 'orders');
+module.exports = Order;
