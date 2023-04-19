@@ -6,6 +6,7 @@ import { LayoutModule } from './layout/layout.module';
 import { AuthenticationGuard } from '@common/auth';
 import { SnackBarComponent } from './snackbar/snack-bar/snack-bar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
   {
@@ -56,6 +57,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     LayoutModule,
     MatSnackBarModule,
+    MatButtonModule
   ]
 })
 export class AdminModule { }

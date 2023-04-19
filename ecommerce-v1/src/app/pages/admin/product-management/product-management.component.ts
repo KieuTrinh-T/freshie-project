@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IProduct } from 'src/app/common/models/product';
+import { MatTableDataSource } from '@angular/material/table';
+import { IProductList } from 'src/app/common/models/product';
 import { ProductService } from 'src/app/common/services/product.service';
 
 @Component({
@@ -9,13 +10,20 @@ import { ProductService } from 'src/app/common/services/product.service';
 })
 export class ProductManagementComponent {
 
-  public data: Array<IProduct> = []
+  public dataSource:MatTableDataSource<IProductList> = new MatTableDataSource<IProductList>()
+  displayedColumns: string[] = ['thumb', 'id', 'name', 'sold','action'];
+  page:number = 1;
+
   constructor(private _productService: ProductService) {
-    this.loadItems()
+    this.loadItems(this.page)
   }
-  loadItems() {
-    this._productService.getAllProducts().subscribe(
-      { next: (res) => { this.data = res.value } }
+  loadItems(page:number) {
+    this._productService.getAllProducts({limit:10,page:this.page}).subscribe(
+      { next: (res) => { this.dataSource.data = res.value } }
     )
+  }
+  changePage(event:any){
+    this.page = event.pageIndex + 1;
+    this.loadItems(this.page);
   }
 }

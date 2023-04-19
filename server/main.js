@@ -14,8 +14,18 @@ var cors = require('cors');
 
 // use it before all route definitions
 app.use(cors({ origin: 'http://localhost:4200' }));
+
+const bodyParser = require("body-parser")
+app.use(bodyParser.json())
+
 const productRouter = require('./api/controllers/product.controller')
+const orderRouter = require('./api/controllers/order.controller')
+const userRouter = require('./api/controllers/user.controller')
+
 app.use('/api/products', productRouter)
+app.use('/api/orders', orderRouter)
+app.use('/api/users', userRouter)
+
 app.listen(port, () => {
     console.log(`I am listening on port ${port}`)
 })
