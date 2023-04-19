@@ -14,6 +14,7 @@
       <div class="product-container col-9">
         <!-- sort session -->
         <div class="sort-container d-flex justify-content-end">
+          <!-- <p>Sort by price: </p> -->
           <form [formGroup]="filterForm">
             <div class="form-group">
               <select formControlName="price" class="form-control" id="price">
@@ -25,7 +26,7 @@
         </div>
         <!-- list product session -->
         <div class="list-product-container">
-          <p>list product</p>
+          <ec-list-product [products]="products" (viewDetail)="viewDetail($event)" (addToCart)="addToCart($event)"></ec-list-product>
         </div>
       </div>
   </div>

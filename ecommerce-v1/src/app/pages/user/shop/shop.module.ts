@@ -7,12 +7,13 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListProductModule } from 'src/app/common/components/list-product/list-product.module';
 
 const routes: Routes = [
   {
     path:"",
     component: ShopComponent,
-  }
+  },
 ]
 
 
@@ -25,7 +26,8 @@ const routes: Routes = [
     MatSelectModule,
     MatMenuModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ListProductModule,
   ]
 })
 export class ShopModule { }

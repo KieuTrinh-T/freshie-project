@@ -18,6 +18,7 @@ export interface IProductDetail {
   rating_count: number;
   category_name: string;
 }
+
 export interface IProduct {
   product_id: string;
   brand_name: string;
@@ -32,4 +33,5 @@ export interface IProduct {
   rating_count: number;
   category_id: string;
   category_name: string;
+  discount?: number;
 }

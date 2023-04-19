@@ -9,9 +9,11 @@ import { INITIAL_STATE } from './app.state';
 import { LoadingModule } from '@common/components/loading';
 import { MatButtonModule } from '@angular/material/button';
 
+
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,

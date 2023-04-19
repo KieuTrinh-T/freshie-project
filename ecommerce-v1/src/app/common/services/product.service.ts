@@ -11,7 +11,8 @@ export class ProductService extends HttpService{
   constructor(protected override _http: HttpClient) {
     super(_http);
   }
-  getAllProducts(){
-    return this.getItems<IProduct>(this.baseUrl + '/api/products');
+  getAllProducts(params:{limit?:number,offset?:number} = {}){
+    return this.getItems<IProduct>(this.baseUrl + '/api/products',null,params);
   }
+
 }
