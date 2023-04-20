@@ -12,7 +12,7 @@ export class ProductService extends HttpService{
     super(_http);
   }
   getAllProducts(params:{limit?:number,offset?:number} = {}){
-    return this.getItems<IProduct>(this.baseUrl + '/api/products',null,params);
+    return this.getItems<IProductList>(this.baseUrl + '/api/products',null,params);
   }
 
 }

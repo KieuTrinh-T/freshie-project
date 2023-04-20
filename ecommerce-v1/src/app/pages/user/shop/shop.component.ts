@@ -9,7 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { ProductService } from '@common/services';
 import { debounceTime } from 'rxjs';
-import { IProduct } from 'src/app/common/models/product';
+import { IProductList } from 'src/app/common/models/product';
 
 @Component({
   selector: 'ec-shop',
@@ -17,7 +17,7 @@ import { IProduct } from 'src/app/common/models/product';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-  products: IProduct[] = [];
+  products: IProductList[] = [];
 
   typeOfCategories = ['Skincare', 'Make up', 'Haircare', 'Perfume', 'Hygiene'];
 
@@ -57,8 +57,8 @@ export class ShopComponent implements OnInit {
   }
 
   getAllProducts() {
-    this._productService.getAllProducts({ limit: 12 }).subscribe((response) => {
-      response.value.forEach((product: IProduct) => {
+    this._productService.getAllProducts({limit:12}).subscribe((response) => {
+      response.value.forEach((product: IProductList) => {
         product.discount = Math.floor(
           ((product.original_price - product.price) / product.original_price) *
             100
