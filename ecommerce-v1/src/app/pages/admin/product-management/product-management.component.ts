@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { IProductList } from 'src/app/common/models/product';
 import { ProductService } from 'src/app/common/services/product.service';
 
@@ -14,16 +15,24 @@ export class ProductManagementComponent {
   displayedColumns: string[] = ['thumb', 'id', 'name', 'sold','action'];
   page:number = 1;
 
-  constructor(private _productService: ProductService) {
-    this.loadItems(this.page)
+  constructor(private _productService: ProductService, private _router: Router) {
+    this.loadItems()
   }
-  loadItems(page:number) {
-    this._productService.getAllProducts().subscribe(
+  loadItems() {
+    this._productService.filterProducts({limit:3,page:this.page}).subscribe(
       { next: (res) => { this.dataSource.data = res.value } }
     )
   }
-  changePage(event:any){
-    this.page = event.pageIndex + 1;
-    this.loadItems(this.page);
+  changePage(numChange:number){
+    this.page = this.page + numChange;
+    console.log(this.page);
+    this.loadItems();
   }
+
+  editProduct(id:string){
+    this._router.navigate(['admin/products/edit',id])
+  }
+
+
+
 }

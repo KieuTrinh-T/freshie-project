@@ -7,6 +7,7 @@ import { AuthenticationGuard } from '@common/auth';
 import { SnackBarComponent } from './snackbar/snack-bar/snack-bar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
         path: "account",
         loadChildren: () => import('./account-management/account-management.module').then((m) => m.AccountManagementModule)
       },
+      {
+        path:"products/edit/:id",
+        component:ProductEditComponent
+      }
     ]
   },
   {
@@ -51,6 +56,8 @@ const routes: Routes = [
   declarations: [
     AdminComponent,
     SnackBarComponent,
+    ProductEditComponent
+
   ],
   imports: [
   CommonModule,

@@ -89,10 +89,10 @@ const filterProduct = async(req, res) => {
         await client.connect();
         const collection = await client.db("cosmetic").collection("products");
         let filter = req.query;
-        const page = parseInt(req.query.page) - 1 || 0;
+        const page = parseInt(req.query.page);
         const limit = parseInt(req.query.limit);
         const search = req.query.search;
-        let sort = req.query.sort;
+        let sort = {};
         if (search) {
             filter = {
                 ...filter,
@@ -172,17 +172,18 @@ const filterProduct = async(req, res) => {
         }
 
         //sort
-        req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
+        // req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
 
         let sortBy = {};
-        if (sort[1]) {
-            sortBy[sort[0]] = sort[1];
-        } else {
-            sortBy[sort[0]] = "asc";
+        if (req.query.sort) {
+            sort = req.query.sort.split(",")
+            if (sort[1]) {
+                sortBy[sort[0]] = sort[1];
+            } else {
+                sortBy[sort[0]] = "asc";
+            }
         }
-        console.log(filter);
         ["sort", "page", "limit", "search", "min_price", "max_price", "min_rating"].forEach((e) => delete filter[e]);
-        console.log(filter)
         const projection = {
             _id: 0,
             product_id: 1,
@@ -207,8 +208,9 @@ const filterProduct = async(req, res) => {
         };
         const result = await collection.find(filter, projection)
             .sort(sortBy)
-            .skip(page * limit)
-            .limit(limit).toArray()
+            .limit(limit)
+            .skip((page - 1) * limit)
+            .toArray()
         client.close()
         return res.status(200).json(convertArrayResult(result))
     } catch (err) {
