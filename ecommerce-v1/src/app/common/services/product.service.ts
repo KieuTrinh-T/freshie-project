@@ -14,6 +14,14 @@ export class ProductService extends HttpService{
   getAllProducts(params:{limit?:number,offset?:number} = {}){
     return this.getItems<IProductList>(this.baseUrl + '/api/products',null,params);
   }
+  filterProducts(params:{category_id?:string,brand_id?:string,search?:string,min_price?:number, max_price?:number,
+    min_rating?:number,sort?:string,
+    limit?:number,page?:number} = {}){
+    return this.getItems<IProductList>(this.baseUrl + '/api/products',null,params);
+  }
+  getProductById(id:string){
+    return this.getItem<IProductDetail>(this.baseUrl + '/api/products' + id);
+  }
 
   getProductById(id:string){
     return this.getItem<IProductDetail>(this.baseUrl + '/api/products/' + id);

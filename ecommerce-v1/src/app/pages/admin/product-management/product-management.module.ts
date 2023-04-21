@@ -13,14 +13,16 @@ const routes: Routes = [
     path: "",
     component: ProductManagementComponent,
     canActivate: [AuthenticationGuard],
+    children: [
+      {path:"",redirectTo:"list",pathMatch:"full"},
 
-
+]
   }
 ]
 
 @NgModule({
   declarations: [
-    ProductManagementComponent
+    ProductManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,7 @@ const routes: Routes = [
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ]
 })
 export class ProductManagementModule { }
