@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const productSchema = mongoose.Schema({
-    product_id: {
-        type: String,
-        required: true,
-    },
     brand_id: {
         type: String,
     },
@@ -55,9 +51,6 @@ const productSchema = mongoose.Schema({
         type: String,
     }
 })
-productSchema.virtual('id').get(function() {
-    return this._id.toHexString();
-});
 
 productSchema.set('toJSON', {
     virtuals: true,
