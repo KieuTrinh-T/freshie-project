@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ProductManagementComponent } from './product-management.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuard } from '@common/auth';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   {
@@ -31,6 +33,8 @@ const routes: Routes = [
     MatButtonModule,
     MatIconModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatSelectModule
   ]
 })
 export class ProductManagementModule { }
