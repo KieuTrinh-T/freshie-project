@@ -27,7 +27,7 @@ const routes: Routes = [
     MatMenuModule,
     MatButtonModule,
     ReactiveFormsModule,
-    ListProductModule,
+    ListProductModule
   ]
 })
 export class ShopModule { }

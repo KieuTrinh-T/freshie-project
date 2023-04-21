@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IProduct } from '../../models/product';
+import { IProductList  } from '../../models/product';
 
 
 @Component({
@@ -8,9 +8,8 @@ import { IProduct } from '../../models/product';
   styleUrls: ['./list-product.component.scss']
 })
 export class ListProductComponent {
-  @Input() products: IProduct[] = [];
+  @Input() products: IProductList[] = [];
   @Output() viewDetail = new EventEmitter<string>();
   @Output() addToCart = new EventEmitter<string>();
   constructor() { }
-
 }

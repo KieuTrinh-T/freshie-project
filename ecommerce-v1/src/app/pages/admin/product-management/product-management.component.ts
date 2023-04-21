@@ -18,7 +18,7 @@ export class ProductManagementComponent {
     this.loadItems(this.page)
   }
   loadItems(page:number) {
-    this._productService.getAllProducts({limit:10,page:this.page}).subscribe(
+    this._productService.getAllProducts().subscribe(
       { next: (res) => { this.dataSource.data = res.value } }
     )
   }
