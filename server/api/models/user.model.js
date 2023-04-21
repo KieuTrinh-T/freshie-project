@@ -1,8 +1,9 @@
 const { query } = require('express');
 const { convertArrayResult, convertObjectResult, convertAuthenResult } = require('../../utils/function');
 const User = require('../schema/user.schema');
+// const jwt = require('jsonwebtoken');
 let ObjectId = require('mongodb').ObjectId;
-
+const jwt = require('jsonwebtoken');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const mongoose = require('mongoose');
 
@@ -17,20 +18,30 @@ const signUp = async(req) => {
     });
 
 
-    let newUser = new User();
-
-    newUser.username = req.body.username;
-    newUser.email = req.body.email;
-    newUser.phone = req.body.phone;
-    newUser.setPassword(req.body.password);
-
-    newUser.save()
-        .then((result) => {
-            console.log(result)
+    try {
+        let user = new User({
+            username: req.body.username,
+            email: req.body.email,
+            phone: req.body.phone,
+            isAdmin: req.body.isAdmin,
+            street: req.body.street,
+            apartment: req.body.apartment,
+            zip: req.body.zip,
+            city: req.body.city,
+            country: req.body.country,
         })
-        .catch((err) => {
-            console.log(err)
-        })
+        user.setPassword(req.body.password);
+        user = await user.save();
+
+        return {
+            status: 200,
+            message: "Sign up successfully",
+            value: user
+        }
+    } catch (error) {
+        return error
+    }
+
 }
 
 const signIn = async(req) => {
@@ -43,25 +54,19 @@ const signIn = async(req) => {
     mongoose.connection.on('connected', () => {
         console.log('Connected to MongoDB');
     });
-    let result = {
-        "is_auth": true,
-        "message": "Authentication success."
+
+    let message = "";
+    const user = await User.findOne({ username: req.body.username })
+    if (!user) {
+        message = "Username is not correct";
+
     }
-
-    User.findOne({ username: req.body.username }).then((user) => {
-        if (!user) {
-            result.message = "Authentication failed. User not found.";
-            result.is_auth = false;
-        }
-        if (!user.validPassword(req.body.password)) {
-            result.message = "Authentication failed. Wrong password.";
-            result.is_auth = false;
-        }
-        console.log(result)
-        return convertAuthenResult(result)
-    });
-
-
+    if (!user.validPassword(req.body.password)) {
+        message = "Password is not correct";
+    } else {
+        message = "Sign in successfully";
+    }
+    return message
 }
 
 const getUserById = async(req) => {
@@ -70,8 +75,7 @@ const getUserById = async(req) => {
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
         const collection = await client.db("cosmetic").collection("users");
-        let query_id = new ObjectId(req.params.id)
-        const result = await collection.findOne({ _id: query_id })
+        const result = await collection.findOne({ _id: new ObjectId(req.params.id) })
         await client.close()
         return convertObjectResult(result)
     } catch (err) {
@@ -110,11 +114,40 @@ const filterUser = async(req) => {
         return err
     }
 }
+const updateUser = async(req) => {
+    // Mongodb connection url
+    const MONGODB_URI = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
+    // Connect to MongoDB
+    mongoose.connect(MONGODB_URI, { dbName: 'cosmetic' });
+    mongoose.connection.on('connected', () => {
+        console.log('Mess from function signIn: Connected to MongoDB');
+    });
+    await User.updateOne({ _id: new ObjectId(req.params.id) }, {
+        $set: {
+            username: req.body.username,
+            email: req.body.email,
+            phone: req.body.phone,
+            avatar: req.body.avatar,
+            isAdmin: req.body.isAdmin,
+            street: req.body.street,
+            apartment: req.body.apartment,
+            zip: req.body.zip,
+            city: req.body.city,
+            country: req.body.country,
+            is_active: req.body.is_active
+        }
+    })
+    const user = await User.findOne({ _id: new ObjectId(req.params.id) })
+    return user
+
+}
+
 
 
 module.exports = {
     signUp,
     signIn,
     getUserById,
-    filterUser
+    filterUser,
+    updateUser
 }

@@ -21,10 +21,13 @@ app.use(bodyParser.json())
 const productRouter = require('./api/controllers/product.controller')
 const orderRouter = require('./api/controllers/order.controller')
 const userRouter = require('./api/controllers/user.controller')
+const cartRouter = require('./api/controllers/cart.controller')
 
 app.use('/api/products', productRouter)
 app.use('/api/orders', orderRouter)
 app.use('/api/users', userRouter)
+app.use('/api/carts', cartRouter)
+
 
 app.listen(port, () => {
     console.log(`I am listening on port ${port}`)

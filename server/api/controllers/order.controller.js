@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express')
-const { getAllOrder, viewOrderItems } = require('../models/order.model')
+const { getAllOrder, viewOrderItems, postOrder } = require('../models/order.model')
 const router = express.Router()
 router
     .get('/', async(req, res) => {
@@ -12,8 +12,14 @@ router
         const result = await getOrderByUser(req)
         res.status(200).json(result)
     })
-    .get('/:order_id', async(req, res) => {
+    .get('/:id', async(req, res) => {
         const result = await viewOrderItems(req)
+        console.log(result)
+        res.status(200).json(result)
+    })
+    .post('/', async(req, res) => {
+        const result = await postOrder(req)
+        console.log(result)
         res.status(200).json(result)
     })
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '@common/base';
-import { SharedService } from '@common/services';
+import { ProductService, SharedService } from '@common/services';
 import { StateService } from './../../../common/state/state.service';
 import { AppState } from 'src/app/app.state';
 
@@ -9,7 +9,7 @@ import { AppState } from 'src/app/app.state';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent extends BaseComponent {
+export class HomeComponent {
 
   categories = [
     { name: 'Category 1', image: 'https://picsum.photos/200/300' },
@@ -20,10 +20,8 @@ export class HomeComponent extends BaseComponent {
     { name: 'Category 6', image: 'https://picsum.photos/200/300' },
   ]
   constructor(
-    override _state: StateService<AppState>,
-    private _sharedService: SharedService
+    private _sharedService: SharedService,
   ) {
-    super(_state);
   }
 
   sharedData() {
