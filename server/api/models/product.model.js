@@ -2,9 +2,11 @@ const { convertArrayResult } = require('../../utils/function');
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const { ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
+const Product = require('../schema/product.schema');
 
 
-const getAllProducts = async(req) => {
+const getAllProducts = async(req, res) => {
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -12,13 +14,13 @@ const getAllProducts = async(req) => {
         const collection = await client.db("cosmetic").collection("products");
         const result = await collection.find({}).toArray();
         await client.close()
-        return convertArrayResult(result)
+        return res.status(200).json(convertArrayResult(result))
     } catch (err) {
-        return err
+        return res.status(500).json(err)
     }
 
 }
-const getProduct = async(req) => {
+const getProduct = async(req, res) => {
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -27,12 +29,12 @@ const getProduct = async(req) => {
         const result = await collection.findOne({ _id: new ObjectId(req.params.id) })
         console.log(result)
         client.close()
-        return convertArrayResult(result)
+        return res.status(200).json(convertArrayResult(result))
     } catch (err) {
-        return err
+        return res.status(500).json(err)
     }
 }
-const getProductByCategory = async(req) => {
+const getProductByCategory = async(req, res) => {
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -40,12 +42,12 @@ const getProductByCategory = async(req) => {
         const collection = await client.db("cosmetic").collection("products");
         const result = await collection.find({ category_id: req.params.category_id }).toArray()
         client.close()
-        return convertArrayResult(result)
+        return res.status(200).json(convertArrayResult(result))
     } catch (err) {
-        return err
+        return res.status(500).json(err)
     }
 }
-const getProductByBrand = async(req) => {
+const getProductByBrand = async(req, res) => {
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -56,13 +58,13 @@ const getProductByBrand = async(req) => {
         }).toArray()
         console.log(result)
         client.close()
-        return convertArrayResult(result)
+        return res.status(200).json(convertArrayResult(result))
     } catch (err) {
-        return err
+        return res.status(500).json(err)
     }
 }
 
-const search = async(req) => {
+const search = async(req, res) => {
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -74,13 +76,13 @@ const search = async(req) => {
             }
         }).toArray()
         client.close()
-        return convertArrayResult(result)
+        return res.status(200).json(convertArrayResult(result))
     } catch (err) {
-        return err
+        return res.status(500).json(err)
     }
 
 }
-const filterProduct = async(req) => {
+const filterProduct = async(req, res) => {
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -208,19 +210,61 @@ const filterProduct = async(req) => {
             .skip(page * limit)
             .limit(limit).toArray()
         client.close()
-        return convertArrayResult(result)
+        return res.status(200).json(convertArrayResult(result))
     } catch (err) {
-        return err
+        return res.status(500).json(err)
     }
 
 }
+const addProduct = async(req, res) => {
+    try {
+        // Mongodb connection url
+        const MONGODB_URI = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
 
+        // Connect to MongoDB
+        mongoose.connect(MONGODB_URI, { dbName: 'cosmetic' });
+        mongoose.connection.on('connected', () => {
+            console.log('Mess from Post: Connected to MongoDB');
+        });
+        let newProduct = new Product(req.body);
+        newProduct = await newProduct.save();
+        return res.status(200).json(newProduct)
+    } catch (err) {
+        return res.status(500).json(err)
+    }
+}
+const updateProduct = async(req, res) => {
+    try {
+        // Mongodb connection url
+        const MONGODB_URI = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
 
+        // Connect to MongoDB
+        mongoose.connect(MONGODB_URI, { dbName: 'cosmetic' });
+        mongoose.connection.on('connected', () => {
+            console.log('Connected to MongoDB');
+        });
+        let updateFields = req.body;
+        let product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' })
+        }
+        for (let key in updateFields) {
+            product[key] = updateFields[key];
+            console.log(key)
+        }
+        product = await product.save();
+        return res.status(200).json(product)
+    } catch (err) {
+        return res.status(500).json(err)
+    }
+}
 module.exports = {
     getAllProducts,
     getProduct,
     getProductByCategory,
     getProductByBrand,
     filterProduct,
-    search
+    search,
+    addProduct,
+    updateProduct
 }

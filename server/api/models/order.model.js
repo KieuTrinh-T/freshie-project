@@ -1,6 +1,6 @@
 const { convertArrayResult } = require('../../utils/function');
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const Order = require('../schema/order.schema');
 const OrderItem = require('../schema/order-item.schema');
 require('../schema/product.schema')
@@ -12,7 +12,7 @@ const getAllOrder = async(req) => {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
-        const collection = await client.db("cosmetic").collection("order");
+        const collection = await client.db("cosmetic").collection("orders");
         const result = await collection.find({}).toArray();
         await client.close()
         return convertArrayResult(result)
@@ -24,13 +24,12 @@ const getAllOrder = async(req) => {
 const getOrderByUser = async(req) => {
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
-        const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-        await client.connect();
-        const collection = await client.db("cosmetic").collection("order");
+        mongoose.connect(uri, { dbName: 'cosmetic' });
+        mongoose.connection.on('connected', () => {
+            console.log('Mess from View: Connected to MongoDB');
+        });
         const user_id = req.params.user_id
-        const order_status_id = req.params.order_status_id
-        const result = await collection.find({ user_id: user_id, order_status_id: order_status_id }).toArray();
-        await client.close()
+        const result = await Order.find({ user: user_id })
         return convertArrayResult(result)
     } catch (err) {
         return err
@@ -100,9 +99,51 @@ const postOrder = async(req) => {
         return err
     }
 }
+const cancelOrder = async(req, res) => {
+    // Mongodb connection url
+    const MONGODB_URI = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
+
+    // Connect to MongoDB
+    mongoose.connect(MONGODB_URI, { dbName: 'cosmetic' });
+    mongoose.connection.on('connected', () => {
+        console.log('Mess from Post: Connected to MongoDB');
+    });
+    let order = await Order.findById(req.params.id);
+    if (!order) {
+        return res.status(404).send('The order with the given ID was not found.');
+    }
+    order.status = 'Cancelled';
+    order = await order.save();
+    return res.status(200).send(order);
+}
+const updateOrder = async(req, res) => {
+    // Mongodb connection url
+    const MONGODB_URI = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
+
+    // Connect to MongoDB
+    mongoose.connect(MONGODB_URI, { dbName: 'cosmetic' });
+    mongoose.connection.on('connected', () => {
+        console.log('Mess from Post: Connected to MongoDB');
+    });
+    let order = await Order.findById(req.params.id);
+    if (!order) {
+        return res.status(404).send('The order with the given ID was not found.');
+    }
+    updateFields = req.body;
+    for (const field in updateFields) {
+        order[field] = updateFields[field];
+    }
+    console.log(order)
+    order = await order.save();
+    return res.status(200).send(order);
+}
+
+
 module.exports = {
     getAllOrder,
     getOrderByUser,
     viewOrderItems,
-    postOrder
+    postOrder,
+    cancelOrder,
+    updateOrder
 }
