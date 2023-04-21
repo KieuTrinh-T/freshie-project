@@ -8,6 +8,8 @@ import { SnackBarComponent } from './snackbar/snack-bar/snack-bar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { FormsModule } from '@angular/forms';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 const routes: Routes = [
   {
@@ -64,7 +66,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     LayoutModule,
     MatSnackBarModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    AngularEditorModule
   ]
 })
 export class AdminModule { }

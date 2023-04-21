@@ -1,2 +1,30 @@
 <h2>Cập nhật thông tin sản phẩm</h2>
 <label>Mã sản phẩm</label>
+<input type="text" class="form-control" [(ngModel)]="product._id" disabled>
+<label>Tên sản phẩm</label>
+<input type="text" class="form-control" [(ngModel)]="product.product_name">
+<div class="price">
+    <div class="price-item">
+        <label>Giá</label>
+        <input type="text" class="form-control" [(ngModel)]="product.price"></div>
+    <div class="price-item">
+        <label>Giá gốc</label>
+        <input type="text" class="form-control" [(ngModel)]="product.original_price">
+    </div>
+    <div>
+        <label class="price-item">Số lượng kho</label>
+        <input type="text" class="form-control" [(ngModel)]="product.inventory_num">
+    </div>
+</div>
+<!-- <label>Ảnh chi tiết</label> -->
+<!-- <div class="images">
+    <div>
+        <img class="product-thumb" src="{{product.thumb}}">
+        <input type="file" (change)="onFileChange($event)" accept="image/*">
+    </div>
+    <img class="product-thumb" src="{{product.image_1}}">
+    <img class="product-thumb" src="{{product.image_2}}">
+    <img class="product-thumb" src="{{product.image_3}}">
+</div> -->
+<label>Mô tả</label>
+<angular-editor [(ngModel)]="product.description" [config]="editorConfig"></angular-editor>
