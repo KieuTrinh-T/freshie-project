@@ -1,5 +1,5 @@
 export interface IProductDetail {
-  product_id: string;
+  _id: string;
   brand_id: string;
   brand_name: string;
   slug: string;
@@ -19,7 +19,7 @@ export interface IProductDetail {
   category_name: string;
 }
 export interface IProductList {
-  product_id: string;
+  _id: string;
   product_name: string;
   thumb: string;
   description: string;

@@ -9,13 +9,13 @@
           <img class="card-img rounded-0 img-fluid" src="{{p.thumb}}">
           <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
               <ul class="list-unstyled">
-                <li class="icon-item-list"><a><mat-icon class="icon-product" aria-hidden="false" aria-label="Example home icon" fontIcon="visibility" (click)="viewDetail.emit(p.product_id)"></mat-icon></a></li>
-                <li class="icon-item-list"><a><mat-icon class="icon-product" aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart" (click)="addToCart.emit(p.product_id)"></mat-icon></a></li>
+                <li class="icon-item-list"><a><mat-icon class="icon-product" aria-hidden="false" aria-label="Example home icon" fontIcon="visibility" (click)="viewDetail.emit(p._id)"></mat-icon></a></li>
+                <li class="icon-item-list"><a><mat-icon class="icon-product" aria-hidden="false" aria-label="Example home icon" fontIcon="shopping_cart" (click)="addToCart.emit(p._id)"></mat-icon></a></li>
               </ul>
           </div>
       </div>
       <div class="card-body">
-          <a class="h5 text-decoration-none" (click)="viewDetail.emit(p.product_id)">{{p.product_name | truncate:40}}</a>
+          <a class="h5 text-decoration-none" (click)="viewDetail.emit(p._id)">{{p.product_name | truncate:40}}</a>
           <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
               <li class="pt-2">
                 <mat-icon class="star" aria-hidden="false" aria-label="Example home icon" fontIcon="star"></mat-icon>
