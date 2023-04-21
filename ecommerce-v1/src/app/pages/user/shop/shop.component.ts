@@ -70,7 +70,7 @@ export class ShopComponent implements OnInit {
 
   viewDetail(id: string) {
     console.log(id);
-    this.router.navigate([`/user/product-detail.${id}`])
+    this.router.navigate([`/product-detail/${id}`])
   }
 
   addToCart(id: string) {

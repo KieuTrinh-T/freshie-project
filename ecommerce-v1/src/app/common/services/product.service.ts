@@ -23,4 +23,8 @@ export class ProductService extends HttpService{
     return this.getItem<IProductDetail>(this.baseUrl + '/api/products' + id);
   }
 
+  getProductById(id:string){
+    return this.getItem<IProductDetail>(this.baseUrl + '/api/products/' + id);
+  }
+
 }
