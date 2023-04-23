@@ -1,0 +1,56 @@
+<div class="wrapper">
+  <div class="left-container">
+    <mat-tab-group class="container" [selectedIndex]="controlTab.value"
+    (selectedIndexChange)="controlTab.setValue($event)">
+      <mat-tab label="Sign in">
+        <!-- form sign in -->
+        <div class="signin-container">
+          <h2 class="title">Đăng nhập</h2>
+          <form [formGroup]="signInForm" (ngSubmit)="signIn()">
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input formControlName="username" matInput type="text" placeholder="Username" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input formControlName="password" matInput type="password" placeholder="Password" />
+            </mat-form-field>
+            <button mat-raised-button color="primary">Đăng nhập</button>
+          </form>
+        </div>
+      </mat-tab>
+      <mat-tab label="Sign up">
+        <!-- form sign up -->
+        <div class="signup-container">
+          <h2 class="title">Đăng ký</h2>
+          <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input formControlName="username" matInput type="text" placeholder="Username" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input formControlName="email" matInput type="email" placeholder="Email" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Phone</mat-label>
+              <input formControlName="phone" matInput type="text" placeholder="Phone" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input formControlName="password" matInput type="password" placeholder="Password" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Confirm Password</mat-label>
+              <input formControlName="confirmPassword" matInput type="password" placeholder="Confirm Password" />
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary">Đăng ký</button>
+          </form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <div class="right-container">
+    <h2>Welcome to Freshie</h2>
+  </div>
+</div>
