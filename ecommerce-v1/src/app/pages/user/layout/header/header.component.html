@@ -50,9 +50,12 @@
               <div class="icon cursor-pointer" style="margin-right: 10px;">
                 <mat-icon matBadge="15" matBadgeColor="warn">shopping_cart</mat-icon>
               </div>
-              <div class="icon cursor-pointer">
+              <div class="icon cursor-pointer" *ngIf="user$ | async as user; else signInBtn">
                 <mat-icon matBadge="99+" matBadgeColor="warn">person</mat-icon>
               </div>
+              <ng-template #signInBtn>
+                <button mat-button routerLink="info/sign-in">Sign In</button>
+              </ng-template>
             </div>
           </div>
         </div>

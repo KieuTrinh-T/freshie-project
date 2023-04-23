@@ -15,10 +15,6 @@ const routes: Routes = [
         loadChildren: () => import('./home/home.module').then((m) => m.HomeModule)
       },
       {
-        path: "login",
-        loadChildren: () => import('./user-login/user-login.module').then((m) => m.UserLoginModule)
-      },
-      {
         path: "shop",
         loadChildren: () => import('./shop/shop.module').then((m) => m.ShopModule)
       },
@@ -26,6 +22,10 @@ const routes: Routes = [
         path: "product-detail",
         loadChildren: () => import('./product/product.module').then((m) => m.ProductModule)
       },
+      {
+        path: "info",
+        loadChildren: () => import('./info/info.module').then((m) => m.InfoModule)
+      }
     ]
   },
 

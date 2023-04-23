@@ -39,7 +39,7 @@ export class HttpService {
     if (headers) {
       reqOptions['headers'] = headers;
     }
-    return this._http.post(url, body, reqOptions);
+    return this._http.post<OdataResponse<T>>(url, body, reqOptions);
   }
 
   protected updateItem<T>(url: string, body: T, headers?: HttpHeaders | null) {
