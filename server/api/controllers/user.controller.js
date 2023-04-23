@@ -12,9 +12,8 @@ router
         res.status(200).json(result)
     })
     .post('/signin', async(req, res) => {
-        const result = await signIn(req);
-        res.status(200).json(result)
-        console.log(result)
+        await signIn(req, res);
+
 
 
     })

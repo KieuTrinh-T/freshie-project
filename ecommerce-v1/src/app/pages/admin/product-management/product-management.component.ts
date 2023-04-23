@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { OdataParams } from 'src/app/common/http/http.model';
 import { IProductList } from 'src/app/common/models/product';
 import { ProductService } from 'src/app/common/services/product.service';
 
@@ -29,6 +28,7 @@ export class ProductManagementComponent {
 
   constructor(private _productService: ProductService, private _router: Router) {
     this.loadItems()
+
   }
   loadItems() {
 
