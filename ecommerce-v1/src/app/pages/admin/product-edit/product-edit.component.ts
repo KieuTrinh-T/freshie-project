@@ -81,4 +81,13 @@ export class ProductEditComponent {
 
     };
 
+    updateProduct()
+    {
+      this._productService.updateProduct(this.product._id,this.product).subscribe(
+        {next:(res)=>{console.log(res)},
+        error:(err)=>{console.log(err)}}
+      )
+
+    }
+
 }

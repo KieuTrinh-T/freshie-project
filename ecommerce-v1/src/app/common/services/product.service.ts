@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http/http.service';
 import { HttpClient } from '@angular/common/http';
-import { IProductDetail, IProductList } from '../models/product';
+import { IProductDetail, IProductList, ProductDetail } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,8 @@ export class ProductService extends HttpService{
   getProductById(id:string){
     return this.getItem<IProductDetail>(this.baseUrl + '/api/products/' + id);
   }
-
+  updateProduct(id:string,product:ProductDetail){
+    return this.editItem<ProductDetail>(this.baseUrl + '/api/products/' + id,product);
+  }
 
 }
