@@ -50,6 +50,14 @@ export class HttpService {
     return this._http.patch(url, body, reqOptions);
   }
 
+  protected editItem<T>(url: string, body: T, headers?: HttpHeaders | null) {
+    const reqOptions: HttpOptions = {}
+    if (headers) {
+      reqOptions['headers'] = headers;
+    }
+    return this._http.put(url, body, reqOptions);
+  }
+
   protected deleteItem(url: string, headers?: HttpHeaders | null) {
     const reqOptions: HttpOptions = {}
     if (headers) {
