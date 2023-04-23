@@ -210,6 +210,7 @@ const filterProduct = async(req) => {
         client.close()
         return convertArrayResult(result)
     } catch (err) {
+        console.log(err)
         return err
     }
 
