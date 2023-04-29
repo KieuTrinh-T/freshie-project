@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { BaseComponent } from '@common/base';
 import { ProductService, SharedService } from '@common/services';
 import { StateService } from './../../../common/state/state.service';
-import { AppState } from 'src/app/app.state';
 
 @Component({
   selector: 'app-home',

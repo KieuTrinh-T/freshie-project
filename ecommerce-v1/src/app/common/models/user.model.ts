@@ -1,21 +1,14 @@
 export interface IUser {
-  _id: string;
-  name: string;
-  address: string;
-  phoneNumber: string;
-  email: string;
-  role: string;
-}
-export interface IUserRole {
-  name: string;
-  displayName: string;
+  username: string;
+  password: string;
+  email?: string;
+  avatar?: string;
+  phone?: string;
+  street?: string;
+  apartment?: string;
+  zip?: string;
+  city?: string;
+  country?: string;
+  is_active?: boolean;
 }
 
-export const BLANK_USER: IUser = {
-  _id: '',
-  name: '',
-  address: '',
-  phoneNumber: '',
-  email: '',
-  role: ''
-}
