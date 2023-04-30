@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { FormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   {
@@ -68,7 +70,9 @@ const routes: Routes = [
     MatSnackBarModule,
     MatButtonModule,
     FormsModule,
-    AngularEditorModule
+    AngularEditorModule,
+    MatFormFieldModule,
+    MatSelectModule
   ]
 })
 export class AdminModule { }
