@@ -39,7 +39,7 @@ export class HttpService {
     if (headers) {
       reqOptions['headers'] = headers;
     }
-    return this._http.post(url, body, reqOptions);
+    return this._http.post<OdataResponse<T>>(url, body, reqOptions);
   }
 
   protected updateItem<T>(url: string, body: T, headers?: HttpHeaders | null) {
@@ -50,6 +50,7 @@ export class HttpService {
     return this._http.patch(url, body, reqOptions);
   }
 
+  protected deleteItem<T>(url: string, body: T, headers?: HttpHeaders | null) {
   protected editItem<T>(url: string, body: T, headers?: HttpHeaders | null) {
     const reqOptions: HttpOptions = {}
     if (headers) {
@@ -63,6 +64,7 @@ export class HttpService {
     if (headers) {
       reqOptions['headers'] = headers;
     }
+    reqOptions['body'] = body;
     return this._http.delete(url, reqOptions);
   }
 }
