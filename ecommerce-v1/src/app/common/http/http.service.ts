@@ -50,11 +50,12 @@ export class HttpService {
     return this._http.patch(url, body, reqOptions);
   }
 
-  protected deleteItem(url: string, headers?: HttpHeaders | null) {
+  protected deleteItem<T>(url: string, body: T, headers?: HttpHeaders | null) {
     const reqOptions: HttpOptions = {}
     if (headers) {
       reqOptions['headers'] = headers;
     }
+    reqOptions['body'] = body;
     return this._http.delete(url, reqOptions);
   }
 }

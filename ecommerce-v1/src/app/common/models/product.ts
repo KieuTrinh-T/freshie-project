@@ -32,3 +32,5 @@ export interface IProductList {
   inventory_num: number;
   discount: number;
 }
+
+
