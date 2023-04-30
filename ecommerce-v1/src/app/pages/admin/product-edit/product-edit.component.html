@@ -1,8 +1,21 @@
 <h2>Cập nhật thông tin sản phẩm</h2>
 <label>Mã sản phẩm</label>
 <input type="text" class="form-control" [(ngModel)]="product._id" disabled>
+<div class="product_image">
+    <img [src]="product.thumb" alt="">
+    <input type="file" (change)="onFileSelected($event,product)">
+
+</div>
 <label>Tên sản phẩm</label>
 <input type="text" class="form-control" [(ngModel)]="product.product_name">
+<label>Danh mục</label>
+<mat-form-field>
+    <mat-select [(value)]="product.category_id">
+        <mat-option *ngFor="let category of categories " [value]="category.id">
+            {{category.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
 <div class="price">
     <div class="price-item">
         <label>Giá</label>
@@ -16,16 +29,7 @@
         <input type="text" class="form-control" [(ngModel)]="product.inventory_num">
     </div>
 </div>
-<!-- <label>Ảnh chi tiết</label> -->
-<!-- <div class="images">
-    <div>
-        <img class="product-thumb" src="{{product.thumb}}">
-        <input type="file" (change)="onFileChange($event)" accept="image/*">
-    </div>
-    <img class="product-thumb" src="{{product.image_1}}">
-    <img class="product-thumb" src="{{product.image_2}}">
-    <img class="product-thumb" src="{{product.image_3}}">
-</div> -->
+
 <label>Mô tả</label>
 <angular-editor [(ngModel)]="product.description" [config]="editorConfig"></angular-editor>
 <button mat-flat-button color="primary" (click)="updateProduct()">Cập nhật</button>

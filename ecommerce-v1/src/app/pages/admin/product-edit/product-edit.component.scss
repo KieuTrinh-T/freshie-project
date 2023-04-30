@@ -6,6 +6,11 @@
     margin-bottom: 20px;
 }
 
+label {
+    font-weight: 700;
+    margin-right: 10px;
+}
+
 .price {
     display: flex;
     flex-wrap: wrap;
@@ -20,4 +25,9 @@
     margin: 0 10px;
     color: darkred;
     font-weight: 700;
+}
+
+mat-form-field {
+    margin: 10px;
+    border-radius: 20px;
 }

@@ -11,6 +11,13 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 })
 export class ProductEditComponent {
 
+  categories = [
+    {id: '1594', name:"hygiene"},
+    {id: '1591', name:"haircare"},
+    {id: '1584', name:"makeup"},
+    {id: '1595', name:"perfume"},
+    {id:'1582', name:"skincare"}
+  ]
   product = new ProductDetail();
   constructor(private activateRoute: ActivatedRoute, private _productService: ProductService ) {
     this.activateRoute.params.subscribe(
@@ -88,6 +95,19 @@ export class ProductEditComponent {
         error:(err)=>{console.log(err)}}
       )
 
+    }
+    onFileSelected(event: any, product: ProductDetail) {
+      let me = this;
+      let file = event.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+         product.image_1= reader.result!.toString()
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
     }
 
 }
