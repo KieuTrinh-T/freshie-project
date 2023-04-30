@@ -12,10 +12,9 @@ import { ProductService } from 'src/app/common/services/product.service';
 export class ProductManagementComponent {
 
   public dataSource:MatTableDataSource<IProductList> = new MatTableDataSource<IProductList>()
-  displayedColumns: string[] = ['thumb', 'id', 'name', 'sold','action'];
+  displayedColumns: string[] = ['thumb', 'name', 'sold','inventory','action'];
   page:number = 1;
   limit:number = 10;
-  pagesize = [5,10,15,20]
   categories = [
     {id: 1594, name:"hygiene"},
     {id: 1591, name:"haircare"},
