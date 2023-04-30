@@ -7,6 +7,9 @@ import { AuthenticationGuard } from '@common/auth';
 import { SnackBarComponent } from './snackbar/snack-bar/snack-bar.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { FormsModule } from '@angular/forms';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 const routes: Routes = [
   {
@@ -39,6 +42,10 @@ const routes: Routes = [
         path: "account",
         loadChildren: () => import('./account-management/account-management.module').then((m) => m.AccountManagementModule)
       },
+      {
+        path:"products/edit/:id",
+        component:ProductEditComponent
+      }
     ]
   },
   {
@@ -51,13 +58,17 @@ const routes: Routes = [
   declarations: [
     AdminComponent,
     SnackBarComponent,
+    ProductEditComponent
+
   ],
   imports: [
   CommonModule,
     RouterModule.forChild(routes),
     LayoutModule,
     MatSnackBarModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    AngularEditorModule
   ]
 })
 export class AdminModule { }

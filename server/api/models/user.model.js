@@ -44,7 +44,7 @@ const signUp = async(req) => {
 
 }
 
-const signIn = async(req) => {
+const signIn = async(req, res) => {
 
     // Mongodb connection url
     const MONGODB_URI = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
@@ -59,14 +59,16 @@ const signIn = async(req) => {
     const user = await User.findOne({ username: req.body.username })
     if (!user) {
         message = "Username is not correct";
+        res.status(500).json({ message: message });
 
     }
     if (!user.validPassword(req.body.password)) {
         message = "Password is not correct";
+        res.status(500).json({ message: message });
     } else {
         message = "Sign in successfully";
+        res.status(200).json({ message: message, value: user });
     }
-    return message
 }
 
 const getUserById = async(req) => {

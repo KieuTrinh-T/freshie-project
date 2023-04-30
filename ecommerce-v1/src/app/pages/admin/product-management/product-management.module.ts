@@ -3,24 +3,28 @@ import { CommonModule } from '@angular/common';
 import { ProductManagementComponent } from './product-management.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuard } from '@common/auth';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   {
     path: "",
     component: ProductManagementComponent,
     canActivate: [AuthenticationGuard],
+    children: [
+      {path:"",redirectTo:"list",pathMatch:"full"},
 
-
+]
   }
 ]
 
 @NgModule({
   declarations: [
-    ProductManagementComponent
+    ProductManagementComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,9 @@ const routes: Routes = [
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatSelectModule
   ]
 })
 export class ProductManagementModule { }

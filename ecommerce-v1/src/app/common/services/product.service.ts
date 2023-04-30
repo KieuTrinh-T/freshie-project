@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http/http.service';
 import { HttpClient } from '@angular/common/http';
-import { IProductDetail, IProductList } from '../models/product';
+import { IProductDetail, IProductList, ProductDetail } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,16 @@ export class ProductService extends HttpService{
   getAllProducts(params:{limit?:number,offset?:number} = {}){
     return this.getItems<IProductList>(this.baseUrl + '/api/products',null,params);
   }
-
+  filterProducts(params:{category_id?:string,brand_id?:string,search?:string,min_price?:number, max_price?:number,
+    min_rating?:number,sort?:string,
+    limit?:number,page?:number} = {}){
+    return this.getItems<IProductList>(this.baseUrl + '/api/products',null,params);
+  }
   getProductById(id:string){
     return this.getItem<IProductDetail>(this.baseUrl + '/api/products/' + id);
+  }
+  updateProduct(id:string,product:ProductDetail){
+    return this.editItem<ProductDetail>(this.baseUrl + '/api/products/' + id,product);
   }
 
 }
