@@ -65,9 +65,11 @@ const signIn = async(req, res) => {
     if (!user.validPassword(req.body.password)) {
         message = "Password is not correct";
         res.status(500).json({ message: message });
-    } else {
+    } else if (user.validPassword(req.body.password)) {
         message = "Sign in successfully";
         res.status(200).json({ message: message, value: user });
+    } else {
+        res.status(500).json({ message: message });
     }
 }
 

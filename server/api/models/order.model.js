@@ -86,6 +86,7 @@ const postOrder = async(req) => {
             shippingAddress2: req.body.shippingAddress2,
             city: req.body.city,
             country: req.body.country,
+            phone: req.body.phone,
             status: req.body.status,
             subtotal: totalPrices.reduce((a, b) => a + b, 0),
             shipping: req.body.shipping,
