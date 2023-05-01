@@ -13,7 +13,10 @@ const getAllOrder = async(req) => {
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
         const collection = await client.db("cosmetic").collection("orders");
-        const result = await collection.find({}).toArray();
+        const query = req.query
+        console.log(req.query)
+
+        const result = await collection.find(query).sort({ 'dateOrdered': -1 }).toArray();
         await client.close()
         return convertArrayResult(result)
     } catch (err) {
@@ -21,6 +24,8 @@ const getAllOrder = async(req) => {
     }
 
 }
+
+
 const getOrderByUser = async(req) => {
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
@@ -146,5 +151,5 @@ module.exports = {
     viewOrderItems,
     postOrder,
     cancelOrder,
-    updateOrder
+    updateOrder,
 }
