@@ -1,0 +1,41 @@
+<h2>Cập nhật thông tin sản phẩm</h2>
+<label>Mã sản phẩm</label>
+<input type="text" class="form-control" [(ngModel)]="product._id" disabled>
+<div class="product_image">
+    <div class="image-item"> <img [src]="product.thumb" alt="">
+        <input type="file" (change)="changeThumb($event,product)"></div>
+    <div class="image-item"><img [src]="product.image_1" alt="">
+        <input type="file" (change)="changeImage1($event,product)"></div>
+    <div class="image-item"><img [src]="product.image_2" alt="">
+        <input type="file" (change)="changeImage2($event,product)"></div>
+    <div class="image-item"><img [src]="product.image_3" alt="">
+        <input type="file" (change)="changeImage3($event,product)"></div>
+
+</div>
+<label>Tên sản phẩm</label>
+<input type="text" class="form-control" [(ngModel)]="product.product_name">
+<label>Danh mục</label>
+<mat-form-field>
+    <mat-select [(value)]="product.category_id">
+        <mat-option *ngFor="let category of categories " [value]="category.id">
+            {{category.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+<div class="price">
+    <div class="price-item">
+        <label>Giá</label>
+        <input type="text" class="form-control" [(ngModel)]="product.price"></div>
+    <div class="price-item">
+        <label>Giá gốc</label>
+        <input type="text" class="form-control" [(ngModel)]="product.original_price">
+    </div>
+    <div>
+        <label class="price-item">Số lượng kho</label>
+        <input type="text" class="form-control" [(ngModel)]="product.inventory_num">
+    </div>
+</div>
+
+<label>Mô tả</label>
+<angular-editor [(ngModel)]="product.description" [config]="editorConfig"></angular-editor>
+<button mat-flat-button color="primary" (click)="updateProduct()">Cập nhật</button>

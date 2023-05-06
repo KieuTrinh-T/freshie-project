@@ -7,7 +7,7 @@ import { OdataParams, OdataResponse, HttpOptions } from './http.model';
 })
 
 export class HttpService {
-  public baseUrl = 'http://localhost:3004';
+  public baseUrl = 'https://freshie-nrvr.onrender.com';
 
   constructor(protected _http: HttpClient) { }
 
@@ -50,11 +50,21 @@ export class HttpService {
     return this._http.patch(url, body, reqOptions);
   }
 
-  protected deleteItem(url: string, headers?: HttpHeaders | null) {
+
+  protected editItem<T>(url: string, body: T, headers?: HttpHeaders | null) {
     const reqOptions: HttpOptions = {}
     if (headers) {
       reqOptions['headers'] = headers;
     }
+    return this._http.put(url, body, reqOptions);
+  }
+
+  protected deleteItem<T>(url: string, headers?: HttpHeaders | null) {
+    const reqOptions: HttpOptions = {}
+    if (headers) {
+      reqOptions['headers'] = headers;
+    }
+
     return this._http.delete(url, reqOptions);
   }
 }

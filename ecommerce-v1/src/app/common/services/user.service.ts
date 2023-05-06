@@ -4,17 +4,32 @@ import { HttpService } from './../http/http.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OdataResponse } from '../http/http.model';
 import { ThisReceiver } from '@angular/compiler';
-import { IUser } from '../models/user.model';
+import { BLANK_USER, IUser, User } from '../models/user.model';
+import { IAdmin } from '../models/admin';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends HttpService {
+
+  public _admin: IAdmin = {
+    maAdmin: 0,
+    tenAdmin: '',
+    email: '',
+    password: ''
+  }
   constructor(protected override _http: HttpClient) {
     super(_http);
   }
-  private _userState$: Subject<IUser | null> = new Subject();
+  private _userState$: BehaviorSubject<IUser> = new BehaviorSubject(BLANK_USER);
+
+  // get user state
+
+  getUserState(){
+    return this._userState$.getValue();
+  }
 
   //get user
   getUser$() {
+    console.log(this._userState$.asObservable());
     return this._userState$.asObservable();
   }
 
@@ -34,24 +49,44 @@ export class UserService extends HttpService {
       switchMap((res: any) => {
         console.log(res);
         if (res) {
-          this.setUser$(res);
-          return of(true);
+          this.setUser$(res.value);
         }
-        return of(false);
+        return of(res);
       })
     );
   }
 
   //signup
-  signup$(username: string, email: string, password: string, phone: string) {
+  signup$(username: string, email: string, phone: string, password: string,) {
     const url = this.baseUrl + '/api/users/signup';
     console.log(url);
     const body = {
       username,
       email,
-      password,
       phone,
+      password,
     };
     return this.submitItem<IUser>(url, body);
   }
+
+  createAccount(account:User){
+    const url = this.baseUrl + '/api/users/signup';
+    const body = {
+      username:account.username,
+      email:account.email,
+      phone:account.phone,
+      password:account.password,
+      avatar:account.avatar,
+      apartment:account.apartment,
+      street:account.street,
+      city:account.city,
+      country:account.country,
+      zip:account.zip,
+      isAdmin:account.isAdmin,
+      is_active:true,
+
+    }
+    return this.submitItem<IUser>(url,body);
+  }
 }
+

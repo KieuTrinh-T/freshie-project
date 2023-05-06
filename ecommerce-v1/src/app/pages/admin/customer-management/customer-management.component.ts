@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./customer-management.component.scss']
 })
 export class CustomerManagementComponent {
+orderData: any
+  constructor() { }
 
 }

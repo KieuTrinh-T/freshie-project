@@ -1,0 +1,42 @@
+.images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.price {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+    color: darkred;
+}
+
+.price-item {
+    display: inline;
+    margin: 0 10px;
+    color: darkred;
+    font-weight: 700;
+}
+
+mat-form-field {
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.image-item {
+    display: inline-block;
+    width: 20%;
+}
+
+.image-item img {
+    width: 100px;
+}

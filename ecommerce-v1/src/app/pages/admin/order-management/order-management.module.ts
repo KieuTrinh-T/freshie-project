@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { OrderManagementComponent } from './order-management.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthenticationGuard } from '@common/auth';
+import { MatTableModule } from '@angular/material/table';
+import {  MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const routes: Routes = [
   {
@@ -19,7 +23,11 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTabsModule
   ]
 })
 export class OrderManagementModule { }

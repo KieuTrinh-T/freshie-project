@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/common/services/admin.service';
+import { UserService } from 'src/app/common/services/user.service';
 
 @Component({
   selector: 'ec-signin',
@@ -12,7 +13,7 @@ import { AdminService } from 'src/app/common/services/admin.service';
 export class SigninComponent {
   public formGroup: FormGroup = new FormGroup({});
 
-  constructor(private adminService: AdminService, private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar ) { }
+  constructor(private adminService: UserService, private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar ) { }
   ngOnInit(){
     if(localStorage.getItem('admin') != null){
       this.adminService._admin = JSON.parse(localStorage.getItem('admin') as string);
@@ -34,7 +35,7 @@ export class SigninComponent {
 
   submit() {
     if (this.formGroup.valid) {
-      this.adminService.login(this.formGroup.value).subscribe((data: any) => {
+      this.adminService.signin$(this.formGroup.controls['email'].value,this.formGroup.controls['password'].value).subscribe((data: any) => {
         if(data == ''){
           if(this.formGroup.value.remember){
             localStorage.setItem('admin', JSON.stringify(this.adminService._admin));

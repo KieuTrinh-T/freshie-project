@@ -1,0 +1,39 @@
+<h2>Tạo tài khoản</h2>
+<span>{{message}}</span>
+<div>
+    <label>Loại tài khoản</label>
+    <mat-form-field>
+        <mat-select [(value)]="account.isAdmin">
+            <mat-option value="true">Admin</mat-option>
+            <mat-option value="false">Người dùng</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <label>Avatar</label>
+        <img [src]="account.avatar" alt="">
+        <input type="file" (change)="chooseAvatar($event)">
+    </div>
+    <h3>Thông tin đăng nhập</h3>
+    <span matPrefix>*</span>
+    <label>Tên tài khoản</label>
+    <input type="text" class="form-control" [(ngModel)]="account.username" required>
+    <span matPrefix>*</span>
+    <label>Mật khẩu</label>
+    <input type="password" class="form-control" [(ngModel)]="account.password" required>
+    <span matPrefix>*</span>
+    <label>Email</label>
+    <input type="text" class="form-control" [(ngModel)]="account.email" required>
+    <span matPrefix>*</span>
+    <label>Số điện thoại</label>
+    <input type="tel" class="form-control" [(ngModel)]="account.phone" required>
+    <h3>Địa chỉ</h3>
+    <label>Số nhà</label>
+    <input type="text" class="form-control" [(ngModel)]="account.apartment">
+    <label>Tên đường</label>
+    <input type="text" class="form-control" [(ngModel)]="account.street">
+    <label>Tỉnh/Thành phố</label>
+    <input type="text" class="form-control" [(ngModel)]="account.city">
+
+    <button mat-flat-button color="primary" (click)="createAccount()">Tạo tài khoản</button>
+
+</div>

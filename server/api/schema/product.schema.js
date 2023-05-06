@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
+const MONGODB_URI = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
+
+// Connect to MongoDB
+mongoose.connect(MONGODB_URI, { dbName: 'cosmetic' });
 const productSchema = mongoose.Schema({
-    product_id: {
-        type: String,
-        required: true,
-    },
+
     brand_id: {
         type: String,
     },
@@ -55,9 +56,6 @@ const productSchema = mongoose.Schema({
         type: String,
     }
 })
-productSchema.virtual('id').get(function() {
-    return this._id.toHexString();
-});
 
 productSchema.set('toJSON', {
     virtuals: true,
