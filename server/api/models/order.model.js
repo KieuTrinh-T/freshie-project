@@ -144,7 +144,44 @@ const updateOrder = async(req, res) => {
     return res.status(200).send(order);
 }
 
-
+        // Connect to MongoDB
+        mongoose.connect(MONGODB_URI, { dbName: 'cosmetic' });
+        mongoose.connection.on('connected', () => {
+            console.log('Mess from Post: Connected to MongoDB');
+        });
+        const ordrItemIds = Promise.all(req.body.orderItems.map(async orderItem => {
+            let newOrderItem = new OrderItem({
+                quantity: orderItem.quantity,
+                product: orderItem.product,
+            })
+            newOrderItem = await newOrderItem.save();
+            return newOrderItem._id;
+        }))
+        const orderItemsIdsResolved = await ordrItemIds;
+        const totalPrices = await Promise.all(orderItemsIdsResolved.map(async orderItemId => {
+            const orderItem = await OrderItem.findById(orderItemId).populate('product', 'price');
+            const totalPrice = orderItem.product.price * orderItem.quantity;
+            return totalPrice;
+        }))
+        let order = new Order({
+            orderItems: orderItemsIdsResolved,
+            shippingAddress1: req.body.shippingAddress1,
+            shippingAddress2: req.body.shippingAddress2,
+            city: req.body.city,
+            country: req.body.country,
+            status: req.body.status,
+            subtotal: totalPrices.reduce((a, b) => a + b, 0),
+            shipping: req.body.shipping,
+            tax: req.body.tax,
+            total: totalPrices.reduce((a, b) => a + b, 0) + req.body.shipping + req.body.tax,
+            user: req.body.user,
+        })
+        order = await order.save();
+        return order
+    } catch (err) {
+        return err
+    }
+}
 module.exports = {
     getAllOrder,
     getOrderByUser,
@@ -152,4 +189,5 @@ module.exports = {
     postOrder,
     cancelOrder,
     updateOrder,
+
 }
