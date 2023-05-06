@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-const Cart = require('../models/cart.model');
-
-
-const loadCart = async(req) => {
 const Cart = require('../schema/cart.schema');
 const Product = require('../schema/product.schema');
 
