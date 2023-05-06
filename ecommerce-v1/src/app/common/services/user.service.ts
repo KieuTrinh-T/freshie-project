@@ -4,10 +4,18 @@ import { HttpService } from './../http/http.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OdataResponse } from '../http/http.model';
 import { ThisReceiver } from '@angular/compiler';
-import { BLANK_USER, IUser } from '../models/user.model';
+import { BLANK_USER, IUser, User } from '../models/user.model';
+import { IAdmin } from '../models/admin';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends HttpService {
+
+  public _admin: IAdmin = {
+    maAdmin: 0,
+    tenAdmin: '',
+    email: '',
+    password: ''
+  }
   constructor(protected override _http: HttpClient) {
     super(_http);
   }
@@ -60,4 +68,26 @@ export class UserService extends HttpService {
     };
     return this.submitItem<IUser>(url, body);
   }
+
+  createAccount(account:User){
+    const url = this.baseUrl + '/api/users/signup';
+    const body = {
+      username:account.username,
+      email:account.email,
+      phone:account.phone,
+      password:account.password,
+      avatar:account.avatar,
+      apartment:account.apartment,
+      street:account.street,
+      city:account.city,
+      country:account.country,
+      zip:account.zip,
+      isAdmin:account.isAdmin,
+      is_active:true,
+
+    }
+    return this.submitItem<IUser>(url,body);
+  }
+
 }
+

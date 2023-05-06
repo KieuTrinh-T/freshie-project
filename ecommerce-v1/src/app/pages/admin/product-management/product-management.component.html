@@ -1,6 +1,12 @@
 <div class="option-container">
     <div class="show-option">
         <div class="filter">
+            <button mat-raised-button (click)="addProduct()">
+              <i class="material-icons">add</i>
+         Thêm mới sản phẩm
+      </button>
+        </div>
+        <div class="filter">
             <label>Danh mục</label>
             <mat-form-field>
                 <mat-select [(value)]="category_id" (valueChange)="onValueChange()">
@@ -9,6 +15,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+
         </div>
     </div>
 

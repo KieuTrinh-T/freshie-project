@@ -2,8 +2,14 @@
 <label>Mã sản phẩm</label>
 <input type="text" class="form-control" [(ngModel)]="product._id" disabled>
 <div class="product_image">
-    <img [src]="product.thumb" alt="">
-    <input type="file" (change)="onFileSelected($event,product)">
+    <div class="image-item"> <img [src]="product.thumb" alt="">
+        <input type="file" (change)="changeThumb($event,product)"></div>
+    <div class="image-item"><img [src]="product.image_1" alt="">
+        <input type="file" (change)="changeImage1($event,product)"></div>
+    <div class="image-item"><img [src]="product.image_2" alt="">
+        <input type="file" (change)="changeImage2($event,product)"></div>
+    <div class="image-item"><img [src]="product.image_3" alt="">
+        <input type="file" (change)="changeImage3($event,product)"></div>
 
 </div>
 <label>Tên sản phẩm</label>

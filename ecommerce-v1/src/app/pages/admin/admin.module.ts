@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { AccountCreateComponent } from './account-create/account-create.component';
 
 const routes: Routes = [
   {
@@ -45,9 +46,14 @@ const routes: Routes = [
         loadChildren: () => import('./account-management/account-management.module').then((m) => m.AccountManagementModule)
       },
       {
+        path: "account/create",
+        component:AccountCreateComponent
+      },
+      {
         path:"products/edit/:id",
         component:ProductEditComponent
-      }
+      },
+
     ]
   },
   {
@@ -60,7 +66,8 @@ const routes: Routes = [
   declarations: [
     AdminComponent,
     SnackBarComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    AccountCreateComponent
 
   ],
   imports: [
