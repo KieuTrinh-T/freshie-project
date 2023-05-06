@@ -76,6 +76,7 @@ export class SignInComponent {
     const { username, email,phone, password } = (this.signUpForm.value as any);
 
     console.log(this.signUpForm.value as any);
+
     this._userService.signup$(username, email,phone, password).subscribe((res: any) => {
       // open sign in tab
       console.log(res);

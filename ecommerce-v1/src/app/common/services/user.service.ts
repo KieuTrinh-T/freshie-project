@@ -88,6 +88,5 @@ export class UserService extends HttpService {
     }
     return this.submitItem<IUser>(url,body);
   }
-
 }
 

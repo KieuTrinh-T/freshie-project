@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const Cart = require('../models/cart.model');
+
+
+const loadCart = async(req) => {
 const Cart = require('../schema/cart.schema');
 const Product = require('../schema/product.schema');
 
@@ -24,6 +28,7 @@ const getAllCart = async(req, res) => {
 }
 
 const loadCart = async(req, res) => {
+
     try {
         const uri = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
         mongoose.connect(uri, { dbName: 'cosmetic' });
@@ -118,9 +123,6 @@ const removeFromCart = async(req, res) => {
         return res.status(500).send(err.message)
     }
 }
-
-
-
 module.exports = {
     loadCart,
     addToCart,
