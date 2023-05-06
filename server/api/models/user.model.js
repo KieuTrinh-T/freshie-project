@@ -38,7 +38,7 @@ const signUp = async(req) => {
             message: "Sign up successfully",
             value: user
         }
-    } catch (error) {
+    
         if (req.body.isAdmin === "true") {
             user.isAdmin = true;
         } else {
