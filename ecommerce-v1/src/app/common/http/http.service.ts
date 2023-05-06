@@ -7,7 +7,7 @@ import { OdataParams, OdataResponse, HttpOptions } from './http.model';
 })
 
 export class HttpService {
-  public baseUrl = 'http://localhost:3004';
+  public baseUrl = 'https://freshie-nrvr.onrender.com';
 
   constructor(protected _http: HttpClient) { }
 

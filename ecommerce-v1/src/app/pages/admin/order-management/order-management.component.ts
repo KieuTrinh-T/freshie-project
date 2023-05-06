@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { IOrder } from 'src/app/common/models/order';
 import { OrderService } from 'src/app/common/services/order.service';
 
@@ -10,12 +11,40 @@ import { OrderService } from 'src/app/common/services/order.service';
 })
 export class OrderManagementComponent {
   displayedColumns: string[] = ['id', 'date', 'total', 'status', 'action'];
+  labels: any = ['Tất cả', 'Chờ xác nhận', 'Đã hủy', 'Đã hoàn thành']
   public dataSource: MatTableDataSource<IOrder> = new MatTableDataSource<IOrder>()
+  tabIndex: number = 1;
+  query:string = '';
 constructor(private _service: OrderService) {
-  this.loadItems();
+  this.loadItems(this.query);
+
  }
-loadItems() {
-  this._service.loadOrders$().subscribe(
+ changeTab(tabChangeEvent: MatTabChangeEvent): void{
+  this.tabIndex = tabChangeEvent.index;
+  switch (this.tabIndex) {
+    case 0:
+      this.query = ``;
+      this.loadItems(this.query);
+      break;
+    case 1:
+      this.query = `status=Pending`;
+      this.loadItems(this.query);
+      break;
+    case 2:
+      this.query = `status=Cancelled`;
+      this.loadItems(this.query);
+      break;
+    case 3:
+      this.query = `status=Completed`;
+      this.loadItems(this.query);
+      break;
+    }
+    console.log(this.tabIndex)
+    console.log(this.query)
+    console.log(this.dataSource.data)
+  }
+loadItems(query: string) {
+  this._service.filterOrders$(query).subscribe(
     { next: (res) => { this.dataSource.data = res.value } }
   )
 }}

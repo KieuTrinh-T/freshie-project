@@ -20,57 +20,48 @@
       </mat-form-field>
   </div>
 </div> -->
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" [selectedIndex]="tabIndex" (selectedTabChange)="changeTab($event)">
+        <mat-tab *ngFor="let label of labels" label="{{label}}">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <!-- Position Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+                </ng-container>
 
-        <!--- Note that these columns can be defined in any order.
-      The actual rendered columns are set as a property on the row definition" -->
+                <!-- Name Column -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Ngày </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date_ordered}} </td>
+                </ng-container>
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let element"> {{element._id}} </td>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="date">
-            <th mat-header-cell *matHeaderCellDef> Ngày </th>
-            <td mat-cell *matCellDef="let element"> {{element.date_ordered}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="total">
-            <th mat-header-cell *matHeaderCellDef> Giá trị </th>
-            <td mat-cell *matCellDef="let element"> {{element.total}} </td>
-        </ng-container>
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef> Tình trạng </th>
-            <td mat-cell *matCellDef="let element"> {{element.status}} </td>
-        </ng-container>
-        <ng-container matColumnDef="action">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let element">
-                <div class="d-flex">
-                    <button mat-icon-button>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="total">
+                    <th mat-header-cell *matHeaderCellDef> Giá trị </th>
+                    <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Tình trạng </th>
+                    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                </ng-container>
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="d-flex">
+                            <button mat-icon-button>
             <mat-icon>edit</mat-icon>
           </button>
-                    <button mat-icon-button>
+                            <button mat-icon-button>
             <mat-icon>pageview</mat-icon>
           </button>
-                </div>
-            </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <!-- <div class="pagination-div">
-  <ul class="pagination">
-      <li class="{{page>1?'page-item':'page-item disabled'}}"><button mat-icon-button (click)="changePage(-1)"><mat-icon>keyboard_arrow_left</mat-icon></button></li>
-      <li *ngIf="page>1" class="page-item"><button mat-flat-button (click)="changePage(-1)"> {{page-1}}</button></li>
-      <li class="page-item active"><button mat-flat-button>{{page}}</button></li>
-      <li class="page-item"><button mat-flat-button (click)="changePage(1)">{{page+1}}</button></li>
-      <li class="page-item"><button mat-icon-button (click)="changePage(1)"><mat-icon>keyboard_arrow_right</mat-icon></button></li>
-  </ul>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
 
-</div> -->
+        </mat-tab>
+    </mat-tab-group>

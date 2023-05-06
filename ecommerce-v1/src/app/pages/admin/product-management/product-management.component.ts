@@ -49,4 +49,8 @@ export class ProductManagementComponent {
       { next: (res) => { this.dataSource.data = res.value } }
     )
   }
+
+  addProduct(){
+    this._router.navigate(['admin/products/add'])
+  }
 }
