@@ -6,6 +6,7 @@ import { AuthenticationGuard } from '@common/auth';
 import { MatTableModule } from '@angular/material/table';
 import {  MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const routes: Routes = [
   {
@@ -25,7 +26,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatTableModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule
   ]
 })
 export class OrderManagementModule { }

@@ -23,22 +23,28 @@ const signUp = async(req) => {
             username: req.body.username,
             email: req.body.email,
             phone: req.body.phone,
-            isAdmin: req.body.isAdmin,
             street: req.body.street,
             apartment: req.body.apartment,
             zip: req.body.zip,
             city: req.body.city,
             country: req.body.country,
         })
+        if (req.body.isAdmin === "true") {
+            user.isAdmin = true;
+        } else {
+            user.isAdmin = false;
+        }
         user.setPassword(req.body.password);
         user = await user.save();
 
+        const result = await User.find({ username: req.body.username })
         return {
             status: 200,
             message: "Sign up successfully",
-            value: user
+            value: result
         }
     } catch (error) {
+        console.log(error)
         return error
     }
 

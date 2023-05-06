@@ -96,7 +96,20 @@ export class ProductEditComponent {
       )
 
     }
-    onFileSelected(event: any, product: ProductDetail) {
+    changeThumb(event: any, product: ProductDetail) {
+      let me = this;
+      let file = event.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+         product.thumb= reader.result!.toString()
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+    }
+    changeImage1(event: any, product: ProductDetail) {
       let me = this;
       let file = event.target.files[0];
 
@@ -104,6 +117,32 @@ export class ProductEditComponent {
       reader.readAsDataURL(file);
       reader.onload = function () {
          product.image_1= reader.result!.toString()
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+    }
+    changeImage2(event: any, product: ProductDetail) {
+      let me = this;
+      let file = event.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+         product.image_2= reader.result!.toString()
+      };
+      reader.onerror = function (error) {
+        console.log('Error: ', error);
+      };
+    }
+    changeImage3(event: any, product: ProductDetail) {
+      let me = this;
+      let file = event.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+         product.image_3= reader.result!.toString()
       };
       reader.onerror = function (error) {
         console.log('Error: ', error);

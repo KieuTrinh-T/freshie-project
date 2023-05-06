@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AccountManagementComponent } from './account-management.component';
 import { RouterModule } from '@angular/router';
 import { AuthenticationGuard } from '@common/auth';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes = [
   {
@@ -18,7 +19,8 @@ const routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatButtonModule
   ]
 })
 export class AccountManagementModule { }
