@@ -23,12 +23,22 @@ const signUp = async(req) => {
             username: req.body.username,
             email: req.body.email,
             phone: req.body.phone,
+            isAdmin: req.body.isAdmin,
             street: req.body.street,
             apartment: req.body.apartment,
             zip: req.body.zip,
             city: req.body.city,
             country: req.body.country,
         })
+        user.setPassword(req.body.password);
+        user = await user.save();
+
+        return {
+            status: 200,
+            message: "Sign up successfully",
+            value: user
+        }
+    } catch (error) {
         if (req.body.isAdmin === "true") {
             user.isAdmin = true;
         } else {
@@ -66,6 +76,7 @@ const signIn = async(req, res) => {
     if (!user) {
         message = "Username is not correct";
         res.status(500).json({ message: message });
+
 
     }
     if (!user.validPassword(req.body.password)) {
