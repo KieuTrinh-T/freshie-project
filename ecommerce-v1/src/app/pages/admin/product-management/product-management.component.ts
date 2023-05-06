@@ -40,8 +40,7 @@ export class ProductManagementComponent {
     console.log(this.page);
     this.loadItems();
   }
-  loadItems(page:number) {
-    this._productService.getAllProducts().subscribe(
+
 
   editProduct(id:string){
     this._router.navigate(['admin/products/edit',id])
