@@ -45,15 +45,18 @@ export class UserService extends HttpService {
       username,
       password,
     };
-    return this.submitItem(url, body).pipe(
-      switchMap((res: any) => {
-        console.log(res);
-        if (res) {
-          this.setUser$(res.value);
-        }
-        return of(res);
-      })
-    );
+    return this.submitItem(url, body);
+    //   switchMap((res: any) => {
+    //     console.log(res);
+    //     if (res.message === 'Sign in successfully') {
+    //       this.setUser$(res.value);
+    //     } else {
+
+    //     }
+    //     return of(res);
+
+    //   })
+    // );
   }
 
   //signup

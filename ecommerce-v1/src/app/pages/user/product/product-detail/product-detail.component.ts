@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '@common/services';
+import { CartService } from 'src/app/common/services/cart.service';
 
 @Component({
   selector: 'ec-product-detail',
@@ -9,9 +10,11 @@ import { ProductService } from '@common/services';
 })
 export class ProductDetailComponent implements OnInit {
   product: any;
+  quantity: number = 1;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
+    private cartService: CartService
   ) { }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -26,5 +29,19 @@ export class ProductDetailComponent implements OnInit {
         }
       );
     }
+  }
+
+  increaseQuantity() {
+    this.quantity++;
+  }
+
+  decreaseQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
+
+  addToCart() {
+    this.cartService.addToCart$(this.product._id, this.quantity);
   }
 }

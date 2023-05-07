@@ -56,7 +56,7 @@ const addToCart = async(req, res) => {
 
         if (cart) {
             //cart exists for user
-            let itemIndex = cart.cartItems.findIndex(p => p.product._id.toString() === productId.toString())
+            let itemIndex = cart.cartItems.findIndex(p => p.product=== productId)
             if (itemIndex > -1) {
                 //product exists in the cart, update the quantity
                 console.log('product exists in the cart, update the quantity = ', quantity)
@@ -84,12 +84,13 @@ const addToCart = async(req, res) => {
                 user_id: req.params.user_id,
                 cartItems: [{ product: productId, quantity }],
             })
-            cart.countSubTotal()
+            // cart.countSubTotal()
             return res.status(201).send(newCart)
         }
 
     } catch (err) {
-        return res.status(500).send(err.message)
+        console.log(err)
+        return res.status(500).send(err)
     }
 }
 const removeFromCart = async(req, res) => {
