@@ -8,6 +8,7 @@ import {
 } from '@angular/material/list';
 import { Router } from '@angular/router';
 import { ProductService } from '@common/services';
+import { CartService } from 'src/app/common/services/cart.service';
 import { debounceTime } from 'rxjs';
 import { IProductList } from 'src/app/common/models/product';
 
@@ -30,7 +31,8 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private _productService: ProductService,
-    private router: Router
+    private router: Router,
+    private _cartService: CartService
   ) {}
   ngOnInit(): void {
     this.getAllProducts();
@@ -73,7 +75,8 @@ export class ShopComponent implements OnInit {
     this.router.navigate([`/product-detail/${id}`])
   }
 
-  addToCart(id: string) {
-    console.log(id);
+  addToCart(product_id: string) {
+    console.log(product_id, 1);
+    this._cartService.addToCart$(product_id, 1);
   }
 }
