@@ -4,6 +4,8 @@ import { AccountManagementComponent } from './account-management.component';
 import { RouterModule } from '@angular/router';
 import { AuthenticationGuard } from '@common/auth';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 const routes = [
   {
@@ -20,7 +22,9 @@ const routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    MatFormFieldModule
   ]
 })
 export class AccountManagementModule { }
