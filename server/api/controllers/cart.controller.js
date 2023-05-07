@@ -2,16 +2,14 @@
 
 const express = require('express')
 const router = express.Router()
-const { loadCart, addToCart, getAllCart, removeFromCart } = require('../models/cart.model')
+const { loadCart, addToCart, getAllCart, removeFromCart, getRecentCart } = require('../models/cart.model')
 
 router
     .get('/', async(req, res) => {
         await getAllCart(req, res)
     })
     .get('/:user_id', async(req, res) => {
-        const result = await loadCart(req)
-        console.log(result)
-        res.status(200).json(result)
+        await loadCart(req, res)
     })
     .post('/:user_id', async(req, res) => {
         await addToCart(req, res)
