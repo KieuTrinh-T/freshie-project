@@ -16,19 +16,49 @@ export class CartService extends HttpService {
     super(_http);
   }
 
+  // get user state
+  getUserState() {
+    return this._userService.getUserState();
+  }
+
+  // save carts from local storage to server
+  saveCarts$(user_id: string) {
+    console.log(user_id);
+    const carts = JSON.parse(localStorage.getItem('carts') || '[]');
+    const url =  this.baseUrl + '/api/carts/' +  user_id;
+    let request$: Observable<any>[] = [];
+    if(carts.length > 0){
+      console.log(carts);
+      carts.forEach((cart: any) => {
+      const body = {
+        product_id: cart.product_id,
+        quantity: cart.quantity,
+      };
+      request$.push(this.submitItem(url, body));
+    });
+    }
+    return forkJoin(request$).subscribe((res: any) => {
+      console.log(res);
+      localStorage.removeItem('carts');
+    });
+  }
+
   getCartItems$() {
-    const url = this.baseUrl + 'api/carts/:user_id';
+    const url = this.baseUrl + '/api/carts/' + this.getUserState()?._id || '';
     return this.getItems(url);
   }
 
   addToCart$(product_id: string, quantity: number) {
 
     const carts = JSON.parse(localStorage.getItem('carts') || '[]');
+    const user_id = this._userService.getUserState()?._id;
+    console.log(user_id);
 
-    const url = this.baseUrl + 'api/carts/:user_id';
+    const url =  this.baseUrl + '/api/carts/' +  user_id;
+    console.log(url);
 
     let request$: Observable<any>[] = [];
-    if (!this._userService.getUserState()?.user_id) {
+    if (!this._userService.getUserState()?._id) {
       // TODO: add to local storage
       const cart = carts.find((cart: any) => cart.product_id === product_id);
       if (cart) {
@@ -38,25 +68,15 @@ export class CartService extends HttpService {
       }
       localStorage.setItem('carts', JSON.stringify(carts));
     } else {
-      if (carts.length) {
-        carts.forEach((cart: any) => {
-          const body = {
-            product_id: cart.product_id,
-            quantity: cart.quantity,
-          };
-          request$.push(this.submitItem(url, body));
-        });
-      } else {
         const body = {
           product_id,
           quantity,
         };
-        request$.push(this.submitItem(url, body));
+        this.submitItem(url, body)
+        .subscribe((res: any) => {
+          console.log(res);
+        }
+        );
       }
-    }
-
-    if (request$.length) {
-      return forkJoin(request$).pipe(finalize(() => localStorage.removeItem('carts')));
-    } else return of(null);
   }
 }

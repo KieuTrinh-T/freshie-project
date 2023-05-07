@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutModule } from './layout/layout.module';
+import { CartModule } from './cart/cart.module';
 import {MatIconModule} from '@angular/material/icon';
+
 
 const routes: Routes = [
   {
@@ -25,7 +27,11 @@ const routes: Routes = [
       {
         path: "info",
         loadChildren: () => import('./info/info.module').then((m) => m.InfoModule)
-      }
+      },
+      {
+        path: "cart",
+        loadChildren: () => import('./cart/cart.module').then((m) => m.CartModule)
+      },
     ]
   },
 
