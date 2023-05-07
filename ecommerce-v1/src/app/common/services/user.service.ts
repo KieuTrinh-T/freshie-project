@@ -5,16 +5,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OdataResponse } from '../http/http.model';
 import { ThisReceiver } from '@angular/compiler';
 import { BLANK_USER, IUser, User } from '../models/user.model';
-import { IAdmin } from '../models/admin';
+import { IAdmin } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends HttpService {
 
   public _admin: IAdmin = {
-    maAdmin: 0,
-    tenAdmin: '',
+    _id: '',
+    username: '',
     email: '',
-    password: ''
+    password: '',
+    isAdmin: false,
   }
   constructor(protected override _http: HttpClient) {
     super(_http);

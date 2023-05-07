@@ -1,2 +1,22 @@
-<p>account-management works!</p>
+<h2>Xin chào {{admin.username}}</h2>
 <button mat-raised-button color="primary" (click)="createAccount()">Create account</button>
+<div>
+    <img [src]="admin.avatar==''?'https://www.nicepng.com/maxp/u2w7i1u2r5i1y3r5/':admin.avatar" alt="">
+</div>
+<div>
+    <label>Username: </label>
+    <input type="text" [(ngModel)]="admin.username">
+</div>
+<div>
+    <label>Email</label>
+    <input type="text" [(ngModel)]="admin.email" disabled>
+</div>
+<div>
+    <label>Số điện thoại</label>
+    <input type="text" [(ngModel)]="admin.phone">
+</div>
+<div>
+    <label>Avatar: </label>
+    <input type="file" [(ngModel)]="admin.avatar" (click)="onFileSelected($event,admin)">
+</div>
+<button mat-raised-button color="primary" (click)="updateAccount()">Save change</button>
