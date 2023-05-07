@@ -48,14 +48,18 @@
             </div>
             <div class="icon-group d-flex justify-content-end align-items-center w-25">
               <div class="icon cursor-pointer" style="margin-right: 10px;">
-                <mat-icon matBadge="15" matBadgeColor="warn">shopping_cart</mat-icon>
+                <mat-icon matBadge="15" matBadgeColor="warn" routerLink="cart">shopping_cart</mat-icon>
               </div>
-              <div class="icon cursor-pointer" *ngIf="user$ | async as user; else signInBtn">
-                <mat-icon matBadge="99+" matBadgeColor="warn">person</mat-icon>
-              </div>
-              <ng-template #signInBtn>
-                <button mat-button routerLink="info/sign-in">Sign In</button>
-              </ng-template>
+              <ng-container *ngIf="(user$ | async) as user">
+                <div *ngIf="user.username===''">
+                  <!-- Nếu username hoặc pw rỗng, hiển thị nút đăng nhập -->
+                    <button mat-button routerLink="info/sign-in">Sign In</button>
+                </div>
+                <div *ngIf="user.username">
+                  <!-- Nếu username và pw đều có giá trị, hiển thị thông tin người dùng -->
+                  <mat-icon matBadge="99+" matBadgeColor="warn">person</mat-icon>
+                </div>
+              </ng-container>
             </div>
           </div>
         </div>

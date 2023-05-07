@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/f
 import { Router } from '@angular/router';
 import { IUser } from '@common/models';
 import { UserService } from 'src/app/common/services/user.service';
+import { CartService } from 'src/app/common/services/cart.service';
 
 // custom validator to check password
 export function passwordValidator(control: FormControl): ValidationErrors | null {
@@ -48,7 +49,8 @@ export class SignInComponent {
   });
 
   constructor(private _userService: UserService,
-    private router: Router
+    private router: Router,
+    private _cartService: CartService
     ) { }
 
   signIn() {
@@ -58,11 +60,22 @@ export class SignInComponent {
       return;
     }
     const { username, password } = (this.signInForm.value as any);
-    this._userService.signin$(username, password).subscribe((res: boolean) => {
-      // navigate to home page
-      console.log(res);
-      if(res){
+    this._userService.signin$(username, password).subscribe({
+      next: (res: any) => {
+        // reset form
+        this.signInForm.patchValue({
+          username: '',
+          password: '',
+        });
         this.router.navigate(['/']);
+        this._userService.setUser$(res.value);
+        // save carts from local storage to database
+        this._cartService.saveCarts$(res.value._id)
+      },
+      error: (err: any) => {
+        console.log(err.error.message);
+        // show snackbar
+        alert(err.error.message);
       }
     });
   }
