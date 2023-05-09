@@ -16,11 +16,11 @@ export class SigninComponent {
 
   constructor(private adminService: AdminService, private fb: FormBuilder, private router: Router, private snackBar: MatSnackBar ) { }
   ngOnInit(){
-    if(localStorage.getItem('admin') != null){
-      this.adminService._admin = JSON.parse(localStorage.getItem('admin') as string);
+    console.log(this.adminService.adminRemember);
+    if(this.adminService.adminRemember.username != '' && this.adminService.adminRemember.password != ''){
       this.formGroup = this.fb.group({
-        email: new FormControl(this.adminService._admin.username, [Validators.required]),
-        password: new FormControl(this.adminService._admin.password, [Validators.required]),
+        email: new FormControl(this.adminService.adminRemember.username, [Validators.required]),
+        password: new FormControl(this.adminService.adminRemember.password, [Validators.required]),
         remember: new FormControl(true)
       });
 
@@ -43,7 +43,7 @@ export class SigninComponent {
               console.log(res.value);
               this.adminService.setAdmin(res.value as IAdmin)
               if(this.formGroup.controls['remember'].value){
-                localStorage.setItem('admin',JSON.stringify(this.adminService._admin))
+                this.adminService.setAdminRemember(this.formGroup.controls['email'].value,this.formGroup.controls['password'].value);
               }
               this.snackBar.open("Login successfully","",{duration:1000})
               this.router.navigate(['admin']);
