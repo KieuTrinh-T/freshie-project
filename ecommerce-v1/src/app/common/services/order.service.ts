@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http';
-import { IOrder } from '../models/order';
+import { IOrder, IOrderView } from '../models/order';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,10 @@ export class OrderService extends HttpService {
   loadOrder$(id: string) {
     const url = this.baseUrl + `/api/orders/${id}`;
     return this.getItem<IOrder>(url);
+  }
+  viewOrder$(id: string) {
+    const url = this.baseUrl + `/api/orders/${id}`;
+    return this.getItem<IOrderView>(url);
   }
   updateOrder$(id: string, status: string) {
     const url = this.baseUrl + `/api/orders/${id}`;

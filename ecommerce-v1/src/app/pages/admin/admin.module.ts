@@ -13,6 +13,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { AccountCreateComponent } from './account-create/account-create.component';
+import { MatIconModule } from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
 
 const routes: Routes = [
   {
@@ -79,7 +81,9 @@ const routes: Routes = [
     FormsModule,
     AngularEditorModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule,
+    MatCardModule
   ]
 })
 export class AdminModule { }
