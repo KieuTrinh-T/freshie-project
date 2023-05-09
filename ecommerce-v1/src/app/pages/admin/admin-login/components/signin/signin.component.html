@@ -16,9 +16,9 @@
                                 <form [formGroup]="formGroup" class="row g-3 needs-validation">
                                     <div class="col-12">
                                         <div>
-                                            <label for="yourUsername" class="form-label">Email</label>
+                                            <label for="yourUsername" class="form-label">Tên đăng nhập</label>
 
-                                            <input type="email" formControlName="email" class="form-control" required>
+                                            <input type="text" formControlName="email" class="form-control" required>
                                             <div>
                                                 <mat-error *ngIf="formGroup.controls['email'].invalid &&
                                             formGroup.controls['email'].touched">

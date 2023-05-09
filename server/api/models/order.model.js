@@ -13,9 +13,20 @@ const getAllOrder = async(req) => {
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         await client.connect();
         const collection = await client.db("cosmetic").collection("orders");
-        const query = req.query
-        console.log(req.query)
-
+        let query = req.query
+        if (req.query.day) {
+            const day = new Date(req.query.day)
+            day.setDate(day.getDate() + 1)
+            query = {
+                ...query,
+                date_ordered: {
+                    $gte: new Date(req.query.day),
+                    $lt: day
+                }
+            }
+            delete query.day
+        }
+        console.log(query)
         const result = await collection.find(query).sort({ 'dateOrdered': -1 }).toArray();
         await client.close()
         return convertArrayResult(result)
@@ -143,45 +154,30 @@ const updateOrder = async(req, res) => {
     order = await order.save();
     return res.status(200).send(order);
 }
+getRecentOrder = async(req, res) => {
+    try {
+        // Mongodb connection url
+        const MONGODB_URI = "mongodb+srv://trinhttk20411c:tun4eK0KBEnRlL4T@cluster0.amr5r35.mongodb.net/?retryWrites=true&w=majority";
 
         // Connect to MongoDB
         mongoose.connect(MONGODB_URI, { dbName: 'cosmetic' });
         mongoose.connection.on('connected', () => {
             console.log('Mess from Post: Connected to MongoDB');
         });
-        const ordrItemIds = Promise.all(req.body.orderItems.map(async orderItem => {
-            let newOrderItem = new OrderItem({
-                quantity: orderItem.quantity,
-                product: orderItem.product,
-            })
-            newOrderItem = await newOrderItem.save();
-            return newOrderItem._id;
-        }))
-        const orderItemsIdsResolved = await ordrItemIds;
-        const totalPrices = await Promise.all(orderItemsIdsResolved.map(async orderItemId => {
-            const orderItem = await OrderItem.findById(orderItemId).populate('product', 'price');
-            const totalPrice = orderItem.product.price * orderItem.quantity;
-            return totalPrice;
-        }))
-        let order = new Order({
-            orderItems: orderItemsIdsResolved,
-            shippingAddress1: req.body.shippingAddress1,
-            shippingAddress2: req.body.shippingAddress2,
-            city: req.body.city,
-            country: req.body.country,
-            status: req.body.status,
-            subtotal: totalPrices.reduce((a, b) => a + b, 0),
-            shipping: req.body.shipping,
-            tax: req.body.tax,
-            total: totalPrices.reduce((a, b) => a + b, 0) + req.body.shipping + req.body.tax,
-            user: req.body.user,
-        })
-        order = await order.save();
-        return order
+        var start = new Date();
+        start.setHours(0, 0, 0, 0);
+
+        var end = new Date();
+        end.setHours(23, 59, 59, 999);
+        const result = await Order.find({ date_order: { $gte: start, $lt: end } }).populate('user', 'name')
+        return res.status(200).send(convertArrayResult(result));
     } catch (err) {
-        return err
+        return res.status(500).send(err);
     }
 }
+
+
+
 module.exports = {
     getAllOrder,
     getOrderByUser,
@@ -189,5 +185,5 @@ module.exports = {
     postOrder,
     cancelOrder,
     updateOrder,
-
+    getRecentOrder
 }

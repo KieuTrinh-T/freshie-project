@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-const Cart = require('../models/cart.model');
-
-
-const loadCart = async(req) => {
 const Cart = require('../schema/cart.schema');
 const Product = require('../schema/product.schema');
 
@@ -60,14 +56,17 @@ const addToCart = async(req, res) => {
 
         if (cart) {
             //cart exists for user
-            let itemIndex = cart.cartItems.findIndex(p => p.product._id.toString() === productId.toString())
+            cart.cartItems.forEach(element => {
+                console.log(element.product.toString(), element.product)
+            });
+            let itemIndex = cart.cartItems.findIndex(p => p.product.toString() === productId)
             if (itemIndex > -1) {
                 //product exists in the cart, update the quantity
                 console.log('product exists in the cart, update the quantity = ', quantity)
                 let productItem = cart.cartItems[itemIndex]
                 const product = await Product.findById(productId)
-                cart.subTotal += product.price * (quantity - productItem.quantity)
-                productItem.quantity = quantity
+                cart.subTotal += product.price * (quantity + productItem.quantity)
+                productItem.quantity = quantity + productItem.quantity
                 cart.cartItems[itemIndex] = productItem
 
             } else {
@@ -88,7 +87,6 @@ const addToCart = async(req, res) => {
                 user_id: req.params.user_id,
                 cartItems: [{ product: productId, quantity }],
             })
-            cart.countSubTotal()
             return res.status(201).send(newCart)
         }
 

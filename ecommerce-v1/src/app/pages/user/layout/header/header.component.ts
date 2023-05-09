@@ -9,9 +9,10 @@ import {UserService } from 'src/app/common/services/user.service';
 })
 export class HeaderComponent {
 
+  // khai bao bien user$ de lay gia tri user tu userService, gia tri nay duoc lay tu BehaviorSubject<IUser> = new BehaviorSubject(BLANK_USER);
   user$ = this._userService.getUser$();
 
-  constructor(private _userService: UserService) { }
 
+  constructor(private _userService: UserService) { }
 
 }

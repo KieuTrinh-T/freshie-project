@@ -5,16 +5,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OdataResponse } from '../http/http.model';
 import { ThisReceiver } from '@angular/compiler';
 import { BLANK_USER, IUser, User } from '../models/user.model';
-import { IAdmin } from '../models/admin';
+import { IAdmin } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService extends HttpService {
 
   public _admin: IAdmin = {
-    maAdmin: 0,
-    tenAdmin: '',
+    _id: '',
+    username: '',
     email: '',
-    password: ''
+    password: '',
+    isAdmin: false,
   }
   constructor(protected override _http: HttpClient) {
     super(_http);
@@ -45,15 +46,18 @@ export class UserService extends HttpService {
       username,
       password,
     };
-    return this.submitItem(url, body).pipe(
-      switchMap((res: any) => {
-        console.log(res);
-        if (res) {
-          this.setUser$(res.value);
-        }
-        return of(res);
-      })
-    );
+    return this.submitItem(url, body);
+    //   switchMap((res: any) => {
+    //     console.log(res);
+    //     if (res.message === 'Sign in successfully') {
+    //       this.setUser$(res.value);
+    //     } else {
+
+    //     }
+    //     return of(res);
+
+    //   })
+    // );
   }
 
   //signup

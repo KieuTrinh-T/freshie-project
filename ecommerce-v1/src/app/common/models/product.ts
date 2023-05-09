@@ -32,6 +32,7 @@ export interface IProductList {
   rating_count: number;
   inventory_num: number;
   discount: number;
+}
 
 export class ProductDetail {
 
