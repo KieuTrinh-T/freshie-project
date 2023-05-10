@@ -18,7 +18,7 @@
 }
 
 .trans-infor {
-    align-items: end;
+    font-weight: 400;
 }
 
 .trans-infor div {
@@ -33,8 +33,33 @@
 
 .left {
     width: 40%;
+    padding: 20px;
+}
+
+img {
+    width: 50%;
 }
 
 .right {
-    width: 60%;
+    width: 100%;
+    padding: 20px;
+    margin-left: 10px;
+}
+
+.action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    margin-top: 10px;
+    padding: 20px;
+    font-weight: 700;
+}
+
+b {
+    font-weight: 700;
+    color: red;
 }

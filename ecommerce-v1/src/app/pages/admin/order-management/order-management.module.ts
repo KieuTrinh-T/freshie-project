@@ -18,7 +18,7 @@ const routes: Routes = [
 
   },
   {
-    path: "detail/:id",
+    path: ":id",
     component: OrderDetailComponent,
     canActivate: [AuthenticationGuard]
   }
@@ -36,7 +36,7 @@ const routes: Routes = [
     MatIconModule,
     MatButtonModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
 
   ]
 })

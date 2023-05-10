@@ -1,9 +1,4 @@
 <div class="container">
-
-
-    <div class="left">
-        <ec-order-management></ec-order-management>
-    </div>
     <div class="right">
         <div class="user-infor section">
             <h3>Thông tin đơn hàng</h3>
@@ -18,6 +13,7 @@
 
         </div>
         <div class="order-detail section ">
+
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                 <ng-container matColumnDef="thumb">
                     <th mat-header-cell *matHeaderCellDef> </th>
@@ -58,8 +54,11 @@
             </div>
             <div>
                 <h6><b>Tổng tiền: </b></h6>
-                <span>{{order.total}}</span>
+                <span><b>{{order.total}}</b></span>
             </div>
+        </div>
+        <div class="action">
+            <button *ngIf="order.status=='Pending'" mat-raised-button (click)="onAccept()">Duyệt</button>
         </div>
 
     </div>

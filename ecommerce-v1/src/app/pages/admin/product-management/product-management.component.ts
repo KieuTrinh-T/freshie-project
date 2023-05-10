@@ -54,4 +54,10 @@ export class ProductManagementComponent {
   addProduct(){
     this._router.navigate(['admin/products/add'])
   }
+  search(event:any){
+    this._productService.filterProducts({search:event.target.value}).subscribe(
+      { next: (res) => { this.dataSource.data = res.value } }
+    )
+
+  }
 }
