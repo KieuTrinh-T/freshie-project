@@ -1,0 +1,16 @@
+.infor {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 60%;
+}
+
+.infor div img {
+    width: 50%;
+}
+
+mat-card {
+    margin-top: 10px;
+    padding-left: 10px;
+}
