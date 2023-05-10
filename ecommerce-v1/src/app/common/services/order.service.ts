@@ -29,7 +29,7 @@ export class OrderService extends HttpService {
   }
   updateOrder$(id: string, status: string) {
     const url = this.baseUrl + `/api/orders/${id}`;
-    return this.updateItem(url, { status });
+    return this.editItem(url, { status });
   }
   deleteOrder$(id: string) {
     const url = this.baseUrl + `/api/orders/${id}`;
