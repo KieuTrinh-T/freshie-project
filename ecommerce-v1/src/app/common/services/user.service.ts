@@ -92,5 +92,16 @@ export class UserService extends HttpService {
     }
     return this.submitItem<IUser>(url,body);
   }
+
+  getAllUsers(){
+    const url = this.baseUrl + '/api/users/';
+    return this.getItems<IUser>(url)
+  }
+
+getUserById(id:string){
+  const url = this.baseUrl + '/api/users/';
+  return this.getItem<IUser>(url+id);
+}
+
 }
 

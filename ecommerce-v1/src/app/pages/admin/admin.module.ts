@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
         path:"products/add",
         component:ProductEditComponent
       },
+      {
+        path:"customers/:id",
+        component:CustomerDetailComponent
+      }
 
     ]
   },
@@ -76,7 +81,8 @@ const routes: Routes = [
     SnackBarComponent,
     ProductEditComponent,
     AccountCreateComponent,
-    DialogComponent
+    DialogComponent,
+    CustomerDetailComponent
 
   ],
   imports: [
