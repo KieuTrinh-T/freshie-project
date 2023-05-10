@@ -1,3 +1,42 @@
+.option-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.show-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+}
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.filter div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+table {
+    min-width: 50%;
+    width: 80%;
+}
+
 th {
     font-weight: 800;
     text-align: center;
@@ -5,6 +44,18 @@ th {
 
 img {
     width: 100px;
+}
+
+tr {
+    padding: 10px;
+}
+
+td {
+    width: 10%;
+}
+
+td:nth-child(2) {
+    width: 60%;
 }
 
 .pagination-div {
@@ -33,14 +84,6 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.option-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 20px;
 }
 
 .option-container mat-form-field {

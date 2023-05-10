@@ -12,11 +12,20 @@ export interface IUser {
   country?: string;
   is_active?: boolean;
 }
+export interface IAdmin extends IUser {
+  isAdmin: boolean;
+}
 
 export const BLANK_USER: IUser = {
   username: '',
   password: '',
   _id:''
+}
+export const BLANK_ADMIN: IAdmin = {
+  username: '',
+  password: '',
+  _id:'',
+  isAdmin: false,
 }
 export class User{
   constructor(

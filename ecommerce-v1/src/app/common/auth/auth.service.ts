@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { of, delay, Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { IAdmin } from "../models/admin";
+import { IAdmin } from "../models/user.model";
 import { AdminService } from "../services/admin.service";
 
 @Injectable({ providedIn: "root" })
@@ -17,9 +17,9 @@ export class AuthService {
 
   }
   isAdminLoggedIn() {
-    if (this.adminService._admin.maAdmin != 0) {
-      return of(true).pipe(delay(300));
-    }
+    // if (this.adminService._admin._id != '') {
+    //   return of(true).pipe(delay(300));
+    // }
     return of(true).pipe(delay(300));
   }
 
