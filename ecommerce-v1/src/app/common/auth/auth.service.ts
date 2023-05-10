@@ -17,9 +17,9 @@ export class AuthService {
 
   }
   isAdminLoggedIn() {
-    if (this.adminService._admin._id != '') {
-      return of(true).pipe(delay(300));
-    }
+    // if (this.adminService._admin._id != '') {
+    //   return of(true).pipe(delay(300));
+    // }
     return of(true).pipe(delay(300));
   }
 

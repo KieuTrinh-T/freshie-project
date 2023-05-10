@@ -13,6 +13,10 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { AccountCreateComponent } from './account-create/account-create.component';
+import { MatIconModule } from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import { DialogComponent } from './dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
@@ -53,6 +57,10 @@ const routes: Routes = [
         path:"products/edit/:id",
         component:ProductEditComponent
       },
+      {
+        path:"products/add",
+        component:ProductEditComponent
+      },
 
     ]
   },
@@ -67,7 +75,8 @@ const routes: Routes = [
     AdminComponent,
     SnackBarComponent,
     ProductEditComponent,
-    AccountCreateComponent
+    AccountCreateComponent,
+    DialogComponent
 
   ],
   imports: [
@@ -79,7 +88,10 @@ const routes: Routes = [
     FormsModule,
     AngularEditorModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule,
+    MatCardModule,
+    MatDialogModule
   ]
 })
 export class AdminModule { }

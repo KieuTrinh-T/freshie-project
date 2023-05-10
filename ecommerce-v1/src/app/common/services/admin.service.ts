@@ -12,9 +12,17 @@ import { HttpService } from '../http/http.service';
 export class AdminService extends HttpService {
 
   public _admins: Array<IAdmin> = [];
+  public adminRemember= {
+    username: '',
+    password: ''
+  }
   public _admin: any;
   setAdmin(admin: IAdmin) {
     this._admin = admin;
+  }
+  setAdminRemember(username: string, password: string){
+    this.adminRemember.username = username;
+    this.adminRemember.password = password;
   }
   constructor(protected override _http: HttpClient) {
     super(_http);
@@ -32,7 +40,7 @@ export class AdminService extends HttpService {
   //   })
   // }
   signin$(username: string, password: string) {
-    const url = 'http://localhost:3004' + '/api/users/signin';
+    const url = 'https://freshie-nrvr.onrender.com' + '/api/users/signin';
     const body = {
       username,
       password,

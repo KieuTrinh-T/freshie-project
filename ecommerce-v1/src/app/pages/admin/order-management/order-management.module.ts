@@ -7,6 +7,8 @@ import { MatTableModule } from '@angular/material/table';
 import {  MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import {  MatCardModule } from '@angular/material/card';
 
 const routes: Routes = [
   {
@@ -14,12 +16,18 @@ const routes: Routes = [
     component: OrderManagementComponent,
     canActivate: [AuthenticationGuard]
 
+  },
+  {
+    path: ":id",
+    component: OrderDetailComponent,
+    canActivate: [AuthenticationGuard]
   }
 ]
 
 @NgModule({
   declarations: [
-    OrderManagementComponent
+    OrderManagementComponent,
+    OrderDetailComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +35,9 @@ const routes: Routes = [
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    MatCardModule,
+
   ]
 })
 export class OrderManagementModule { }

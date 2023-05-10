@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    background-color: rgb(218, 221, 221);
+}
+
+.container div {
+    background-color: white;
+}
+
+.user-infor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.trans-infor {
+    font-weight: 400;
+}
+
+.trans-infor div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.left {
+    width: 40%;
+    padding: 20px;
+}
+
+img {
+    width: 50%;
+}
+
+.right {
+    width: 100%;
+    padding: 20px;
+    margin-left: 10px;
+}
+
+.action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button {
+    margin-top: 10px;
+    padding: 20px;
+    font-weight: 700;
+}
+
+b {
+    font-weight: 700;
+    color: red;
+}

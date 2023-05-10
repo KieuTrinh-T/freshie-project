@@ -60,3 +60,10 @@ export class ProductDetail {
   )
   {}
 }
+export interface IProductShort{
+_id: string;
+product_name: string;
+thumb: string;
+original_price: number;
+  price: number;
+}
