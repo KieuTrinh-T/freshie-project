@@ -1,11 +1,13 @@
 import { Component, importProvidersFrom } from '@angular/core';
 import { Order } from '../../../common/models/order';
+
 import { IOrderItemView } from "../../../common/models/orderItem";
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { OrderService } from '../../../common/services/order.service';
 import { Router } from '@angular/router';
 import { CartService } from '../../../common/services/cart.service';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+
 @Component({
   selector: 'ec-order',
   templateUrl: './order.component.html',
@@ -78,5 +80,6 @@ export class OrderComponent {
         this.router.navigate(['/shop']);
       }
     )
+
   }
 }

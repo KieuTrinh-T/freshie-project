@@ -3,6 +3,7 @@ const { convertArrayResult, convertObjectResult } = require('../../utils/functio
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const Order = require('../schema/order.schema');
 const OrderItem = require('../schema/order-item.schema');
+const Cart = require('../schema/cart.schema');
 require('../schema/product.schema')
 
 const mongoose = require('mongoose');
@@ -111,6 +112,7 @@ const postOrder = async(req, res) => {
         }))
         let order = new Order({
             orderItems: orderItemsIdsResolved,
+            recipientName: req.body.recipientName,
             shippingAddress1: req.body.shippingAddress1,
             shippingAddress2: req.body.shippingAddress2,
             city: req.body.city,
@@ -123,6 +125,12 @@ const postOrder = async(req, res) => {
             total: totalPrices.reduce((a, b) => a + b, 0) + req.body.shipping + req.body.tax,
             user: req.body.user,
         })
+        const cart = await Cart.findOne({ user_id: req.body.user });
+        const to_delete = req.body.orderItems.map(orderItem => orderItem.product)
+        cart.cartItems = cart.cartItems.filter(item => {
+            return to_delete.indexOf(item.product.toString()) === -1
+        })
+        await cart.save()
         order = await order.save();
         return res.status(200).json(convertObjectResult(order));
     } catch (err) {
