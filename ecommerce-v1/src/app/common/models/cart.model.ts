@@ -5,3 +5,17 @@ export class CartItem {
     )
     {}
 }
+
+export interface ICart {
+  _id: string;
+  quantity: number;
+  product: IProduct;
+}
+
+export interface IProduct {
+  id: string;
+  original_price: number;
+  price: number;
+  product_name: string;
+  thumb: string;
+}

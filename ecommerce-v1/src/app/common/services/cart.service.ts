@@ -44,8 +44,14 @@ export class CartService extends HttpService {
   }
 
   getCartItems$() {
-    const url = this.baseUrl + '/api/carts/' + this.getUserState()?._id || '';
-    return this.getItems(url);
+    const carts = JSON.parse(localStorage.getItem('carts') || '[]');
+    const user_id = this._userService.getUserState()?._id;
+    if (!this._userService.getUserState()?._id) {
+      return of(carts);
+    } else {
+      const url =  this.baseUrl + '/api/carts/' +  user_id;
+      return this.getItems(url);
+    }
   }
 
   addToCart$(product_id: string, quantity: number) {
