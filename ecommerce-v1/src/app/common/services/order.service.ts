@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http';
 import { IOrder, IOrderView } from '../models/order';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService extends HttpService {
 
-  constructor(protected override _http: HttpClient) {
+  constructor(protected override _http: HttpClient,
+    private _userService: UserService) {
     super(_http);
   }
   loadOrders$() {
@@ -35,6 +37,16 @@ export class OrderService extends HttpService {
   deleteOrder$(id: string) {
     const url = this.baseUrl + `/api/orders/${id}`;
     return this.deleteItem(url);
+  }
+
+  // get user state
+  getUserState() {
+    this._userService.getUserState();
+  }
+  createOrder$() {
+    const url = this.baseUrl + '/api/orders';
+    const user_id = this._userService.getUserState()?._id;
+
   }
 
 }
