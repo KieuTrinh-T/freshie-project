@@ -16,8 +16,40 @@
         <span class="Cart-product-delete-top">Delete</span>
       </div>
     </div>
-    <div id="showcart" class="Carts-container-second-detail-middle">
-
+    <div id="showcart" class="Carts-container-second-detail-middle" *ngFor="let item of carts">
+      <div>
+        <div class="Carts-list-items-container">
+          <div class="Carts-container-middle-first">
+            <input
+            type="checkbox"
+            id="Carts-checkbox"
+            class="shopping-cart-checkbox"
+            />
+            <img
+            src="{{item.product.thumb}}"
+            alt="{{item.product.product_name}}"
+            class="Carts-product-img"
+            />
+            <span class="Carts-product-name">{{item.product.product_name}}</span>
+          </div>
+          <div class="Carts-container-middle-second">
+            <span class="Carts-product-price">{{item.product.price}}</span>
+          </div>
+          <div class="Carts-container-middle-third">
+            <div class="Carts-product-number">
+              <button class="Carts-product-number-btn">-</button>
+              <input type="text" class="Carts-product-number-input" value="{{item.quantity}}" />
+              <button class="Carts-product-number-btn">+</button>
+            </div>
+          </div>
+          <div class="Carts-container-middle-fourth">
+            <span class="Carts-product-total">{{item.product.price * item.quantity}}</span>
+            <span class="Carts-product-delete">
+              <i class="fas fa-trash-alt"></i>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="Carts-container-second-detail-bottom">
       <div class="Carts-container-second-detail-bottom-left">
