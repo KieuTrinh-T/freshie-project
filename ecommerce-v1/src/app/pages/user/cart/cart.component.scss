@@ -107,7 +107,7 @@ input[type="checkbox"]:checked:before {
   height: 1.2rem;
   top: 0;
   left: 0;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-background-pink);
 }
 
 input[type="checkbox"]:checked:after {
@@ -174,7 +174,7 @@ input[type="checkbox"]:checked:after {
 .Carts-container-second-detail-middle::-webkit-scrollbar-thumb
 {
 	/* background-color: #000000; */
-	background-color: var(--secondary-color);
+	background-color: var(--primary-background-pink);
 
 }
 .Cart-img-product {
@@ -228,7 +228,7 @@ input[type="checkbox"]:checked:after {
 }
 .cart-btn-delete {
     font-size: 2.5rem;
-    color:var(--secondary-color);
+    color:var(--other-text-pink);
     cursor: pointer;
 }
 .cart-btn-delete:hover{
@@ -270,7 +270,7 @@ input[type="checkbox"]:checked:after {
 .btn-container-checkout {
     padding: 1rem 3rem;
     font-weight: 700px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-background-pink);
     border: none;
     color: var(--tertiary-text-white);
     border-radius: 10px;
@@ -347,7 +347,7 @@ input[type="checkbox"]:checked:after {
   .product-sale {
     width: 50px;
     height: 50px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-background-pink);
     position: absolute;
     top: 10px;
     left: -20px;
@@ -434,7 +434,7 @@ input[type="checkbox"]:checked:after {
     padding: 0.5rem 1rem;
     border-radius: 20px;
     border: none;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-background-pink);
     opacity: 0.7;
     color:var(--other-background-white);
   }
@@ -469,7 +469,7 @@ input[type="checkbox"]:checked:after {
   padding: 1rem;
   border: none;
   border-radius: 10px;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-background-pink);
   font-size: 16px;
   color: var(--tertiary-text-white);
   cursor: pointer;
@@ -496,7 +496,7 @@ input[type="checkbox"]:checked:after {
 }
 .Carts-list-items-container-nothing button{
   padding:1rem 1.5rem;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-background-pink);
   color:var(--tertiary-text-white);
   cursor: pointer;
   border: none;
