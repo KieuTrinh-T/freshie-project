@@ -10,6 +10,7 @@ export interface IUser {
   zip?: string;
   city?: string;
   country?: string;
+  isAdmin?: boolean;
   is_active?: boolean;
 }
 export interface IAdmin extends IUser {

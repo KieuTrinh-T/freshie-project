@@ -1,0 +1,31 @@
+<div>
+    <div class="infor">
+        <div>
+            <img src="{{user.avatar!=''?user.avatar:'assets/img/user.jpg'}}">
+        </div>
+        <div>
+            <h4>{{user.username}}</h4>
+            <p>{{user.email}}</p>
+            <p>{{user.phone}}</p>
+            <p>{{user.city}}</p>
+        </div>
+    </div>
+    <div class="trans">
+        <h4>Lịch sử mua hàng</h4>
+        <h6 *ngIf="orderList.length==0">Chưa có đơn hàng</h6>
+        <div *ngFor="let order of orderList">
+            <mat-card>
+                <mat-card-title>Đơn hàng: {{order._id}}</mat-card-title>
+                <mat-card-content>
+                    <h6>Tổng tiền: {{order.total|currency:"&nbsp;"}}</h6>
+                    <h6>Ngày: {{order.date_ordered|date}}</h6>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button [routerLink]="['/admin/orders/',order._id]">Xem chi tiết</button>
+                </mat-card-actions>
+
+            </mat-card>
+        </div>
+
+    </div>
+</div>

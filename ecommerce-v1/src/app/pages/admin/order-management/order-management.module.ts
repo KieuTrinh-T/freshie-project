@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import {  MatCardModule } from '@angular/material/card';
+import {  MatChipsModule } from '@angular/material/chips';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
     MatButtonModule,
     MatTabsModule,
     MatCardModule,
+    MatChipsModule
 
   ]
 })
