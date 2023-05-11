@@ -36,6 +36,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   decreaseQuantity() {
+    console.log(this.quantity);
     if (this.quantity > 1) {
       this.quantity--;
     }

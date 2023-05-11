@@ -77,6 +77,8 @@ export class ShopComponent implements OnInit {
 
   addToCart(product_id: string) {
     console.log(product_id, 1);
-    this._cartService.addToCart$(product_id, 1);
+    this._cartService.addToCart$(product_id, 1).subscribe((response) => {
+      console.log(response);
+    });
   }
 }
