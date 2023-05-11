@@ -103,6 +103,7 @@ export class OrderView implements IOrderView{
       _id: '',
       phone: ''
     };
+
     this.date_ordered = new Date();
   }
 }
