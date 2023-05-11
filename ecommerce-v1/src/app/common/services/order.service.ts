@@ -19,9 +19,10 @@ export class OrderService extends HttpService {
     const url = this.baseUrl + `/api/orders?${query}`;
     return this.getItems<IOrder>(url);
   }
-  loadOrder$(id: string) {
-    const url = this.baseUrl + `/api/orders/${id}`;
-    return this.getItem<IOrder>(url);
+  loadOrderByUser$(id: string) {
+    const url = this.baseUrl + `/api/orders`;
+    const params = { user: id };
+    return this.getItems<IOrder>(url,null,params);
   }
   viewOrder$(id: string) {
     const url = this.baseUrl + `/api/orders/${id}`;
