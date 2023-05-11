@@ -1,1 +1,32 @@
-<p>profile works!</p>
+<div class="container" style="margin-top: 20px;">
+  <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
+    <mat-tab label="Hồ sơ">
+      <div class="info">
+        <h4 style="margin-top: 20px;">Thông tin cá nhân</h4>
+        <p>Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+          <!-- <div class="img-contain">
+            <img src="https://i.pinimg.com/originals/0f/6e/4e/0f6e4e1b6b0b6b0b6b0b6b0b6b0b6b0b.jpg" alt="avatar" />
+          </div> -->
+          <div class="info-container">
+            <div class="info-item">
+              <div class="info-item-label">Tên đăng nhập:</div>
+              <div class="info-item-value">{{user.username}}</div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-label">Email:</div>
+              <div class="info-item-value">
+                  <input matInput placeholder="Email" value="{{user.email}}" />
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-item-label">Số điện thoại:</div>
+              <div class="info-item-value">{{user.phone}}</div>
+            </div>
+          </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Đổi mật khẩu">
+
+    </mat-tab>
+  </mat-tab-group>
+</div>

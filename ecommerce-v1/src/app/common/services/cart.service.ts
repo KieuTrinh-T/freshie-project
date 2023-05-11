@@ -109,14 +109,15 @@ export class CartService extends HttpService {
       localStorage.setItem('orderItems', JSON.stringify(orderItems));
     }
   }
-  // remove order item
   removeOrderItem(cart: any) {
     const orderItems = JSON.parse(localStorage.getItem('orderItems') || '[]');
     const orderItem = orderItems.find(
       (orderItem: any) => orderItem._id === cart._id
     );
     if (orderItem) {
-      orderItems.splice(orderItems.indexOf(orderItem), 1);
+      const index = orderItems.indexOf(orderItem);
+      orderItems.splice(index, 1);
+
       localStorage.setItem('orderItems', JSON.stringify(orderItems));
     }
   }
