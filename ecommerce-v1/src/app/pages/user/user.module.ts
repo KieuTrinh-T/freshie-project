@@ -9,6 +9,7 @@ import { OrderModule } from './order/order.module';
 import { HistoryModule } from './history/history.module';
 
 
+
 const routes: Routes = [
   {
     path: "",
@@ -42,6 +43,7 @@ const routes: Routes = [
         path: "history",
         loadChildren: () => import('./history/history.module').then((m) => m.HistoryModule)
       },
+
     ]
   },
 

@@ -4,6 +4,7 @@
       Danh sách sản phẩm
     </h1>
     <div class="list-product" *ngFor="let item of orderList">
+
       <div class="product-item">
         <div class="product-image">
           <img src="{{item.product.thumb}}" alt="" />
@@ -37,6 +38,7 @@
           <p>{{totalPrice}} đ</p>
           <p>0 đ</p>
           <p>{{totalPrice}} đ</p>
+
         </div>
       </div>
     </div>
@@ -68,6 +70,7 @@
           </mat-form-field>
           <button type="submit" (click)="createOrder()">Đặt hàng</button>
         </form>
+
     </div>
   </div>
 </div>
