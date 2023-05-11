@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { SwiperOptions } from 'swiper';
 import SwiperCore, { A11y, EffectFade, Navigation, Pagination, Scrollbar } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
+import { IProductList } from '../../../models/product';
+import { ProductService } from '../../../services/product.service';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
@@ -29,60 +31,21 @@ export class CarouselProductComponent {
     this.swiper.swiperRef.slidePrev(300);
   }
 
-  Products = [
-    {
-      id: 1,
-      name: 'Product 1',
-      price: 100,
-      discount: 80,
-      image: 'https://picsum.photos/200/300',
-      voteCount: 5,
-      voteAverage: 4
-    },
-    {
-      id: 2,
-      name: 'Product 2',
-      price: 100,
-      discount: 80,
-      image: 'https://picsum.photos/200/300',
-      voteCount: 5,
-      voteAverage: 4
-    },
-    {
-      id: 3,
-      name: 'Product 3',
-      price: 100,
-      discount: 80,
-      image: 'https://picsum.photos/200/300',
-      voteCount: 5,
-      voteAverage: 4
-    },
-    {
-      id: 4,
-      name: 'Product 4',
-      price: 100,
-      discount: 80,
-      image: 'https://picsum.photos/200/300',
-      voteCount: 5,
-      voteAverage: 4
-    },
-    {
-      id: 5,
-      name: 'Product 5',
-      price: 100,
-      discount: 80,
-      image: 'https://picsum.photos/200/300',
-      voteCount: 5,
-      voteAverage: 4
-    },
-    {
-      id: 6,
-      name: 'Product 6',
-      price: 100,
-      discount: 80,
-      image: 'https://picsum.photos/200/300',
-      voteCount: 5,
-      voteAverage: 4
-    },
-  ]
+  constructor(
+    private _productService: ProductService,
+  ) {
+    this.getAllProducts();
+  }
+
+  ngOnInIt(): void {
+    this.getAllProducts();
+  }
+
+  products: IProductList[] = [];
+
+  getAllProducts() {
+    this._productService.getAllProducts({limit:6}).subscribe((response) => {
+      this.products = response.value;
+    });
+  }
 }

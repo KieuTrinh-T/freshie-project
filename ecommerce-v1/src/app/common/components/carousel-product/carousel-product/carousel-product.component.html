@@ -1,18 +1,18 @@
 <div class="d-flex align-items-center justify-content-between">
   <mat-icon class="text-dark" fontIcon="navigate_before" (click)="slidePrev()"></mat-icon>
   <swiper class="w-90" #swiper [config]="config" >
-    <ng-template *ngFor="let p of Products" swiperSlide>
+    <ng-template *ngFor="let p of products" swiperSlide>
       <div class="bt-card-ui-3">
         <div class="card-image">
-            <img src="{{p.image}}"/>
+            <img src="{{p.thumb}}"/>
         </div>
         <div class="card-body">
             <div class="card-price">
-                <p class="card-price-old">{{p.price}}</p>
-                <p class="card-price-current">{{p.discount}}</p>
+                <p class="card-price-old">{{p.original_price}}</p>
+                <p class="card-price-current">{{p.price}}</p>
             </div>
             <p class="product-name">
-              {{p.name}}
+              {{p.product_name | truncate:40 }}
             </p>
             <div class="card-vote d-flex align-items-center">
               <ul class="vote-list">
@@ -88,7 +88,7 @@
                   </li>
               </ul>
               <div class="card-vote-tag">
-                <p>({{p.voteCount}})</p>
+                <p>({{p.rating_count}})</p>
               </div>
           </div>
             <div class="card-btn-wrap">

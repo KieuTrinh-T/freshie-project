@@ -109,5 +109,24 @@ getUserById(id:string){
   return this.getItem<IUser>(url+id);
 }
 
+// update user
+
+updateUser(id:any, user:any){
+  const url = this.baseUrl + '/api/users/' + id;
+  const body = {
+    username:user.username,
+    email:user.email,
+    phone:user.phone,
+    password:user.password,
+    avatar:user.avatar,
+    apartment:user.apartment,
+    street:user.street,
+    city:user.city,
+    country:user.country,
+  }
+  console.log(url);
+  console.log(body);
+  return this.editItem<IUser>(url,body);
+}
 }
 
