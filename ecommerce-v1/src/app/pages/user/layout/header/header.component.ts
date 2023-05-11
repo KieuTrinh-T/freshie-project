@@ -15,4 +15,9 @@ export class HeaderComponent {
 
   constructor(private _userService: UserService) { }
 
+  logout(){
+    this._userService.logout$();
+    // redirect to home page
+    window.location.href = '/';
+  }
 }

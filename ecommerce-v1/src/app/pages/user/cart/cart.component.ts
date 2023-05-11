@@ -58,7 +58,6 @@ export class CartComponent {
       this._cartService.removeOrderItem(cart);
     }
   }
-
   // order button click event
   onOrderButtonClick() {
     // get user state

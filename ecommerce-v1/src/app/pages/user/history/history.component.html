@@ -1,0 +1,33 @@
+<div class="left">
+  <div class="option-container" style="padding-top: 30px; width: 80%; margin: 0 auto;">
+      <!-- <div class="chip">
+          <mat-chip-listbox aria-label="Fish selection">
+              <mat-chip-option *ngFor="let opt of options">{{opt.viewValue}}</mat-chip-option>
+          </mat-chip-listbox>
+      </div> -->
+      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" [selectedIndex]="tabIndex" (selectedTabChange)="changeTab($event)">
+
+          <mat-tab *ngFor="let label of labels" label="{{label}}">
+              <div class="tab-content" *ngFor="let order of dataSource">
+                  <mat-card *ngIf="status=='' || order.status == status" class="infor-item" [routerLink]="order._id">
+                      <mat-card-title style="display: flex; justify-content: center; flex-direction: column;">
+                        <h5 style="text-align: center;">Đơn hàng: {{order._id}}</h5>
+                          <img src="{{order.orderItems[0].product.thumb}}" style="width: 100px;"/>
+
+                      </mat-card-title>
+                      <mat-card-content>
+                          <h6 style="text-align: start;">Tổng tiền: {{order.total}}</h6>
+                          <h6 style="text-align: start;">Số loại sản phẩm: {{order.orderItems.length}}</h6>
+                          <h6 style="text-align: start;">Ngày đặt: {{order.date_ordered | date}}</h6>
+                      </mat-card-content>
+                      <mat-card-footer>{{order.status}}</mat-card-footer>
+                      <mat-card-actions>
+                          <button mat-raised-button>Xem chi tiết</button>
+                      </mat-card-actions>
+                  </mat-card>
+              </div>
+
+          </mat-tab>
+      </mat-tab-group>
+  </div>
+  <router-outlet></router-outlet>
