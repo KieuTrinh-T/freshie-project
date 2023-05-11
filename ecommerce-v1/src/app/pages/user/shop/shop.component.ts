@@ -6,7 +6,7 @@ import {
   MatSelectionList,
   MatSelectionListChange,
 } from '@angular/material/list';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ProductService } from '@common/services';
 import { CartService } from 'src/app/common/services/cart.service';
 import { debounceTime } from 'rxjs';
@@ -19,44 +19,65 @@ import { IProductList } from 'src/app/common/models/product';
 })
 export class ShopComponent implements OnInit {
   products: IProductList[] = [];
+  selectedValue: any;
+  categories = [
+    {id: 1594, name:"hygiene"},
+    {id: 1591, name:"haircare"},
+    {id: 1584, name:"makeup"},
+    {id: 1595, name:"perfume"},
+    {id:1582, name:"skincare"}
+  ]
+  category_id:any;
+  min_price:number =  0;
+  max_price:number = 5000000;
+  search: string = '';
 
-  typeOfCategories = ['Skincare', 'Make up', 'Haircare', 'Perfume', 'Hygiene'];
-
-  filterForm = new FormGroup({
-    categories: new FormControl(),
-    price: new FormControl('Low to High'),
+  priceRange = new FormGroup({
+    priceMin: new FormControl(),
+    priceMax: new FormControl()
   });
-
-  @ViewChild('category') category!: MatSelectionList;
 
   constructor(
     private _productService: ProductService,
     private router: Router,
     private _cartService: CartService
-  ) {}
+  ) {
+    this.priceRange.patchValue({
+      priceMin: this.min_price,
+      priceMax: this.max_price
+    })
+  }
   ngOnInit(): void {
     this.getAllProducts();
-    console.log(this.products);
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const keyword: string | undefined = this.router.url.split('=').pop()?.toString();
+        const decodedKeyword: string = keyword ? this.decodeUnicode(keyword) : '';
+      // Use keyword to search products
+      this.getProductsSearch(decodedKeyword);
+      }
+    });
   }
 
   ngAfterViewInit() {
-    console.log(this.category.registerOnChange);
-    this.filterForm.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
-      console.log(value);
-    });
+
   }
 
-  onSelection(
-    $event: MatSelectionListChange,
-    arg1: SelectionModel<MatListOption>
-  ) {
-    console.log($event);
-    console.log(arg1.selected.map((option) => option.value));
-    this.filterForm.patchValue({
-      categories: arg1.selected.map((option) => option.value),
-    });
-    console.log(this.filterForm.value);
+  onValueChange(){
+    this.min_price = this.priceRange.value.priceMin;
+    this.max_price = this.priceRange.value.priceMax;
+    this._productService.filterProducts({category_id:this.category_id,min_price:this.min_price, max_price:this.max_price}).subscribe((response) => {
+      response.value.forEach((product: IProductList) => {
+        product.discount = Math.floor(
+          ((product.original_price - product.price) / product.original_price) *
+            100
+        );
+      });
+      this.products = response.value;
+    }
+    )
   }
+
 
   getAllProducts() {
     this._productService.getAllProducts({limit:12}).subscribe((response) => {
@@ -70,6 +91,24 @@ export class ShopComponent implements OnInit {
     });
   }
 
+  getProductsSearch(search: string) {
+    if(search == ''){
+      this.getAllProducts();
+      return;
+    }
+    this._productService.searchProducts({ search: search }).subscribe((response) => {
+      response.value.forEach((product: IProductList) => {
+        product.discount = Math.floor(
+          ((product.original_price - product.price) / product.original_price) *
+
+            100
+        );
+      });
+      this.products = response.value;
+    });
+    console.log(search);
+  }
+
   viewDetail(id: string) {
     console.log(id);
     this.router.navigate([`/product-detail/${id}`])
@@ -80,5 +119,11 @@ export class ShopComponent implements OnInit {
     this._cartService.addToCart$(product_id, 1).subscribe((response) => {
       console.log(response);
     });
+  }
+
+  decodeUnicode(str: string) {
+    return decodeURIComponent(str.replace(/\\u([\dA-F]{2,4})/gi, (match, p1) => {
+      return String.fromCharCode(parseInt(p1, 16));
+    }));
   }
 }

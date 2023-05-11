@@ -7,6 +7,7 @@ import { CartModule } from './cart/cart.module';
 import {MatIconModule} from '@angular/material/icon';
 import { OrderModule } from './order/order.module';
 import { HistoryModule } from './history/history.module';
+import { AboutModule } from './about/about.module';
 
 
 
@@ -43,6 +44,10 @@ const routes: Routes = [
         path: "history",
         loadChildren: () => import('./history/history.module').then((m) => m.HistoryModule)
       },
+      {
+        path: "about",
+        loadChildren: () => import('./about/about.module').then((m) => m.AboutModule)
+      },
 
     ]
   },
@@ -51,7 +56,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    UserComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,

@@ -60,6 +60,7 @@ export class OrderComponent {
     if(this.deliveryForm.invalid) {
       return;
     }
+
     const { recipientName, shippingAddress1, shippingAddress2, city, phone } = (this.deliveryForm.value as any);
     const total = this.totalPrice;
     const shipping = 0;
@@ -80,7 +81,6 @@ export class OrderComponent {
         this.router.navigate(['/shop']);
       }
     )
-
 
   }
 }

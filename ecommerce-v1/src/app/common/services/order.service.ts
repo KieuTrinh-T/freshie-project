@@ -74,5 +74,4 @@ export class OrderService extends HttpService {
     const url = this.baseUrl + `/api/orders/user/${id}`;
     return this.getItems<IOrder>(url);
   }
-
 }
