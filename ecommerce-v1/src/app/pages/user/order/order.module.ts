@@ -29,7 +29,6 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule
-
   ]
 })
 export class OrderModule { }

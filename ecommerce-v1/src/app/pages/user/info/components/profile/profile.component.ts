@@ -22,9 +22,11 @@ export class ProfileComponent {
   user: any;
   userID?: string = '';
 
+
   profileForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
+
     street: new FormControl(''),
     apartment: new FormControl(''),
     city: new FormControl(''),
@@ -62,6 +64,7 @@ export class ProfileComponent {
     )
   }
 
+
   // get user state
   getUserState(){
     this.userID = this._userService.getUserState()?._id;
@@ -96,4 +99,5 @@ export class ProfileComponent {
       }
     )
   }
+
 }

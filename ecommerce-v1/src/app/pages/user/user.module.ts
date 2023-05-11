@@ -10,6 +10,7 @@ import { HistoryModule } from './history/history.module';
 import { AboutModule } from './about/about.module';
 
 
+
 const routes: Routes = [
   {
     path: "",
@@ -47,6 +48,7 @@ const routes: Routes = [
         path: "about",
         loadChildren: () => import('./about/about.module').then((m) => m.AboutModule)
       },
+
     ]
   },
 

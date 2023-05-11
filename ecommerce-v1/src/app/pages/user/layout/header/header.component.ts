@@ -29,4 +29,9 @@ export class HeaderComponent {
     this.router.navigate(['/shop'],{queryParams:{search:search}});
   }
 
+  logout(){
+    this._userService.logout$();
+    // redirect to home page
+    window.location.href = '/';
+  }
 }
