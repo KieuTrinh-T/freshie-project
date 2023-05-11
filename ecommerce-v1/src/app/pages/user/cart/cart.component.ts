@@ -59,6 +59,7 @@ export class CartComponent {
     }
   }
 
+
   // order button click event
   onOrderButtonClick() {
     // get user state

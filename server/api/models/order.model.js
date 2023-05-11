@@ -52,8 +52,15 @@ const getOrderByUser = async(req, res) => {
             console.log('Mess from View: Connected to MongoDB');
         });
         const user_id = req.params.id
-        const result = await Order.find({ user: user_id })
-        return res.status(200).json(result)
+        const result = await Order.find({ user: user_id }).populate({
+            path: 'orderItems',
+            populate: {
+                path: 'product',
+                select: { 'product_name': 1, 'price': 1, 'original_price': 1, 'thumb': 1 }
+            }
+        }).sort({ 'dateOrdered': -1
+        })
+        return res.status(200).json(convertArrayResult(result))
     } catch (err) {
         return res.status(500).json(err)
     }
@@ -119,6 +126,7 @@ const postOrder = async(req, res) => {
         order = await order.save();
         return res.status(200).json(convertObjectResult(order));
     } catch (err) {
+        console.log(err)
         return res.status(500).json(err)
     }
 }
