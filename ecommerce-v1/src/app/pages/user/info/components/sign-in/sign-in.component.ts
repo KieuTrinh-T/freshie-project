@@ -91,8 +91,6 @@ export class SignInComponent {
     console.log(this.signUpForm.value as any);
 
     this._userService.signup$(username, email,phone, password).subscribe((res: any) => {
-      // open sign in tab
-      console.log(res);
       this.controlTab.setValue(0);
       // reset form
       this.signUpForm.patchValue({

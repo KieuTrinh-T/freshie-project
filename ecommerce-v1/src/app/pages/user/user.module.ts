@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutModule } from './layout/layout.module';
 import { CartModule } from './cart/cart.module';
 import {MatIconModule} from '@angular/material/icon';
+import { OrderModule } from './order/order.module';
 
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: "cart",
         loadChildren: () => import('./cart/cart.module').then((m) => m.CartModule)
+      },
+      {
+        path: "order",
+        loadChildren: () => import('./order/order.module').then((m) => m.OrderModule)
       },
     ]
   },
