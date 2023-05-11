@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="left-container">
+    <h1 class="container-title">
+      Danh sách sản phẩm
+    </h1>
+    <div class="list-product" *ngFor="let item of orderItems">
+      <div class="product-item">
+        <div class="product-image">
+          <img src="{{item.product.thumb}}" alt="" />
+        </div>
+        <div class="product-info">
+          <div class="product-name">
+            {{item.product.product_name}}
+          </div>
+          <div class="product-price">
+            {{item.product.price | number}}đ
+          </div>
+          <div class="product-quantity">
+            Số lượng: {{item.quantity}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-container">
+    <div class="order-info">
+      <h1 class="container-title">
+        Thông tin đơn hàng
+      </h1>
+      <div class="order-info-detail">
+        <div class="order-info-detail-title">
+          <p>Tổng tiền hàng:</p>
+          <p>Phí vận chuyển:</p>
+          <p>Tổng tiền:</p>
+        </div>
+        <div class="order-info-detail-value">
+          <p>{{totalPrice}}đ</p>
+          <p>đ</p>
+          <p>đ</p>
+        </div>
+      </div>
+    </div>
+    <div class="shipping-info">
+      <h1 class="container-title">
+        Thông tin giao hàng
+      </h1>
+    </div>
+  </div>
+</div>

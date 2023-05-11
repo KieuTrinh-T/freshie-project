@@ -50,6 +50,7 @@ export class CartService extends HttpService {
       return of(carts);
     } else {
       const url =  this.baseUrl + '/api/carts/' +  user_id;
+      console.log(url);
       return this.getItems(url);
     }
   }
@@ -59,6 +60,7 @@ export class CartService extends HttpService {
     const carts = JSON.parse(localStorage.getItem('carts') || '[]');
     const user_id = this._userService.getUserState()?._id;
     console.log(user_id);
+    console.log(product_id, quantity);
 
     const url =  this.baseUrl + '/api/carts/' +  user_id;
     console.log(url);
@@ -70,19 +72,52 @@ export class CartService extends HttpService {
       if (cart) {
         cart.quantity += quantity;
       } else {
-        carts.push({ product_id, quantity });
+        // get product info from server by product_id
+        const url = this.baseUrl + '/api/products/' + product_id;
+        this.getItem(url).subscribe((res: any) => {
+          console.log(res);
+          const product = res.value;
+          carts.push({
+            product_id,
+            quantity,
+            product,
+          });
+          localStorage.setItem('carts', JSON.stringify(carts));
+        });
       }
-      localStorage.setItem('carts', JSON.stringify(carts));
+      return of(carts);
     } else {
+
         const body = {
           product_id,
           quantity,
         };
-        this.submitItem(url, body)
-        .subscribe((res: any) => {
-          console.log(res);
-        }
-        );
+        console.log(body);
+        return this.submitItem(url, body);
       }
+
+  }
+
+  // add order item
+  addOrderItem(cart: any) {
+    const orderItems = JSON.parse(localStorage.getItem('orderItems') || '[]');
+    const orderItem = orderItems.find(
+      (orderItem: any) => orderItem._id === cart._id
+    );
+    if (!orderItem) {
+      orderItems.push(cart);
+      localStorage.setItem('orderItems', JSON.stringify(orderItems));
+    }
+  }
+  // remove order item
+  removeOrderItem(cart: any) {
+    const orderItems = JSON.parse(localStorage.getItem('orderItems') || '[]');
+    const orderItem = orderItems.find(
+      (orderItem: any) => orderItem._id === cart._id
+    );
+    if (orderItem) {
+      orderItems.splice(orderItems.indexOf(orderItem), 1);
+      localStorage.setItem('orderItems', JSON.stringify(orderItems));
+    }
   }
 }

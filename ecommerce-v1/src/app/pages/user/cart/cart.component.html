@@ -17,65 +17,34 @@
       </div>
     </div>
     <div id="showcart" class="Carts-container-second-detail-middle" *ngFor="let item of carts">
-      <div>
-        <div class="Carts-list-items-container">
-          <div class="Carts-container-middle-first">
-            <input
-            type="checkbox"
-            id="Carts-checkbox"
-            class="shopping-cart-checkbox"
-            />
-            <img
-            src="{{item.product.thumb}}"
-            alt="{{item.product.product_name}}"
-            class="Carts-product-img"
-            />
-            <span class="Carts-product-name">{{item.product.product_name}}</span>
-          </div>
-          <div class="Carts-container-middle-second">
-            <span class="Carts-product-price">{{item.product.price}}</span>
-          </div>
-          <div class="Carts-container-middle-third">
-            <div class="Carts-product-number">
-              <button class="Carts-product-number-btn">-</button>
-              <input type="text" class="Carts-product-number-input" value="{{item.quantity}}" />
-              <button class="Carts-product-number-btn">+</button>
-            </div>
-          </div>
-          <div class="Carts-container-middle-fourth">
-            <span class="Carts-product-total">{{item.product.price * item.quantity}}</span>
-            <span class="Carts-product-delete">
-              <i class="fas fa-trash-alt"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="Carts-container-second-detail-bottom">
-      <div class="Carts-container-second-detail-bottom-left">
-        <input type="text" id="idCoupon" class="shopping-cart-coupon" placeholder="Coupon Code" />
-        <button class="btn-coupon">
-          <label for="Carts-coupon">Apply Coupon</label>
-        </button>
-      </div>
-      <div class="Carts-container-second-detail-bottom-right">
-        <div class="Cart-total-coupon-decrease">
-          <p>Coupon: <span id="total-coupon">0</span></p>
-        </div>
-        <div class="total-price-lastes">
-          <span>Total payment:</span>
-          <span id="total-price">0</span>
 
-        </div>
-        <div class="Carts-alert-coupon">
-
-        </div>
-        <div class="link-to-checkout">
-          <button class="btn-container-checkout">
-            <span class="btn-checkout">
-              Buy Now
-            </span>
-          </button>
+      <div class="Carts-container-second-detail-middle-first">
+        <input type="checkbox" (change)="onCheckBoxChange($event, item)"/>
+        <div>
+          <img src="{{item.product.thumb}}" alt="" class="Cart-product-img">
+          <p class="Cart-product-title">{{item.product.product_name}}</p>
         </div>
       </div>
+      <div class="Carts-container-second-detail-middle-second">
+        <span class="Cart-product-price">{{item.product.price}}</span>
+      </div>
+      <div class="Carts-container-second-detail-middle-third">
+        <div class="Cart-product-number">
+          <button class="Cart-product-number-minus">-</button>
+          <input type="text" class="Cart-product-number-input" value="{{item.quantity}}" readonly>
+          <button class="Cart-product-number-plus" >+</button>
+        </div>
+      </div>
+      <div class="Carts-container-second-detail-middle-fourth">
+        <span class="Cart-product-total">{{item.product.price}}</span>
+      </div>
+      <span class="Cart-product-delete">
+        <mat-icon class="Cart-product-delete-icon">delete</mat-icon>
+      </span>
     </div>
+  </div>
+</div>
+<button (click)="onOrderButtonClick()">
+  Đặt hàng
+</button>
+

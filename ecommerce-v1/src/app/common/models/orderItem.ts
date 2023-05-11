@@ -1,8 +1,9 @@
 import { IProductShort } from "./product";
+import { IProduct } from "./cart.model";
 
 export interface IOrderItem {
   _id: string;
-  product: string;
+  product: IProduct;
   quantity: number;
 }
 
