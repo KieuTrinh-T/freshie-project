@@ -22,9 +22,6 @@ export class ProfileComponent {
 
   user: any;
 
-  userID?: string = '';
-
-
   profileForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),

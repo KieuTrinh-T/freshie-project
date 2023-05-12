@@ -48,6 +48,9 @@ export class SignInComponent {
     confirmPassword: new FormControl('', [Validators.required, confirmPasswordValidator]),
   });
 
+  errSignIn = '';
+  errSignUp = '';
+
   constructor(private _userService: UserService,
     private router: Router,
     private _cartService: CartService
@@ -75,9 +78,50 @@ export class SignInComponent {
       error: (err: any) => {
         console.log(err.error.message);
         // show snackbar
-        alert(err.error.message);
+        this.errSignIn = err.error.message;
       }
     });
+  }
+
+  getErrorMessage() {
+    if (this.signInForm.controls.username.hasError('required')) {
+      return 'You must enter a value';
+    }
+    if (this.signInForm.controls.password.hasError('required')) {
+      return 'You must enter a value';
+    }
+    if (this.signInForm.controls.password.hasError('password')) {
+      return 'Password must contain at least one number, one letter, one special character, and minimum 8 characters';
+    }
+    if(this.signUpForm.controls.username.hasError('required')) {
+      return 'You must enter a value';
+    }
+    if(this.signUpForm.controls.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+    if(this.signUpForm.controls.email.hasError('email')) {
+      return 'Not a valid email';
+    }
+    if(this.signUpForm.controls.phone.hasError('required')) {
+      return 'You must enter a value';
+    }
+    if(this.signUpForm.controls.phone.hasError('pattern')) {
+      return 'Not a valid phone number';
+    }
+    if(this.signUpForm.controls.password.hasError('required')) {
+      return 'You must enter a value';
+    }
+    if(this.signUpForm.controls.password.hasError('passwordValidator')) {
+      return 'Password must contain at least one number, one letter, one special character, and minimum 8 characters';
+    }
+    if(this.signUpForm.controls.confirmPassword.hasError('required')) {
+      return 'You must enter a value';
+    }
+    if(this.signUpForm.controls.confirmPassword.hasError('confirmPasswordValidator')) {
+      return 'Confirm password does not match';
+    }
+
+    return '';
   }
 
   signUp() {
@@ -90,7 +134,8 @@ export class SignInComponent {
 
     console.log(this.signUpForm.value as any);
 
-    this._userService.signup$(username, email,phone, password).subscribe((res: any) => {
+    this._userService.signup$(username, email,phone, password).subscribe({
+      next: (res: any) => {
       this.controlTab.setValue(0);
       // reset form
       this.signUpForm.patchValue({
@@ -100,7 +145,12 @@ export class SignInComponent {
         password: '',
         confirmPassword: '',
       });
-      console.log(this.controlTab.value)
+      },
+      error: (err: any) => {
+        console.log(err.error.message);
+        // show snackbar
+        this.errSignUp = err.error.message;
+      }
     });
   }
 }
