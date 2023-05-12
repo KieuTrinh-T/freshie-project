@@ -11,6 +11,8 @@ import { ProductService } from '@common/services';
 import { CartService } from 'src/app/common/services/cart.service';
 import { debounceTime } from 'rxjs';
 import { IProductList } from 'src/app/common/models/product';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../admin/dialog/dialog.component';
 
 @Component({
   selector: 'ec-shop',
@@ -33,6 +35,7 @@ export class ShopComponent implements OnInit {
   min_price:number =  0;
   max_price:number = 5000000;
   search: string = '';
+  navigate:any;
 
   priceRange = new FormGroup({
     priceMin: new FormControl(),
@@ -42,7 +45,8 @@ export class ShopComponent implements OnInit {
   constructor(
     private _productService: ProductService,
     private router: Router,
-    private _cartService: CartService
+    private _cartService: CartService,
+    private dialog: MatDialog
   ) {
     this.priceRange.patchValue({
       priceMin: this.min_price,
@@ -134,7 +138,21 @@ export class ShopComponent implements OnInit {
     console.log(product_id, 1);
     this._cartService.addToCart$(product_id, 1).subscribe((response) => {
       console.log(response);
+      const dialogref = this.dialog.open(DialogComponent,{
+        data: {
+          title: "Thêm vào giỏ hàng thành công!",
+          message: 'Bạn có muốn xem giỏ hàng ?',
+        }
+      });
+      dialogref.afterClosed().subscribe((result) => {
+        if(result){
+          console.log(result);
+          this.router.navigate(['/cart']);
+        }
+      }
+      )
     });
+
   }
 
   decodeUnicode(str: string) {
