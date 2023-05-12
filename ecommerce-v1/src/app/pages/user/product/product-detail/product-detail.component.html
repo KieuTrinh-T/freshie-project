@@ -43,7 +43,9 @@
               <div class="card">
                   <div class="card-body">
                       <h1 class="h2">{{product.product_name}}</h1>
-                      <p class="h3 py-2">{{product.original_price}}</p>
+                      <p class="h3 py-2"
+                      style="text-decoration: line-through;"
+                      >{{product.original_price}}</p>
                       <p class="h3 py-2">{{product.price}}</p>
                       <p class="py-2">
                           <i class="fa fa-star text-warning"></i>
@@ -61,36 +63,37 @@
                               <p class="text-muted"><strong>{{product.brand}}</strong></p>
                           </li>
                       </ul>
-
-                      <h6>Description:</h6>
-                      <span
-                      [innerHTML]="product.description">
-                      </span>
-                      <hr>
-
-                          <div class="row">
-                              <div class="col-auto">
-                                  <ul class="list-inline pb-3">
-                                      <li class="list-inline-item text-right">
-                                          Quantity
-                                      </li>
-                                      <li class="list-inline-item"><span (click)="decreaseQuantity()" class="btn btn-success" id="btn-minus">-</span></li>
-                                      <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">{{quantity}}</span></li>
-                                      <li class="list-inline-item"><span (click)="increaseQuantity()" class="btn btn-success" id="btn-plus">+</span></li>
-                                  </ul>
-                              </div>
-                          </div>
-                          <div class="row pb-3">
-                              <div class="col d-grid">
-                                  <button class="btn btn-success btn-lg" value="buy">Buy</button>
-                              </div>
-                              <div class="col d-grid">
-                                  <button (click)="addToCart()" class="btn btn-success btn-lg" value="addtocard">Add To Cart</button>
-                              </div>
-                          </div>
+                      <div class="row">
+                        <div class="col-auto">
+                            <ul class="list-inline pb-3">
+                                <li class="list-inline-item text-right">
+                                    Quantity
+                                </li>
+                                <li class="list-inline-item"><span (click)="decreaseQuantity()" class="btn" id="btn-minus" style="background-color: #EE6983; color: #fff;">-</span></li>
+                                <li class="list-inline-item"><span
+                                   id="var-value">{{quantity}}</span></li>
+                                <li class="list-inline-item"><span (click)="increaseQuantity()" class="btn" id="btn-plus" style="background-color: #EE6983; color: #fff;">+</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col d-grid">
+                            <button (click)="addToCart()" class="btn btn-lg" value="addtocard"
+                            style="background-color: #EE6983; color: #fff;"
+                            >Add To Cart</button>
+                        </div>
+                    </div>
                   </div>
               </div>
           </div>
       </div>
+      <div style="margin-top: 20px;">
+        <h4>Description:</h4>
+                      <span
+                      [innerHTML]="product.description">
+                      </span>
+                      <hr>
+      </div>
   </div>
+
 </section>
