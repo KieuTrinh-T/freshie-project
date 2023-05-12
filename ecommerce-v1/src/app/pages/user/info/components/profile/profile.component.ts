@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IUser } from 'src/app/common/models/user.model';
 import { UserService } from 'src/app/common/services/user.service';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+
 import { Router } from '@angular/router';
 
 // custom validator to check confirm password
