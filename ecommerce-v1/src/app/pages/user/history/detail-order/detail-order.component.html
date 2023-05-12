@@ -1,0 +1,49 @@
+<div class="container">
+  <h2>Thông tin đơn hàng</h2>
+  <div class="user-infor section">
+      <mat-card class="infor-item">
+          <mat-card-title>Số điện thoại</mat-card-title>
+          <mat-card-footer>{{order.user.phone}}</mat-card-footer>
+      </mat-card>
+      <mat-card class="infor-item">
+          <mat-card-title>Địa chỉ</mat-card-title>
+          <mat-card-footer>{{order.shippingAddress1}}, {{order.city}}</mat-card-footer>
+      </mat-card>
+      <mat-card class="infor-item">
+          <mat-card-title>Ngày đặt hàng</mat-card-title>
+          <mat-card-footer>{{order.date_ordered|date}}</mat-card-footer>
+      </mat-card>
+      <mat-card class="infor-item">
+          <mat-card-title>Trạng thái</mat-card-title>
+          <mat-card-footer>{{order.status}}</mat-card-footer>
+      </mat-card>
+      <mat-card class="infor-item">
+        <mat-card-title><b>Tổng tiền: </b></mat-card-title>
+        <mat-card-footer><b>{{order.total}}</b></mat-card-footer>
+    </mat-card>
+  </div>
+
+  <div class="order-detail section ">
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="thumb">
+              <th mat-header-cell *matHeaderCellDef > </th>
+              <td mat-cell *matCellDef="let element"> <img src="{{element.product.thumb}}"> </td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Sản phẩm </th>
+              <td mat-cell *matCellDef="let element"> {{element.product.product_name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Giá </th>
+              <td mat-cell *matCellDef="let element"> {{element.product.price}} </td>
+          </ng-container>
+          <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"> Số lượng </th>
+              <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  </div>
+</div>

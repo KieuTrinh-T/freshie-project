@@ -73,6 +73,12 @@ export class UserService extends HttpService {
     return this.submitItem<IUser>(url, body);
   }
 
+  //logout
+  logout$() {
+    // set user state to blank user
+    this.setUser$(BLANK_USER);
+  }
+
   createAccount(account:User){
     const url = this.baseUrl + '/api/users/signup';
     const body = {

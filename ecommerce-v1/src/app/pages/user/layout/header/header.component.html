@@ -57,7 +57,18 @@
                 </div>
                 <div *ngIf="user.username">
                   <!-- Nếu username và pw đều có giá trị, hiển thị thông tin người dùng -->
-                  <mat-icon matBadge="99+" matBadgeColor="warn">person</mat-icon>
+                  <mat-icon class="cursor-pointer" matBadge="99+" matBadgeColor="warn" [matMenuTriggerFor]="menu">person</mat-icon>
+                  <mat-menu #menu="matMenu">
+                    <button routerLink="/history" mat-menu-item>
+                      <span>Đơn mua</span>
+                    </button>
+                    <button routerLink="/info/profile" mat-menu-item>
+                      <span>Tài khoản</span>
+                    </button>
+                    <button (click)="logout()" mat-menu-item>
+                      <span>Đăng xuất</span>
+                    </button>
+                  </mat-menu>
                 </div>
               </ng-container>
             </div>

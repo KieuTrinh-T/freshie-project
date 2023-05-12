@@ -43,10 +43,36 @@ export class OrderService extends HttpService {
   getUserState() {
     this._userService.getUserState();
   }
-  createOrder$() {
+  // create order
+  createOrder(orderItems: Array<{ product: string, quantity: number }>,
+    recipientName: string,
+    shippingAddress1: string,
+    shippingAddress2: string,
+    city: string,
+    phone: string,
+    shipping: number,
+    tax: number
+    ) {
     const url = this.baseUrl + '/api/orders';
-    const user_id = this._userService.getUserState()?._id;
+    const user = this._userService.getUserState()?._id;
+    const body = {
+      orderItems,
+      recipientName,
+      shippingAddress1,
+      shippingAddress2,
+      city,
+      phone,
+      user,
+      shipping,
+      tax,
+    };
+    console.log(body);
+    return this.submitItem(url, body);
+  }
 
+  getOrdersByUser$(id: string) {
+    const url = this.baseUrl + `/api/orders/user/${id}`;
+    return this.getItems<IOrder>(url);
   }
 
 }
