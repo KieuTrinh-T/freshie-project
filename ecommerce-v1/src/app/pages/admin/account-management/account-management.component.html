@@ -17,6 +17,6 @@
 </div>
 <div>
     <label>Avatar: </label>
-    <input type="file" [(ngModel)]="admin.avatar" (click)="onFileSelected($event,admin)">
+    <input type="file" (change)="onFileSelected($event,admin)">
 </div>
 <button mat-raised-button color="primary" (click)="updateAccount()">Save change</button>

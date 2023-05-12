@@ -26,6 +26,23 @@ constructor(private _service: OrderService, private _router: Router) {
   this.loadItems(this.query);
 
  }
+ changeChip(value: string) {
+  switch (value) {
+    case 'all':
+      this.query = '';
+      break;
+    case 'today':
+      this.query = 'day=' + new Date().toISOString().split('T')[0];
+      break;
+    case 'yesterday':
+      this.query = 'day=' + new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0];
+      break;
+    case 'thismonth':
+      this.query = 'thismonth';
+      break;
+  }
+  this.loadItems(this.query);
+}
  changeTab(tabChangeEvent: MatTabChangeEvent): void{
   this.tabIndex = tabChangeEvent.index;
   switch (this.tabIndex) {
