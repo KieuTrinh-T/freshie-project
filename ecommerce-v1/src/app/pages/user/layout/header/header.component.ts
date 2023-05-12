@@ -28,6 +28,4 @@ export class HeaderComponent {
   searchProducts(search:string){
     this.router.navigate(['/shop'],{queryParams:{search:search}});
   }
-
-
 }

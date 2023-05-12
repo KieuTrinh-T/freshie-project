@@ -44,7 +44,7 @@ const routes: Routes = [
         loadChildren: () => import('./history/history.module').then((m) => m.HistoryModule)
       },
       {
-        path: "about",
+        path: "",
         loadChildren: () => import('./about/about.module').then((m) => m.AboutModule)
       },
 

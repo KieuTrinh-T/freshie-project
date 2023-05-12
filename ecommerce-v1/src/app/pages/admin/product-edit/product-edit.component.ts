@@ -22,6 +22,7 @@ export class ProductEditComponent {
   ]
   product = new ProductDetail();
   constructor(private activateRoute: ActivatedRoute, private _productService: ProductService, private dialog: MatDialog, private _router: Router ) {
+
     this.activateRoute.params.subscribe(
       (params) => {
         let id = params['id'];
@@ -102,7 +103,8 @@ export class ProductEditComponent {
           data: {title: 'Thông báo', message: "Đã xảy ra lỗi khi cập nhật sản phẩm: " + err.error.message},
         });
 
-        }})
+        }}
+      )
 
     }
     changeThumb(event: any, product: ProductDetail) {

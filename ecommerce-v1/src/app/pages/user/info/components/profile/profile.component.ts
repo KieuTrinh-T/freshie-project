@@ -66,8 +66,6 @@ export class ProfileComponent {
     )
   }
 
-
-
   // get user state
   getUserState(){
     this.userID = this._userService.getUserState()?._id;

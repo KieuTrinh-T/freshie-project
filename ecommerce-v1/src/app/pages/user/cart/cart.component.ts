@@ -73,4 +73,5 @@ export class CartComponent {
       this._router.navigate(['order']);
     }
   }
+
 }

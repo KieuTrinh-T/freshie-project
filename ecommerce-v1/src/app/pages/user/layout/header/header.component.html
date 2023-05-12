@@ -22,7 +22,11 @@
         </div>
         <div class="right-header w-50">
           <div class="w-100 d-flex justify-content-around align-items-center">
-            <div class="input-search d-flex justify-content-end align-items-center w-75" >
+            <div class="search-form d-flex align-items-center">
+              <input class="search-input" type="text" #search placeholder="Search" title="Enter search keyword">
+              <button class="search-button" title="Search" (click)="searchProducts(search.value)"><i class="bi bi-search"></i></button>
+            </div>
+            <!-- <div class="input-search d-flex justify-content-end align-items-center w-75" >
               <div class="fui-search-input-effect">
                 <input type="checkbox" id="check" />
                 <div class="search-box">
@@ -45,10 +49,10 @@
                   </label>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="icon-group d-flex justify-content-end align-items-center w-25">
               <div class="icon cursor-pointer" style="margin-right: 10px;">
-                <mat-icon matBadge="15" matBadgeColor="warn" routerLink="cart">shopping_cart</mat-icon>
+                <mat-icon matBadgeColor="warn" routerLink="cart">shopping_cart</mat-icon>
               </div>
               <ng-container *ngIf="(user$ | async) as user">
                 <div *ngIf="user.username===''">
@@ -57,7 +61,7 @@
                 </div>
                 <div *ngIf="user.username">
                   <!-- Nếu username và pw đều có giá trị, hiển thị thông tin người dùng -->
-                  <mat-icon class="cursor-pointer" matBadge="99+" matBadgeColor="warn" [matMenuTriggerFor]="menu">person</mat-icon>
+                  <mat-icon class="cursor-pointer" matBadgeColor="warn" [matMenuTriggerFor]="menu">person</mat-icon>
                   <mat-menu #menu="matMenu">
                     <button routerLink="/history" mat-menu-item>
                       <span>Đơn mua</span>

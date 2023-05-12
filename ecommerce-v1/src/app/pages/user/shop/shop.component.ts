@@ -27,6 +27,8 @@ export class ShopComponent implements OnInit {
     {id: 1595, name:"perfume"},
     {id:1582, name:"skincare"}
   ]
+  limit:number = 12;
+  page:number = 1;
   category_id:any;
   min_price:number =  0;
   max_price:number = 5000000;
@@ -66,7 +68,7 @@ export class ShopComponent implements OnInit {
   onValueChange(){
     this.min_price = this.priceRange.value.priceMin;
     this.max_price = this.priceRange.value.priceMax;
-    this._productService.filterProducts({category_id:this.category_id,min_price:this.min_price, max_price:this.max_price}).subscribe((response) => {
+    this._productService.filterProducts({limit:this.limit,page:this.page,category_id:this.category_id,min_price:this.min_price, max_price:this.max_price}).subscribe((response) => {
       response.value.forEach((product: IProductList) => {
         product.discount = Math.floor(
           ((product.original_price - product.price) / product.original_price) *
@@ -78,6 +80,20 @@ export class ShopComponent implements OnInit {
     )
   }
 
+  changePage(numChange:number){
+    this.page = this.page + numChange;
+    console.log(this.page);
+    this._productService.filterProducts({limit:this.limit,page:this.page}).subscribe((response) => {
+      response.value.forEach((product: IProductList) => {
+        product.discount = Math.floor(
+          ((product.original_price - product.price) / product.original_price) *
+            100
+        );
+      });
+      this.products = response.value;
+    }
+    )
+  }
 
   getAllProducts() {
     this._productService.getAllProducts({limit:12}).subscribe((response) => {
