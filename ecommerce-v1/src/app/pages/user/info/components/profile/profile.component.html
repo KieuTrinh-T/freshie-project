@@ -7,26 +7,60 @@
           <!-- <div class="img-contain">
             <img src="https://i.pinimg.com/originals/0f/6e/4e/0f6e4e1b6b0b6b0b6b0b6b0b6b0b6b0b.jpg" alt="avatar" />
           </div> -->
-          <div class="info-container">
-            <div class="info-item">
-              <div class="info-item-label">Tên đăng nhập:</div>
-              <div class="info-item-value">{{user.username}}</div>
+
+            <form [formGroup]="profileForm" (ngSubmit)="updateUser()">
+              <div class="info-container">
+              <mat-form-field appearance="outline" style="width: 500px;">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput type="text" placeholder="Email" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 500px;">
+                <mat-label>Số điện thoại</mat-label>
+                <input formControlName="phone" matInput type="text" placeholder="Số điện thoại" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 500px;">
+                <mat-label>Apartment</mat-label>
+                <input formControlName="apartment" matInput type="text" placeholder="Apartment" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 500px;">
+                <mat-label>Street</mat-label>
+                <input formControlName="street" matInput type="text" placeholder="Street" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 500px;">
+                <mat-label>City</mat-label>
+                <input formControlName="city" matInput type="text" placeholder="City" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" style="width: 500px;">
+                <mat-label>Country</mat-label>
+                <input formControlName="country" matInput type="text" placeholder="Country" />
+              </mat-form-field>
+              <button mat-raised-button color="primary" type="submit">Cập nhật</button>
             </div>
-            <div class="info-item">
-              <div class="info-item-label">Email:</div>
-              <div class="info-item-value">
-                  <input matInput placeholder="Email" value="{{user.email}}" />
-              </div>
-            </div>
-            <div class="info-item">
-              <div class="info-item-label">Số điện thoại:</div>
-              <div class="info-item-value">{{user.phone}}</div>
-            </div>
+            </form>
           </div>
-      </div>
     </mat-tab>
     <mat-tab label="Đổi mật khẩu">
-
+      <div class="info">
+        <h4 style="margin-top: 20px;">Đổi mật khẩu</h4>
+        <p>Đổi mật khẩu để bảo mật tài khoản</p>
+        <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+          <div class="info-container">
+            <mat-form-field appearance="outline" style="width: 500px;">
+              <mat-label>Mật khẩu cũ</mat-label>
+              <input formControlName="oldPassword" matInput type="password" placeholder="Mật khẩu cũ" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 500px;">
+              <mat-label>Mật khẩu mới</mat-label>
+              <input formControlName="newPassword" matInput type="password" placeholder="Mật khẩu mới" />
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 500px;">
+              <mat-label>Nhập lại mật khẩu mới</mat-label>
+              <input formControlName="confirmPassword" matInput type="password" placeholder="Nhập lại mật khẩu mới" />
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Cập nhật</button>
+          </div>
+        </form>
+      </div>
     </mat-tab>
   </mat-tab-group>
 </div>

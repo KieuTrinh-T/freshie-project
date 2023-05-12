@@ -120,7 +120,6 @@ export class CartService extends HttpService {
       const index = orderItems.indexOf(orderItem);
       orderItems.splice(index, 1);
 
-
       localStorage.setItem('orderItems', JSON.stringify(orderItems));
     }
   }

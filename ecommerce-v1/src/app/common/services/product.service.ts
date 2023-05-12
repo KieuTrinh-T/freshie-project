@@ -25,5 +25,8 @@ export class ProductService extends HttpService{
   updateProduct(id:string,product:ProductDetail){
     return this.editItem<ProductDetail>(this.baseUrl + '/api/products/' + id,product);
   }
+  searchProducts(params:{search?:string} = {}){
+    return this.getItems<IProductList>(this.baseUrl + '/api/products/',null,params);
+  }
 
 }

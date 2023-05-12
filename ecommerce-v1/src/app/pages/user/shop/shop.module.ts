@@ -8,6 +8,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListProductModule } from 'src/app/common/components/list-product/list-product.module';
+import {MatChipsModule} from '@angular/material/chips';
+import { FormsModule } from '@angular/forms';
+import {MatSliderModule} from '@angular/material/slider';
 
 const routes: Routes = [
   {
@@ -27,7 +30,10 @@ const routes: Routes = [
     MatMenuModule,
     MatButtonModule,
     ReactiveFormsModule,
-    ListProductModule
+    ListProductModule,
+    MatChipsModule,
+    FormsModule,
+    MatSliderModule
   ]
 })
 export class ShopModule { }
