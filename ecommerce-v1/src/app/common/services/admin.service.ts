@@ -61,7 +61,7 @@ export class AdminService extends HttpService {
   }
   updateAccount$(admin: IAdmin) {
     const url = this.baseUrl + '/api/users/';
-    return this.updateItem(url + admin._id, admin).pipe(
+    return this.editItem(url + admin._id, admin).pipe(
       map((res: any) => {
         this._admin = res.value;
         return res.value;
