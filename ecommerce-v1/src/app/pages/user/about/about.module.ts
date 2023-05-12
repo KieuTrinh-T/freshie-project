@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'about',
     component: AboutComponent,
   }
 ];
