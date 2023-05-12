@@ -13,6 +13,8 @@ import { UserService } from 'src/app/common/services/user.service';
 export class CartComponent {
 
   carts = Array<ICart>();
+  check_list = Array<ICart>();
+  public total: number = 0;
 
   constructor(
     private _cartService: CartService,
@@ -20,7 +22,9 @@ export class CartComponent {
     private _userService: UserService
   ) {
     this.getCartItems();
+    this.caculateTotalPrice();
   }
+
 
   // get user state
   getUserState() {
@@ -46,17 +50,26 @@ export class CartComponent {
     });
   }
   }
+  caculateTotalPrice() {
+    this.total = 0;
+    this.check_list.forEach((cart) => {
+      this.total += cart.quantity * cart.product.price;
+    });
+  }
 
   // check box change event
   onCheckBoxChange(event: any, cart: ICart) {
     // if check box is checked, add item to order list
     if (event.target.checked) {
       this._cartService.addOrderItem(cart);
+      this.check_list.push(cart);
     }
     // if check box is unchecked, remove item from order list
     else {
       this._cartService.removeOrderItem(cart);
+      this.check_list = this.check_list.filter((item) => item !== cart);
     }
+    this.caculateTotalPrice();
   }
   // order button click event
   onOrderButtonClick() {
@@ -73,5 +86,19 @@ export class CartComponent {
       this._router.navigate(['order']);
     }
   }
+  onQuantityChange(cart: ICart, quantity: number) {
+      cart.quantity+=quantity;
+      // update cart item
+      // update cart items in local storage
+      localStorage.setItem('carts', JSON.stringify(this.carts));
+      // update cart items in server
+      if(this.getUserState()?._id){
+        this._cartService.addToCart$(cart.product.id,quantity).subscribe((res) => {
+          console.log(res);
+        });
+    }
+    this.caculateTotalPrice();
+  }
+
 
 }

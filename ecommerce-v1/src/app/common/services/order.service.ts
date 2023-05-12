@@ -22,9 +22,9 @@ export class OrderService extends HttpService {
     return this.getItems<IOrder>(url);
   }
   loadOrderByUser$(id: string) {
-    const url = this.baseUrl + `/api/orders`;
+    const url = this.baseUrl + `/api/orders/user/${id}`;
     const params = { user: id };
-    return this.getItems<IOrder>(url,null,params);
+    return this.getItems<IOrder>(url,null);
   }
   viewOrder$(id: string) {
     const url = this.baseUrl + `/api/orders/${id}`;
