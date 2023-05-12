@@ -66,6 +66,8 @@
     </div>
     <div class="action">
         <button *ngIf="order.status=='Pending'" mat-raised-button (click)="onAccept()">Duyệt</button>
+        <button *ngIf="order.status=='Shipping'" mat-raised-button (click)="onComplete()">Đã hoàn tất</button>
+
     </div>
 
 </div>

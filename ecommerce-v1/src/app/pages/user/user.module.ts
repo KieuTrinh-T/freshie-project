@@ -7,7 +7,6 @@ import { CartModule } from './cart/cart.module';
 import {MatIconModule} from '@angular/material/icon';
 import { OrderModule } from './order/order.module';
 import { HistoryModule } from './history/history.module';
-import { AboutModule } from './about/about.module';
 
 
 

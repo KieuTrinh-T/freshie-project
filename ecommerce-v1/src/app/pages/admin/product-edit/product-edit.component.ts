@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ProductService } from '@common/services';
 import {  ProductDetail } from 'src/app/common/models/product';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -21,7 +21,8 @@ export class ProductEditComponent {
     {id:'1582', name:"skincare"}
   ]
   product = new ProductDetail();
-  constructor(private activateRoute: ActivatedRoute, private _productService: ProductService, private dialog: MatDialog ) {
+  constructor(private activateRoute: ActivatedRoute, private _productService: ProductService, private dialog: MatDialog, private _router: Router ) {
+
     this.activateRoute.params.subscribe(
       (params) => {
         let id = params['id'];
@@ -101,6 +102,7 @@ export class ProductEditComponent {
         this.dialog.open(DialogComponent, {
           data: {title: 'Thông báo', message: "Đã xảy ra lỗi khi cập nhật sản phẩm: " + err.error.message},
         });
+
         }}
       )
 
