@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '@common/services';
 import {  ProductDetail } from 'src/app/common/models/product';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'ec-product-edit',
   templateUrl: './product-edit.component.html',
@@ -19,7 +21,7 @@ export class ProductEditComponent {
     {id:'1582', name:"skincare"}
   ]
   product = new ProductDetail();
-  constructor(private activateRoute: ActivatedRoute, private _productService: ProductService ) {
+  constructor(private activateRoute: ActivatedRoute, private _productService: ProductService, private dialog: MatDialog ) {
     this.activateRoute.params.subscribe(
       (params) => {
         let id = params['id'];
@@ -91,8 +93,15 @@ export class ProductEditComponent {
     updateProduct()
     {
       this._productService.updateProduct(this.product._id,this.product).subscribe(
-        {next:(res)=>{console.log(res)},
-        error:(err)=>{console.log(err)}}
+        {next:(res)=>{console.log(res),
+          this.dialog.open(DialogComponent, {
+            data: {title: 'Thông báo', message: "Đã cập nhật sản phẩm thành công"},
+          });},
+        error:(err)=>{console.log(err)
+        this.dialog.open(DialogComponent, {
+          data: {title: 'Thông báo', message: "Đã xảy ra lỗi khi cập nhật sản phẩm: " + err.error.message},
+        });
+        }}
       )
 
     }

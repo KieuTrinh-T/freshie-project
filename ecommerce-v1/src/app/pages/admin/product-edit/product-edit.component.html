@@ -2,6 +2,7 @@
 <label>Mã sản phẩm</label>
 <input type="text" class="form-control" [(ngModel)]="product._id" disabled>
 <div class="product_image">
+    <h3>Hình ảnh sản phẩm</h3>
     <div class="image-item"> <img [src]="product.thumb" alt="">
         <input type="file" (change)="changeThumb($event,product)"></div>
     <div class="image-item"><img [src]="product.image_1" alt="">
