@@ -43,37 +43,36 @@
             </div>
         </div>
 
-      </div>
     </div>
-    <div class="shipping-info">
-      <h1 class="container-title">
+</div>
+<div class="shipping-info">
+    <h1 class="container-title">
         Thông tin giao hàng
-      </h1>
-      <div class="shipping-info-detail">
+    </h1>
+    <div class="shipping-info-detail">
         <form [formGroup]="deliveryForm" class="delivery-form">
-          <mat-form-field appearance="outline">
-            <mat-label>Tên người nhận</mat-label>
-            <input formControlName="recipientName" matInput type="text" placeholder="Tên người nhận" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Tòa, tầng</mat-label>
-            <input formControlName="shippingAddress1" matInput type="text" placeholder="Tòa, tầng" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Số nhà, tên đường</mat-label>
-            <input formControlName="shippingAddress2" matInput type="text" placeholder="Số nhà, tên đường" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Thành phố/ Tỉnh</mat-label>
-            <input formControlName="city" matInput type="text" placeholder="Thành phố/ Tỉnh" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Số điện thoại</mat-label>
-            <input formControlName="phone" matInput type="text" placeholder="Số điện thoại" />
-          </mat-form-field>
-          <button class="btn-order" type="submit" (click)="createOrder()">Đặt hàng</button>
+            <mat-form-field appearance="outline">
+                <mat-label>Tên người nhận</mat-label>
+                <input formControlName="recipientName" matInput type="text" placeholder="Tên người nhận" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Tòa, tầng</mat-label>
+                <input formControlName="shippingAddress1" matInput type="text" placeholder="Tòa, tầng" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Số nhà, tên đường</mat-label>
+                <input formControlName="shippingAddress2" matInput type="text" placeholder="Số nhà, tên đường" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Thành phố/ Tỉnh</mat-label>
+                <input formControlName="city" matInput type="text" placeholder="Thành phố/ Tỉnh" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Số điện thoại</mat-label>
+                <input formControlName="phone" matInput type="text" placeholder="Số điện thoại" />
+            </mat-form-field>
+            <button class="btn-order" type="submit" (click)="createOrder()">Đặt hàng</button>
         </form>
 
-            </div>
-        </div>
     </div>
+</div>
