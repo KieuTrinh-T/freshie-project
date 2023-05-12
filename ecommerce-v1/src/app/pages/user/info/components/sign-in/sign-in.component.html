@@ -12,14 +12,16 @@
               <input formControlName="username" matInput type="text" placeholder="Username" />
               <mat-error>{{getErrorMessage()}}</mat-error>
             </mat-form-field>
-
-            <mat-form-field appearance="outline" style="width: 500px;  margin-bottom: 20px;">
+            <mat-form-field appearance="outline" style="width: 500px;  margin-bottom: 15px;">
               <mat-label>Password</mat-label>
               <input formControlName="password" matInput type="password" placeholder="Password" />
               <mat-error>{{getErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-error style="margin-bottom: 10px;">{{errSignIn}}</mat-error>
             <button mat-raised-button color="primary" style="width: 500px;">Đăng nhập</button>
+            <div class="admin-link" style="width: 500px; display: flex; justify-content: center; margin-top: 15px;">
+              <a href="/admin/auth/sign-in">Đăng nhập với tư cách là admin</a>
+            </div>
           </form>
         </div>
       </mat-tab>
