@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { SwiperOptions } from 'swiper';
 import SwiperCore, { A11y, EffectFade, Navigation, Pagination, Scrollbar } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
@@ -16,6 +16,11 @@ SwiperCore.use([EffectFade]);
   styleUrls: ['./carousel-product.component.scss']
 })
 export class CarouselProductComponent {
+
+  @Output() viewDetail = new EventEmitter<string>();
+  @Output() addToCart = new EventEmitter<string>();
+
+
   config: SwiperOptions = {
     slidesPerView: 4,
     spaceBetween: 20,

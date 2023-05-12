@@ -28,11 +28,10 @@
       </div>
   </div>
   <div class="row">
-    <ec-carousel-product></ec-carousel-product>
+    <ec-carousel-product (viewDetail)="viewDetail($event)" (addToCart)="addToCart($event)"></ec-carousel-product>
   </div>
 </section>
-<!-- best seller section end -->
-<!-- categories session start-->
+
 <section class="container py-5">
   <div class="row text-center pt-3 mb-2">
       <div class="col-lg-6 m-auto">

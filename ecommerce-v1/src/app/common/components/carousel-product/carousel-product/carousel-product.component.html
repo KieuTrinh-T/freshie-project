@@ -92,12 +92,12 @@
               </div>
           </div>
             <div class="card-btn-wrap">
-                <a class="card-btn card-btn--buy-now text-decoration-none cursor-pointer">
-                    Buy now
-                </a>
-                <a class="card-btn card-btn--add-cart text-decoration-none cursor-pointer">
+                <button class="card-btn card-btn--buy-now text-decoration-none cursor-pointer" (click)="viewDetail.emit(p._id)">
+                    Details
+                </button>
+                <button class="card-btn card-btn--add-cart text-decoration-none cursor-pointer" (click)="addToCart.emit(p._id)">
                     Add to cart
-                </a>
+                </button>
             </div>
         </div>
     </div>
