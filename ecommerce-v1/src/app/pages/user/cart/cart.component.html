@@ -1,45 +1,138 @@
-<div class="Carts-container-second">
-  <div class="Carts-container-second-detail">
-    <div class="Carts-container-second-detail-top">
-      <div class="Carts-container-top-first">
-        <span class="Cart-product-title-top" >Product</span>
-      </div>
-      <div class="Carts-container-top-second">
-        <span class="Cart-product-price-top" >Price</span>
-      </div>
-      <div class="Carts-container-top-third">
-        <span class="Cart-product-number-top" >The number of product</span>
-      </div>
-      <div class="Carts-container-top-fourth">
-        <span class="Cart-product-total-top" >Total</span>
-      </div>
-    </div>
-    <div class="Carts-container-second-detail-middle" *ngFor="let item of carts">
-
-      <div class="Carts-container-second-detail-middle-first">
-        <input style="width: 20%;" type="checkbox" (change)="onCheckBoxChange($event, item)"/>
-        <div style="width: 75%;">
-          <img src="{{item.product.thumb}}" alt="" class="Cart-product-img">
-          <p class="Cart-product-title">{{item.product.product_name}}</p>
+<!-- <div class="Carts-container-second">
+    <div class="Carts-container-second-detail">
+        <div class="Carts-container-second-detail-top">
+            <div class="Carts-container-top-first">
+                <span class="Cart-product-title-top">Sản phẩm</span>
+            </div>
+            <div class="Carts-container-top-second">
+                <span class="Cart-product-price-top">Giá</span>
+            </div>
+            <div class="Carts-container-top-third">
+                <span class="Cart-product-number-top">Số lượng</span>
+            </div>
+            <div class="Carts-container-top-fourth">
+                <span class="Cart-product-total-top">Tổng cộng</span>
+            </div>
         </div>
-      </div>
-      <div class="Carts-container-second-detail-middle-second">
-        <span class="Cart-product-price">{{item.product.price}}</span>
-      </div>
-      <div class="Carts-container-second-detail-middle-third">
-          <button class="Cart-product-number-minus">-</button>
-          <input type="text" class="Cart-product-number-input" value="{{item.quantity}}" readonly>
-          <button class="Cart-product-number-plus" >+</button>
-      </div>
-      <div class="Carts-container-second-detail-middle-fourth">
-        <span class="Cart-product-total">{{item.product.price}}</span>
-      </div>
+        <div class="Carts-container-second-detail-middle" *ngFor="let item of carts">
+
+            <div class="Carts-container-second-detail-middle-first">
+                <input style="width: 20%;" type="checkbox" (change)="onCheckBoxChange($event, item)" />
+                <div style="width: 75%;">
+                    <img src="{{item.product.thumb}}" alt="" class="Cart-product-img">
+                    <p class="Cart-product-title">{{item.product.product_name}}</p>
+                </div>
+            </div>
+            <div class="Carts-container-second-detail-middle-second">
+                <span class="Cart-product-price">{{item.product.price}}</span>
+            </div>
+            <div class="Carts-container-second-detail-middle-third">
+                <button class="Cart-product-number-minus">-</button>
+                <input type="text" class="Cart-product-number-input" value="{{item.quantity}}" readonly>
+                <button class="Cart-product-number-plus">+</button>
+            </div>
+            <div class="Carts-container-second-detail-middle-fourth">
+                <span class="Cart-product-total">{{item.product.price}}</span>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="button-container">
-  <button class="btn-order" (click)="onOrderButtonClick()">
+    <button class="btn-order" (click)="onOrderButtonClick()">
     Đặt hàng
   </button>
-</div>
+</div> -->
+<!-- Breadcrumb Section End -->
 
+<!-- Shopping Cart Section Begin -->
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Số lượng</th>
+                                <th>Chọn</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of carts" class="cart_item">
+                                <td class="product__cart__item">
+                                    <div class="product__cart__item__pic">
+                                        <img src="{{item.product.thumb}}" alt="">
+                                    </div>
+                                    <div class="product__cart__item__text">
+                                        <h6>{{item.product.product_name}}</h6>
+                                        <h5>{{item.product.price|currency:"VND"}} </h5>
+                                    </div>
+
+                                </td>
+                                <td class="quantity__item">
+                                    <div class="quantity">
+                                        <div class="pro-qty">
+
+                                            <input type="text" value="{{item.quantity}}">
+                                            <div>
+                                                <button (click)="onQuantityChange(item,1)">
+                                                <mat-icon>keyboard_arrow_up</mat-icon>
+                                              </button>
+                                                <button (click)="onQuantityChange(item,-1)" [disabled]="item.quantity==1">
+                                                <mat-icon>keyboard_arrow_down</mat-icon>
+                                              </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="cart__price">
+                                    <input type="checkbox" (change)="onCheckBoxChange($event, item)" />
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+
+                <div class="cart__total">
+
+                    <div>Tổng cộng: <span class="cart__total_price_ship">{{total|currency:"VND"}}</span></div>
+
+                    <div class="button-container">
+                        <button mat-raised-button color="warm" (click)="onOrderButtonClick()">
+                          <mat-icon>navigate_next</mat-icon>
+                      Đặt hàng
+                    </button>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="btn_Continue_Buying">
+                            <button mat-raised-button routerLink="/shop">
+                            <mat-icon>keyboard_backspace</mat-icon>
+                            Mua hàng
+                          </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn update__btn">
+                            <button mat-raised-button routerLink="/cart">
+                            <mat-icon>update</mat-icon>
+                            Cập nhật
+                          </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
