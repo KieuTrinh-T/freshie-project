@@ -44,6 +44,16 @@ onAccept(){
   )
 
 }
+onComplete(){
+  this.order.status = 'Completed';
+  this._service.updateOrder$(this.order._id,this.order.status).subscribe(
+    {next:(res)=>{
+      this.openDialog("Đã cập nhật trạng thái đơn hàng");},
+    error:(err)=>{
+      this.openDialog("Không thể cập nhật trạng thái đơn hàng. Lỗi; " + err.statusText);}}
+  )
+}
+
 openDialog(message:string): void {
     this.dialog.open(DialogComponent, {
       data: {title: 'Thông báo', message: message},
