@@ -7,15 +7,21 @@
         <div class="signin-container">
           <h2 class="title">Đăng nhập</h2>
           <form [formGroup]="signInForm" (ngSubmit)="signIn()">
-            <mat-form-field appearance="outline" style="width: 500px;">
+            <mat-form-field appearance="outline" style="width: 500px; margin-bottom: 15px;">
               <mat-label>Username</mat-label>
               <input formControlName="username" matInput type="text" placeholder="Username" />
+              <mat-error>{{getErrorMessage()}}</mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" style="width: 500px;">
+            <mat-form-field appearance="outline" style="width: 500px;  margin-bottom: 15px;">
               <mat-label>Password</mat-label>
               <input formControlName="password" matInput type="password" placeholder="Password" />
+              <mat-error>{{getErrorMessage()}}</mat-error>
             </mat-form-field>
+            <mat-error style="margin-bottom: 10px;">{{errSignIn}}</mat-error>
             <button mat-raised-button color="primary" style="width: 500px;">Đăng nhập</button>
+            <div class="admin-link" style="width: 500px; display: flex; justify-content: center; margin-top: 15px;">
+              <a href="/admin/auth/sign-in">Đăng nhập với tư cách là admin</a>
+            </div>
           </form>
         </div>
       </mat-tab>
@@ -27,23 +33,29 @@
             <mat-form-field appearance="outline" style="width: 500px;">
               <mat-label>Username</mat-label>
               <input formControlName="username" matInput type="text" placeholder="Username" />
+              <mat-error>{{getErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" style="width: 500px;">
               <mat-label>Email</mat-label>
               <input formControlName="email" matInput type="email" placeholder="Email" />
+              <mat-error>{{getErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" style="width: 500px;">
               <mat-label>Phone</mat-label>
               <input formControlName="phone" matInput type="text" placeholder="Phone" />
+              <mat-error>{{getErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" style="width: 500px;">
               <mat-label>Password</mat-label>
               <input formControlName="password" matInput type="password" placeholder="Password" />
+              <mat-error>{{getErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" style="width: 500px;">
               <mat-label>Confirm Password</mat-label>
               <input formControlName="confirmPassword" matInput type="password" placeholder="Confirm Password" />
+              <mat-error>{{getErrorMessage()}}</mat-error>
             </mat-form-field>
+            <mat-error>{{errSignUp}}</mat-error>
             <button type="submit" mat-raised-button color="primary" style="width: 500px;">Đăng ký</button>
           </form>
         </div>

@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { CarouselProductModule } from 'src/app/common/components/carousel-product/carousel-product.module';
+import { MatDialogModule } from '@angular/material/dialog';
 const routes: Routes = [
   {
     path: "",
@@ -20,7 +21,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatButtonModule,
     MatIconModule,
-    CarouselProductModule
+    CarouselProductModule,
+    MatDialogModule
   ]
 })
 export class HomeModule { }

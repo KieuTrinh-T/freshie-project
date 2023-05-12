@@ -21,9 +21,7 @@ export function confirmPasswordValidator(control: FormControl): ValidationErrors
 export class ProfileComponent {
 
   user: any;
-
   userID?: string = '';
-
 
   profileForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -68,13 +66,13 @@ export class ProfileComponent {
 
   // get user state
   getUserState(){
-    this.userID = this._userService.getUserState()?._id;
+    this.user = this._userService.getUserState()?._id;
   }
 
   updateUser(){
     const user = this.profileForm.value;
     console.log(user);
-    this._userService.updateUser(this.userID,user).subscribe(
+    this._userService.updateUser(this.user,user).subscribe(
       res => {
         alert('Update user successfully!');
       },
@@ -89,7 +87,7 @@ export class ProfileComponent {
     const user = {
       password: password
     }
-    this._userService.updateUser(this.userID,user).subscribe(
+    this._userService.updateUser(this.user,user).subscribe(
       res => {
         alert('Change password successfully!');
         // router to login
