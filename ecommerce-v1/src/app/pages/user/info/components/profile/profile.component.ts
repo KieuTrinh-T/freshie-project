@@ -11,15 +11,6 @@ export function confirmPasswordValidator(control: FormControl): ValidationErrors
   return newPassword && confirmPassword === newPassword.value ? null : { confirmPassword: true };
 }
 
-import { Router } from '@angular/router';
-
-// custom validator to check confirm password
-export function confirmPasswordValidator(control: FormControl): ValidationErrors | null {
-  const confirmPassword = control.value;
-  const newPassword = control.root.get('newPassword');
-  return newPassword && confirmPassword === newPassword.value ? null : { confirmPassword: true };
-}
-
 @Component({
   selector: 'ec-profile',
   templateUrl: './profile.component.html',
@@ -29,9 +20,6 @@ export function confirmPasswordValidator(control: FormControl): ValidationErrors
 export class ProfileComponent {
 
   user: any;
-  userID?: string = '';
-
-
   userID?: string = '';
 
 

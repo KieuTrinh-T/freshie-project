@@ -31,6 +31,16 @@
         <div class="list-product-container">
           <ec-list-product [products]="products" (viewDetail)="viewDetail($event)" (addToCart)="addToCart($event)"></ec-list-product>
         </div>
+        <div class="pagination-div">
+          <ul class="pagination">
+              <li class="{{page>1?'page-item':'page-item disabled'}}"><button mat-icon-button (click)="changePage(-1)"><mat-icon>keyboard_arrow_left</mat-icon></button></li>
+              <li *ngIf="page>1" class="page-item"><button mat-flat-button (click)="changePage(-1)"> {{page-1}}</button></li>
+              <li class="page-item active"><button mat-flat-button>{{page}}</button></li>
+              <li class="page-item"><button mat-flat-button (click)="changePage(1)">{{page+1}}</button></li>
+              <li class="page-item"><button mat-icon-button (click)="changePage(1)"><mat-icon>keyboard_arrow_right</mat-icon></button></li>
+          </ul>
+
+      </div>
       </div>
   </div>
 </div>
