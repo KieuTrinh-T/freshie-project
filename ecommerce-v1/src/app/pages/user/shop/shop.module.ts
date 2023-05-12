@@ -11,6 +11,7 @@ import { ListProductModule } from 'src/app/common/components/list-product/list-p
 import {MatChipsModule} from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
 import {MatSliderModule} from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
     ListProductModule,
     MatChipsModule,
     FormsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatIconModule
   ]
 })
 export class ShopModule { }
