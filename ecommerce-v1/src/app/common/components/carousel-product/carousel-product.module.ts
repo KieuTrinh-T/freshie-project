@@ -4,6 +4,7 @@ import { CarouselProductComponent } from './carousel-product/carousel-product.co
 import { SwiperModule } from "swiper/angular";
 import { MatIconModule } from '@angular/material/icon';
 import { TruncatePipe } from "../../pipe/truncate.pipe";
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
     declarations: [
         CarouselProductComponent
@@ -15,7 +16,9 @@ import { TruncatePipe } from "../../pipe/truncate.pipe";
         CommonModule,
         SwiperModule,
         MatIconModule,
-        TruncatePipe
+        TruncatePipe,
+        MatButtonModule,
+        MatIconModule
     ]
 })
 export class CarouselProductModule {

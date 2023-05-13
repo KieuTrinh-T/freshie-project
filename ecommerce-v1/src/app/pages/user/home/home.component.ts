@@ -14,11 +14,15 @@ import { MatDialog } from '@angular/material/dialog';
 export class HomeComponent implements OnInit {
 
   categories = [
-    { name: 'Skincare', image: 'https://us.123rf.com/450wm/bsd555/bsd5551911/bsd555191102318/134926483-beauty-and-personal-care-pink-flat-design-long-shadow-glyph-icon-makeup-products-decorative.jpg?ver=6' },
-    { name: 'Perfume', image: 'https://cdn-icons-png.flaticon.com/512/5735/5735681.png' },
-    { name: 'Makeup', image: 'https://cdn-icons-png.flaticon.com/512/4171/4171139.png' },
-    { name: 'Haircare', image: 'https://img.freepik.com/premium-vector/hair-care-treatment-products_316839-4662.jpg?w=2000' },
-    { name: 'Hygiene', image: 'https://cdn3d.iconscout.com/3d/premium/thumb/hygiene-wash-6170950-5073528.png' },
+    { name: 'Sửa rửa mặt', image: 'https://media.hasaki.vn/catalog/category/19_2_img_250x250_8e0796_fit_center.jpg' },
+    { name: 'Kem dưỡng', image: 'https://media.hasaki.vn/catalog/category/9_img_250x250_8e0796_fit_center.jpg' },
+    { name: 'Son', image: 'https://salt.tikicdn.com/cache/280x280/ts/product/7c/7e/b4/c8733758450e71c6e5ea357f4e9486c9.jpg' },
+    { name: 'Trang điểm', image: 'https://salt.tikicdn.com/cache/280x280/ts/product/9e/50/8c/918a77ca759544b4b19c4de0d83cd9c8.jpg' },
+    { name: 'Kem chống nắng', image: 'https://salt.tikicdn.com/cache/280x280/ts/product/0a/ee/58/fa2d2a95feb0a491d105873e028b6a0d.png' },
+    { name: 'Nước hoa', image: 'https://salt.tikicdn.com/cache/280x280/ts/product/83/6e/1b/8843eeacf0b2d4526bce3639530d88d0.jpg' },
+    { name: 'Sữa tắm', image: 'https://media.hasaki.vn/catalog/category/26_1_img_250x250_8e0796_fit_center.jpg' },
+    { name: 'Dưỡng tóc', image: 'https://media.hasaki.vn/catalog/category/137_2_img_250x250_8e0796_fit_center.jpg' },
+
   ]
 
   constructor(

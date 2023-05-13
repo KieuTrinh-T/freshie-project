@@ -1,108 +1,80 @@
 <div class="d-flex align-items-center justify-content-between">
-  <mat-icon class="text-dark" fontIcon="navigate_before" (click)="slidePrev()"></mat-icon>
-  <swiper class="w-90" #swiper [config]="config" >
-    <ng-template *ngFor="let p of products" swiperSlide>
-      <div class="bt-card-ui-3">
-        <div class="card-image">
-            <img src="{{p.thumb}}"/>
-        </div>
-        <div class="card-body">
-            <div class="card-price">
-                <p class="card-price-old">{{p.original_price}}</p>
-                <p class="card-price-current">{{p.price}}</p>
-            </div>
-            <p class="product-name">
-              {{p.product_name | truncate:40 }}
-            </p>
-            <div class="card-vote d-flex align-items-center">
-              <ul class="vote-list">
-                  <li class="vote-item">
-                      <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                      >
+    <mat-icon class="text-dark" fontIcon="navigate_before" (click)="slidePrev()"></mat-icon>
+    <swiper class="w-90" #swiper [config]="config">
+        <ng-template *ngFor="let p of products" swiperSlide>
+            <div class="bt-card-ui-3" (click)="viewDetail.emit(p._id)">
+                <div class="card-image">
+                    <img src="{{p.thumb}}" />
+                </div>
+                <div class="card-body">
+
+                    <p class="product-name">
+                        {{p.product_name | truncate:40 }}
+                    </p>
+                    <div class="card-price">
+                        <p class="card-price-old">{{p.original_price |number}}</p>
+                        <p class="card-price-current">{{p.price|number}} VND</p>
+                    </div>
+                    <div class="card-vote d-flex align-items-center">
+                        <ul class="vote-list">
+                            <li class="vote-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                               d="M11.0818 3.1277C11.4292 2.32265 12.5708 2.32265 12.9182 3.1277L15.0982 8.17958C15.2453 8.52047 15.5691 8.75179 15.9393 8.7804L21.53 9.21239C22.4269 9.2817 22.7833 10.4078 22.0896 10.9806L17.8852 14.4518C17.5886 14.6967 17.4588 15.0899 17.5512 15.4632L18.8451 20.6915C19.0579 21.5513 18.1304 22.2429 17.3671 21.7935L12.5073 18.9326C12.1942 18.7482 11.8058 18.7482 11.4927 18.9326L6.63294 21.7935C5.86964 22.2429 4.94211 21.5513 5.1549 20.6915L6.44884 15.4632C6.54123 15.0899 6.41136 14.6967 6.1148 14.4518L1.91041 10.9806C1.21665 10.4078 1.57306 9.2817 2.47004 9.21239L8.06069 8.7804C8.43086 8.75179 8.75471 8.52047 8.90181 8.17958L11.0818 3.1277Z"
                               fill="currentColor"
                           ></path>
                       </svg>
-                  </li>
-                  <li class="vote-item">
-                      <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                      >
+                            </li>
+                            <li class="vote-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                               d="M11.0818 3.1277C11.4292 2.32265 12.5708 2.32265 12.9182 3.1277L15.0982 8.17958C15.2453 8.52047 15.5691 8.75179 15.9393 8.7804L21.53 9.21239C22.4269 9.2817 22.7833 10.4078 22.0896 10.9806L17.8852 14.4518C17.5886 14.6967 17.4588 15.0899 17.5512 15.4632L18.8451 20.6915C19.0579 21.5513 18.1304 22.2429 17.3671 21.7935L12.5073 18.9326C12.1942 18.7482 11.8058 18.7482 11.4927 18.9326L6.63294 21.7935C5.86964 22.2429 4.94211 21.5513 5.1549 20.6915L6.44884 15.4632C6.54123 15.0899 6.41136 14.6967 6.1148 14.4518L1.91041 10.9806C1.21665 10.4078 1.57306 9.2817 2.47004 9.21239L8.06069 8.7804C8.43086 8.75179 8.75471 8.52047 8.90181 8.17958L11.0818 3.1277Z"
                               fill="currentColor"
                           ></path>
                       </svg>
-                  </li>
-                  <li class="vote-item">
-                      <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                      >
+                            </li>
+                            <li class="vote-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                               d="M11.0818 3.1277C11.4292 2.32265 12.5708 2.32265 12.9182 3.1277L15.0982 8.17958C15.2453 8.52047 15.5691 8.75179 15.9393 8.7804L21.53 9.21239C22.4269 9.2817 22.7833 10.4078 22.0896 10.9806L17.8852 14.4518C17.5886 14.6967 17.4588 15.0899 17.5512 15.4632L18.8451 20.6915C19.0579 21.5513 18.1304 22.2429 17.3671 21.7935L12.5073 18.9326C12.1942 18.7482 11.8058 18.7482 11.4927 18.9326L6.63294 21.7935C5.86964 22.2429 4.94211 21.5513 5.1549 20.6915L6.44884 15.4632C6.54123 15.0899 6.41136 14.6967 6.1148 14.4518L1.91041 10.9806C1.21665 10.4078 1.57306 9.2817 2.47004 9.21239L8.06069 8.7804C8.43086 8.75179 8.75471 8.52047 8.90181 8.17958L11.0818 3.1277Z"
                               fill="currentColor"
                           ></path>
                       </svg>
-                  </li>
-                  <li class="vote-item">
-                      <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                      >
+                            </li>
+                            <li class="vote-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                               d="M11.0818 3.1277C11.4292 2.32265 12.5708 2.32265 12.9182 3.1277L15.0982 8.17958C15.2453 8.52047 15.5691 8.75179 15.9393 8.7804L21.53 9.21239C22.4269 9.2817 22.7833 10.4078 22.0896 10.9806L17.8852 14.4518C17.5886 14.6967 17.4588 15.0899 17.5512 15.4632L18.8451 20.6915C19.0579 21.5513 18.1304 22.2429 17.3671 21.7935L12.5073 18.9326C12.1942 18.7482 11.8058 18.7482 11.4927 18.9326L6.63294 21.7935C5.86964 22.2429 4.94211 21.5513 5.1549 20.6915L6.44884 15.4632C6.54123 15.0899 6.41136 14.6967 6.1148 14.4518L1.91041 10.9806C1.21665 10.4078 1.57306 9.2817 2.47004 9.21239L8.06069 8.7804C8.43086 8.75179 8.75471 8.52047 8.90181 8.17958L11.0818 3.1277Z"
                               fill="currentColor"
                           ></path>
                       </svg>
-                  </li>
-                  <li class="vote-item">
-                      <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                      >
+                            </li>
+                            <li class="vote-item">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                               d="M11.0818 3.1277C11.4292 2.32265 12.5708 2.32265 12.9182 3.1277L15.0982 8.17958C15.2453 8.52047 15.5691 8.75179 15.9393 8.7804L21.53 9.21239C22.4269 9.2817 22.7833 10.4078 22.0896 10.9806L17.8852 14.4518C17.5886 14.6967 17.4588 15.0899 17.5512 15.4632L18.8451 20.6915C19.0579 21.5513 18.1304 22.2429 17.3671 21.7935L12.5073 18.9326C12.1942 18.7482 11.8058 18.7482 11.4927 18.9326L6.63294 21.7935C5.86964 22.2429 4.94211 21.5513 5.1549 20.6915L6.44884 15.4632C6.54123 15.0899 6.41136 14.6967 6.1148 14.4518L1.91041 10.9806C1.21665 10.4078 1.57306 9.2817 2.47004 9.21239L8.06069 8.7804C8.43086 8.75179 8.75471 8.52047 8.90181 8.17958L11.0818 3.1277Z"
                               fill="currentColor"
                           ></path>
                       </svg>
-                  </li>
-              </ul>
-              <div class="card-vote-tag">
-                <p>({{p.rating_count}})</p>
-              </div>
-          </div>
-            <div class="card-btn-wrap">
-                <button class="card-btn card-btn--buy-now text-decoration-none cursor-pointer" (click)="viewDetail.emit(p._id)">
+                            </li>
+                        </ul>
+                        <div class="card-vote-tag">
+                            <p>({{p.rating_count}})</p>
+                        </div>
+                    </div>
+                    <!-- <div class="card-btn-wrap">
+                        <button mat-flat-button (click)="viewDetail.emit(p._id)">
+                          <mat-icon fontIcon="info_outline"></mat-icon>
                     Details
                 </button>
-                <button class="card-btn card-btn--add-cart text-decoration-none cursor-pointer" (click)="addToCart.emit(p._id)">
-                    Add to cart
+                        <button mat-flat-button (click)="addToCart.emit(p._id)">
+                          <mat-icon fontIcon="add_shopping_cart"></mat-icon>
+                    Thêm
                 </button>
+                    </div> -->
+                </div>
             </div>
-        </div>
-    </div>
-    </ng-template>
-  </swiper>
-  <mat-icon class="text-dark" fontIcon="navigate_next" (click)="slideNext()"></mat-icon>
+        </ng-template>
+    </swiper>
+    <mat-icon class="text-dark" fontIcon="navigate_next" (click)="slideNext()"></mat-icon>
 </div>
-
