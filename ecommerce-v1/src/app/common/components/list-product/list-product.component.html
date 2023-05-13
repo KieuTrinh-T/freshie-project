@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a class="h5 text-decoration-none" (click)="viewDetail.emit(p._id)">{{p.product_name | truncate:50}}</a>
+                    <a class="h5 text-decoration-none" (click)="viewDetail.emit(p._id)">{{p.product_name | truncate:40}}</a>
                     <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
                         <li class="pt-2">
                             <mat-icon class="star" aria-hidden="false" aria-label="Example home icon" fontIcon="star"></mat-icon>
