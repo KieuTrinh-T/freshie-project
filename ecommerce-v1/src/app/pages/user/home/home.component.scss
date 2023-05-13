@@ -47,3 +47,42 @@
     text-align: center;
     text-decoration: none;
 }
+
+.testimonial {
+    margin-top: 30px;
+}
+
+.row-defined {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.col-lg-6 {
+    width: 45%;
+    max-width: 50%;
+    position: relative;
+    padding: 20px;
+}
+
+.testimonial__text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.444);
+}
+
+.testimonial__pic {
+    height: 100%;
+    width: 100%;
+}
+
+.testimonial__pic img {
+    height: 100%;
+    width: 100%;
+}
