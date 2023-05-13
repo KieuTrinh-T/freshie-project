@@ -17,8 +17,9 @@ const MONGODB_URI = process.env.MONGODB_URI;
 // use it before all route definitions
 // app.use(cors({ origin: 'http://localhost:4200' }));
 
-const allowedOrigins = ['http://localhost:4200', 'https://freshie-server-mqt8rgu0d-kieutrinh-t.vercel.app', 'http://www.freshie.live'];
-
+const allowedOrigins = ['http://localhost:4200', 'https://freshie-server-mqt8rgu0d-kieutrinh-t.vercel.app', 'http://www.freshie.live',
+    'https://freshie-project.vercel.app/', 'https://www.freshie.live'
+];
 app.use(cors({
     origin: function(origin, callback) {
         if (!origin) return callback(null, true);

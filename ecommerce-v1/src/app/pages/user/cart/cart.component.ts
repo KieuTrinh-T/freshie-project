@@ -99,6 +99,16 @@ export class CartComponent {
     }
     this.caculateTotalPrice();
   }
+  onRemoveButtonClick(cart: ICart) {
+    // remove cart item
+    // remove cart item from local storage
+    this.carts = this.carts.filter((item) => item !== cart);
+    localStorage.setItem('carts', JSON.stringify(this.carts));
+    this.check_list = this.check_list.filter((item) => item !== cart);
+    // remove cart item from server
+
+    this.caculateTotalPrice();
+  }
 
 
 }
